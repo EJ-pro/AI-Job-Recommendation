@@ -4,6 +4,8 @@ export interface JobRole {
     description: string;
     tasks: string[];
     tags: string[];
+    focus_areas: string[]; // 3개월 집중 공략 분야 (Top 3)
+    roadmap: { step: string; action: string }[]; // 3단계 학습 로드맵
 }
 
 export interface Question {
@@ -11,7 +13,7 @@ export interface Question {
     question: string;
     options: {
         text: string;
-        weights: Partial<Record<string, number>>; // job_id -> score
+        weights: Partial<Record<string, number>>;
     }[];
 }
 
@@ -19,58 +21,138 @@ export const JOBS: JobRole[] = [
     {
         id: 'ai-app',
         title: 'AI Application Engineer',
-        description: '기존 AI 모델(GPT, Gemini 등)의 API를 연동하여 실제 사용자가 쓰는 서비스를 빠르게 개발하는 엔지니어입니다.',
+        description: 'LLM API와 프레임워크를 활용해 실제 사용자가 쓰는 AI 서비스를 빠르게 개발합니다.',
         tasks: ['LangChain/LLM 연동', 'AI 서비스 백엔드 개발', 'RAG(검색 증강) 시스템 구축'],
         tags: ['Service', 'API', 'Fast-Paced'],
+        focus_areas: [
+            'LangChain/LlamaIndex 프레임워크 마스터',
+            'Python 백엔드 (FastAPI/Streamlit)',
+            'Prompt Engineering 기초'
+        ],
+        roadmap: [
+            { step: '1개월차', action: 'OpenAI API와 LangChain 튜토리얼을 따라하며 챗봇 3개 만들기 (문서요약, Q&A 등)' },
+            { step: '2개월차', action: 'Streamlit이나 FastAPI를 사용하여 웹 서비스 형태로 배포하고, Vector DB(Pinecone 등) 연동해보기' },
+            { step: '3개월차', action: '나만의 AI 서비스(기획+개발+배포) 포트폴리오 1개 완성하기 (RAG 포함)' }
+        ]
     },
     {
         id: 'prompt-eng',
         title: 'Prompt Engineer',
-        description: 'LLM이 최적의 답변을 내놓도록 입력을 설계하고, 복잡한 태스크를 프롬프트 체인으로 해결하는 전문가입니다.',
+        description: 'LLM이 최적의 답변을 내놓도록 프롬프트를 설계/최적화하고, 모델의 한계를 극복합니다.',
         tasks: ['프롬프트 최적화 및 평가', 'Few-shot Learning 설계', '모델 환각(Hallucination) 제어'],
         tags: ['Logical', 'Language', 'Creative'],
+        focus_areas: [
+            'Advanced Prompting (CoT, ReAct)',
+            'LLM 평가 방법론 (Evals)',
+            '기초 Python 스크립팅'
+        ],
+        roadmap: [
+            { step: '1개월차', action: '기본적인 프롬프트 기법(Zero/Few-shot, CoT)을 다양한 모델(GPT, Claude)에서 실험하고 기록하기' },
+            { step: '2개월차', action: '복잡한 태스크를 해결하는 프롬프트 체인을 설계하고, 자동화 스크립트 작성해보기' },
+            { step: '3개월차', action: '특정 도메인(법률, 의료 등)에 특화된 프롬프트 셋과 평가 리포트를 포트폴리오로 정리하기' }
+        ]
     },
     {
         id: 'mlops',
         title: 'MLOps Engineer',
-        description: '완성된 AI 모델을 안정적으로 배포하고, 지속적인 학습 및 모니터링 파이프라인(CI/CT/CD)을 구축합니다.',
+        description: '머신러닝 모델의 학습부터 배포, 모니터링까지의 전체 라이프사이클을 자동화하고 관리합니다.',
         tasks: ['모델 배포 및 서빙', '클라우드 인프라(AWS/GCP) 관리', '자동화 파이프라인 구축'],
         tags: ['Infrastructure', 'DevOps', 'Stability'],
+        focus_areas: [
+            'Docker & Kubernetes',
+            'Cloud Platform (AWS/GCP)',
+            'CI/CD for ML (GitHub Actions)'
+        ],
+        roadmap: [
+            { step: '1개월차', action: 'Python으로 만든 간단한 모델을 Docker Container로 패키징하고 AWS EC2에 띄워보기' },
+            { step: '2개월차', action: 'GitHub Actions를 이용해 모델 학습부터 배포까지 자동화되는 CI/CD 파이프라인 구축하기' },
+            { step: '3개월차', action: 'Kubernetes 혹은 Serverless(Lambda) 환경에서 모델 서빙 아키텍처 구현 및 트래픽 테스트' }
+        ]
     },
     {
         id: 'data-eng',
         title: 'Data Engineer',
-        description: 'AI 모델 학습에 필요한 대규모 데이터를 수집, 가공, 저장하는 인프라를 담당합니다.',
+        description: '데이터의 수집, 저장, 처리를 위한 견고한 파이프라인을 구축하여 모델 학습을 지원합니다.',
         tasks: ['ETL 파이프라인 구축', '데이터 웨어하우스/레이크 관리', '대용량 데이터 분산 처리'],
         tags: ['BigData', 'Pipeline', 'Spark/Kafka'],
+        focus_areas: [
+            'SQL & Database Design',
+            'Python ETL (Airflow/Prefect)',
+            'Cloud Data Warehouse (BigQuery 등)'
+        ],
+        roadmap: [
+            { step: '1개월차', action: 'SQL 심화 문법 완성 및 Python Pandas로 데이터 정제 스크립트 능숙하게 다루기' },
+            { step: '2개월차', action: 'Airflow를 설치하여 주기적으로 데이터를 수집/가공하는 ETL 파이프라인 만들어보기' },
+            { step: '3개월차', action: '클라우드(AWS S3, BigQuery)를 연동하여 대시보드까지 이어지는 전체 데이터 흐름 완성하기' }
+        ]
     },
     {
         id: 'data-sci',
         title: 'Data Scientist',
-        description: '데이터를 통계적으로 분석하여 비즈니스 인사이트를 도출하고, 머신러닝 모델을 실험합니다.',
+        description: '복잡한 데이터에서 비즈니스 인사이트를 도출하고, 통계 및 머신러닝 알고리즘을 적용합니다.',
         tasks: ['데이터 탐색적 분석(EDA)', '시각화 및 대시보드 제작', '통계적 가설 검정'],
         tags: ['Analysis', 'Statistics', 'Math'],
+        focus_areas: [
+            'Python 데이터 분석 (Pandas/Scikit-learn)',
+            '통계학 기초 및 가설 검정',
+            '데이터 시각화/스토리텔링'
+        ],
+        roadmap: [
+            { step: '1개월차', action: 'Kaggle의 유명한 데이터셋 3개를 골라 EDA(탐색적 데이터 분석) 리포트 작성해보기' },
+            { step: '2개월차', action: 'Scikit-learn을 활용해 분류/회귀 모델을 만들고, 성능 지표(Accuracy, F1 등) 해석 능력 기르기' },
+            { step: '3개월차', action: '자신만의 가설을 세우고 데이터를 통해 검증하여 비즈니스 제안까지 포함된 분석 프로젝트 완성' }
+        ]
     },
     {
         id: 'research',
         title: 'AI Research Scientist',
-        description: '최신 논문을 구현하거나 새로운 모델 아키텍처를 연구하여 SOTA(State-of-the-Art) 성능을 달성합니다.',
+        description: '새로운 알고리즘을 연구하거나 최신 논문을 구현하여 기술의 한계를 넓힙니다.',
         tasks: ['논문 리서치 및 구현', '모델 아키텍처 설계', '모델 경량화 및 최적화'],
         tags: ['Research', 'DeepLearning', 'Academic'],
+        focus_areas: [
+            'Deep Learning Theory (PyTorch)',
+            '최신 논문 리딩 및 구현 능력',
+            '수학적 기초 (선형대수/확률)'
+        ],
+        roadmap: [
+            { step: '1개월차', action: 'PyTorch 공식 튜토리얼 완독 및 CNN/RNN/Transformer 기본 구조 바닥부터 코딩해보기' },
+            { step: '2개월차', action: '관심 분야(CV/NLP)의 Top-tier 학회 최신 논문 1편을 선정하여 코드로 구현(Reproduction)하기' },
+            { step: '3개월차', action: '구현한 모델을 학습시켜 벤치마크 성능을 측정하고, 개선 아이디어 실험해보기' }
+        ]
     },
     {
         id: 'pm',
         title: 'AI Product Manager',
-        description: 'AI 기술로 어떤 가치를 줄 수 있는지 기획하고, 개발팀과 비즈니스팀 사이를 조율합니다.',
+        description: 'AI 기술을 활용한 제품을 기획하고, 개발팀과 비즈니스팀 사이의 가교 역할을 합니다.',
         tasks: ['사용자 요구사항 정의', '제품 로드맵 설계', 'AI 서비스 기획'],
         tags: ['Communication', 'Planning', 'Business'],
+        focus_areas: [
+            'AI 기술 이해 (한계와 가능성)',
+            '데이터 기반 의사결정 (SQL/GA)',
+            '기획서/요구사항 명세서 작성'
+        ],
+        roadmap: [
+            { step: '1개월차', action: '성공한 AI 서비스 5개를 분석(Reverse Engineering)하여 기능 명세서와 UX 흐름도 역기획해보기' },
+            { step: '2개월차', action: '간단한 노코드 툴이나 API를 활용해 MVP(최소기능제품)를 직접 만들어보고 사용자 반응 보기' },
+            { step: '3개월차', action: '해결하려는 문제 정의부터 솔루션, 지표 설정까지 포함된 완벽한 서비스 기획 포트폴리오 작성' }
+        ]
     },
     {
         id: 'architect',
         title: 'AI Solution Architect',
-        description: '고객의 비즈니스 문제를 해결하기 위해 AI 기술 도입 전략을 짜고 전체 시스템 구조를 설계합니다.',
+        description: '고객의 비즈니스 요구사항을 기술적으로 해석하고, 최적의 AI 시스템 아키텍처를 설계합니다.',
         tasks: ['기술 컨설팅 및 제안', '시스템 아키텍처 설계', '기술 타당성 검토(PoC)'],
         tags: ['Consulting', 'SystemDesign', 'Strategy'],
+        focus_areas: [
+            '다양한 AI 모델/서비스 장단점 파악',
+            'Cloud Architecture Pattern',
+            '비즈니스 커뮤니케이션'
+        ],
+        roadmap: [
+            { step: '1개월차', action: '주요 클라우드(AWS/Azure)의 AI 서비스 목록을 정리하고, 각각 어떤 상황에 쓰이는지 장단점 분석' },
+            { step: '2개월차', action: '가상의 기업 시나리오를 3개 설정하여, 각각에 맞는 AI 도입 전략 제안서 작성 연습' },
+            { step: '3개월차', action: 'End-to-End AI 시스템 아키텍처 도표가 포함된 기술 제안서 포트폴리오 완성' }
+        ]
     },
 ];
 
@@ -180,7 +262,7 @@ export const QUESTIONS: Question[] = [
             { text: 'Tableau, SQL, Pandas', weights: { 'data-sci': 5, 'data-eng': 3 } },
         ],
     },
-    // 11~20. 추가 질문 (심화)
+    // 11. 반복 작업
     {
         id: 11,
         question: '반복적인 작업(노가다)을 해야 할 때?',
@@ -190,6 +272,7 @@ export const QUESTIONS: Question[] = [
             { text: '그냥 묵묵히 한다. 꼼꼼함이 중요하다.', weights: { 'data-sci': 2 } },
         ],
     },
+    // 12. 새로운 툴
     {
         id: 12,
         question: '새로운 AI 툴(ChatGPT, Midjourney 등)이 나오면?',
@@ -200,6 +283,7 @@ export const QUESTIONS: Question[] = [
             { text: '어떤 원리로 돌아가는지 기술 블로그를 찾아본다.', weights: { 'research': 3, 'architect': 3 } },
         ],
     },
+    // 13. 발표 부담
     {
         id: 13,
         question: '발표(Presentation)에 대한 부담감은?',
@@ -209,6 +293,7 @@ export const QUESTIONS: Question[] = [
             { text: '발표보다는 글로 정리해서 보여주고 싶다.', weights: { 'research': 2, 'data-eng': 3, 'mlops': 3 } },
         ],
     },
+    // 14. SQL 쿼리
     {
         id: 14,
         question: '하루 종일 SQL 쿼리만 짜야 한다면?',
@@ -218,6 +303,7 @@ export const QUESTIONS: Question[] = [
             { text: '필요한 데이터라면 기꺼이 한다.', weights: { 'pm': 2, 'architect': 2 } },
         ],
     },
+    // 15. 고객 미팅
     {
         id: 15,
         question: '고객사 미팅에 나가야 한다면?',
@@ -227,6 +313,7 @@ export const QUESTIONS: Question[] = [
             { text: '가능하면 개발팀 내부 회의만 하고 싶다.', weights: { 'ai-app': 2, 'mlops': 3, 'data-eng': 3 } },
         ],
     },
+    // 16. 중요 가치
     {
         id: 16,
         question: '가장 중요하게 생각하는 가치는?',
@@ -236,6 +323,7 @@ export const QUESTIONS: Question[] = [
             { text: '실용성(Utility)과 사용자 가치', weights: { 'pm': 5, 'ai-app': 4, 'prompt-eng': 3 } },
         ],
     },
+    // 17. 코드 에러
     {
         id: 17,
         question: '코드가 에러가 났을 때?',
@@ -245,6 +333,7 @@ export const QUESTIONS: Question[] = [
             { text: '구조적으로 어디가 잘못됐는지 전체 그림을 본다.', weights: { 'architect': 4, 'research': 3 } },
         ],
     },
+    // 18. 협업 툴
     {
         id: 18,
         question: '협업 툴(Jira, Slack) 사용 숙련도는?',
@@ -254,6 +343,7 @@ export const QUESTIONS: Question[] = [
             { text: '이런 툴보다는 직접 대화하는 게 편하다.', weights: { 'architect': 2 } },
         ],
     },
+    // 19. MBTI (재미)
     {
         id: 19,
         question: '본인의 MBTI와 가까운 것은? (재미용)',
@@ -264,6 +354,7 @@ export const QUESTIONS: Question[] = [
             { text: '공감하는 F형', weights: { 'pm': 3, 'prompt-eng': 3 } },
         ],
     },
+    // 20. 3년 뒤 모습
     {
         id: 20,
         question: '마지막으로, 당신이 꿈꾸는 3년 뒤 모습은?',

@@ -52,6 +52,38 @@ function ResultContent() {
                 )}
             </div>
 
+            {/* Focus Areas & Roadmap Section */}
+            <div className="space-y-6">
+                {/* Focus Areas */}
+                <div className="bg-white/50 dark:bg-black/20 rounded-2xl p-6 border border-border/50">
+                    <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                        🔥 3개월 집중 공략 분야
+                        <span className="text-xs font-normal text-muted-foreground">(선택과 집중)</span>
+                    </h3>
+                    <div className="grid gap-3 sm:grid-cols-3">
+                        {bestJob.focus_areas?.map((area, idx) => (
+                            <div key={idx} className="bg-background/80 p-3 rounded-xl text-sm font-medium border border-primary/10 text-center shadow-sm">
+                                {area}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* 3-Month Roadmap */}
+                <div className="bg-white/50 dark:bg-black/20 rounded-2xl p-6 border border-border/50">
+                    <h3 className="text-lg font-bold mb-4">📅 월별 학습 로드맵</h3>
+                    <div className="space-y-4">
+                        {bestJob.roadmap?.map((item, idx) => (
+                            <div key={idx} className="relative pl-6 border-l-2 border-primary/20 pb-1 last:pb-0">
+                                <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-background" />
+                                <div className="mb-1 text-sm font-bold text-primary">{item.step}</div>
+                                <p className="text-sm text-muted-foreground">{item.action}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
             {/* AI Adviser Section */}
             <div className="pt-2">
                 <AIAdviser jobTitle={bestJob.title} />

@@ -18,11 +18,11 @@ export async function POST(request: Request) {
             messages: [
                 {
                     role: 'system',
-                    content: 'You are a warm and encouraging career counselor for AI bootcamp graduates. Provide a concise (2-3 sentences) and personalized encouragement based on the recommended job title. Speak in Korean.',
+                    content: 'You are a warm and encouraging career counselor for a bootcamp student who has only 3 months left. Provide a concise (2-3 sentences) encouragement and specific advice on what to focus on for the recommended job. Speak in Korean.',
                 },
                 {
                     role: 'user',
-                    content: `추천받은 직무: ${jobTitle}\n이 직무를 추천받은 신입 지원자에게 해줄 수 있는 핵심 역량 조언과 격려의 말을 짧게 해줘.`,
+                    content: `추천받은 직무: ${jobTitle}\n남은 3개월 동안 이 직무 취업을 위해 가장 집중해야 할 학습 포인트 1가지와 격려의 말을 해줘.`,
                 },
             ],
             max_tokens: 300,
