@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { JOBS } from '@/lib/data';
 import JobCard from '@/components/JobCard';
 import Button from '@/components/Button';
+import AIAdviser from '@/components/AIAdviser';
 
 // Separate component to wrap in Suspense for useSearchParams
 function ResultContent() {
@@ -49,6 +50,11 @@ function ResultContent() {
                         <JobCard job={secondJob} rank={2} />
                     </div>
                 )}
+            </div>
+
+            {/* AI Adviser Section */}
+            <div className="pt-2">
+                <AIAdviser jobTitle={bestJob.title} />
             </div>
 
             <div className="text-center pt-8 pb-16">
