@@ -21,7 +21,7 @@ export default function Home() {
         </h1>
 
         <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          AI 부트캠프를 마쳤지만 어떤 길로 가야 할지 고민이신가요? <br />
+          AI 부트캠프 수강중 어떤 길로 가야 할지 고민이신가요? <br />
           당신의 성향과 강점을 분석해 <span className="text-foreground font-semibold">최적의 직무</span>를 추천해 드립니다.
         </p>
 
@@ -34,7 +34,7 @@ export default function Home() {
             </Button>
           </Link>
           <p className="mt-4 text-sm text-muted-foreground">
-            ⏱️ 소요 시간: 약 2분 | 🔒 로그인 필요 없음
+            ⏱️ 소요 시간: 약 5분 | 🔒 로그인 필요 없음
           </p>
         </div>
       </section>
@@ -42,8 +42,8 @@ export default function Home() {
       {/* Features Grid */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-200">
         {[
-          { icon: '🎯', title: '직무 매칭', desc: '개발 성향과 관심사를 분석하여 6가지 핵심 AI 직무 중 최적의 포지션을 추천합니다.' },
-          { icon: '⚡', title: '빠른 분석', desc: '고민할 필요 없이 2분 안에 결과를 확인하세요. 복잡한 절차 없이 바로 시작할 수 있습니다.' },
+          { icon: '🎯', title: '직무 매칭', desc: '개발 성향과 관심사를 분석하여 핵심 AI 직무 중 최적의 포지션을 추천합니다.' },
+          { icon: '⚡', title: '빠른 분석', desc: '고민할 필요 없이 5분 안에 결과를 확인하세요. 복잡한 절차 없이 바로 시작할 수 있습니다.' },
           { icon: '🚀', title: '취업 가이드', desc: '단순 추천을 넘어, 해당 직무를 위해 당장 무엇을 준비해야 할지 구체적인 가이드를 제공합니다.' },
         ].map((feature, i) => (
           <div key={i} className="p-8 rounded-2xl bg-card border border-border shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
