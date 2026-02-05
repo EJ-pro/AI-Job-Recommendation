@@ -12,25 +12,39 @@ export default function AIAdviser({ jobTitle }: AIAdviserProps) {
     const [status, setStatus] = useState<'idle' | 'loading' | 'completed'>('idle');
     const [message, setMessage] = useState('');
 
-    // Mock AI response logic
-    const handleAnalyze = () => {
+    // API call logic
+    const handleAnalyze = async () => {
         setStatus('loading');
         setMessage('');
 
-        // Simulate network delay
-        setTimeout(() => {
+        try {
+            const res = await fetch('/api/analyze', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ jobTitle }),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) throw new Error(data.error || 'Something went wrong');
+
             setStatus('completed');
-            startTypingEffect();
-        }, 2000);
+            startTypingEffect(data.result);
+        } catch (error) {
+            console.error('API Error:', error);
+            // Fallback to mock data on error (e.g. Quota exceeded)
+            setStatus('completed');
+            const fallbackMessage = `(API 연결 불안정으로 예시 답변을 표시합니다)\n\n회원님의 성향을 분석해보니, **${jobTitle}** 직무가 정말 잘 어울립니다.\n\n단순히 개발을 좋아하는 것을 넘어, 시스템의 원리를 이해하고 최적화하는 데 강점이 있으시네요. 특히 최신 AI 기술을 활용하여 실질적인 가치를 만들어내는 능력은 현업에서 가장 필요로 하는 역량입니다.\n\n지금 바로 관련 포트폴리오를 준비해보세요! 🚀`;
+            startTypingEffect(fallbackMessage);
+        }
     };
 
-    const startTypingEffect = () => {
-        const fullMessage = `회원님의 성향을 분석해보니, **${jobTitle}** 직무가 정말 잘 어울립니다.\n\n단순히 개발을 좋아하는 것을 넘어, 시스템의 원리를 이해하고 최적화하는 데 강점이 있으시네요. 특히 최신 AI 기술을 활용하여 실질적인 가치를 만들어내는 능력은 현업에서 가장 필요로 하는 역량입니다.\n\n지금 바로 관련 포트폴리오를 준비해보세요! 🚀`;
+    const startTypingEffect = (text: string) => {
         let i = 0;
         const interval = setInterval(() => {
-            setMessage((prev) => fullMessage.slice(0, i + 1));
+            setMessage((prev) => text.slice(0, i + 1));
             i++;
-            if (i >= fullMessage.length) clearInterval(interval);
+            if (i >= text.length) clearInterval(interval);
         }, 30);
     };
 
