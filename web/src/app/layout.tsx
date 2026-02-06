@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 };
 
 import AdBanner from "@/components/AdBanner";
+import RouteListener from "@/components/RouteListener";
 import Script from "next/script";
 
 // ... (imports)
@@ -40,11 +41,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
-        <main className="flex-1 w-full max-w-[1920px] mx-auto flex gap-4 p-4">
+        <main className="flex-1 w-full max-w-[1920px] mx-auto flex gap-4 p-4 group">
+          <RouteListener />
 
           {/* Left Ad (Desktop Only) */}
           <aside className="hidden xl:block w-[200px] shrink-0 sticky top-[calc(50vh-300px)] h-fit">
-            <AdBanner dataAdSlot="1234567890" className="h-[600px] w-full" />
+            {/* Hide ads on login/mypage */}
+            <div className="group-has-[[data-hide-ads=true]]:hidden">
+              <AdBanner dataAdSlot="1234567890" className="h-[600px] w-full" />
+            </div>
           </aside>
 
           {/* Main Content */}
@@ -56,13 +61,16 @@ export default function RootLayout({
 
           {/* Right Ad (Desktop Only) */}
           <aside className="hidden xl:block w-[200px] shrink-0 sticky top-[calc(50vh-300px)] h-fit">
-            <AdBanner dataAdSlot="0987654321" className="h-[600px] w-full" />
+            <div className="group-has-[[data-hide-ads=true]]:hidden">
+              <AdBanner dataAdSlot="0987654321" className="h-[600px] w-full" />
+            </div>
           </aside>
 
         </main>
 
         {/* Mobile footer Ad (Visible only on small screens) */}
         <div className="xl:hidden w-full p-4">
+          {/* Conditionally render or keep global if needed. For now, keeping global */}
           <AdBanner dataAdSlot="1122334455" className="h-[100px] w-full" />
         </div>
       </body>

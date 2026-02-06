@@ -1,18 +1,33 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { JOBS } from '@/lib/data';
 import JobCard from '@/components/JobCard';
 import Button from '@/components/Button';
 import AIAdviser from '@/components/AIAdviser';
+import { useAuth } from '@/context/AuthContext';
+import SignupPromptModal from '@/components/SignupPromptModal';
 
 // Separate component to wrap in Suspense for useSearchParams
 function ResultContent() {
     const searchParams = useSearchParams();
     const bestId = searchParams.get('best');
     const secondId = searchParams.get('second');
+    const { user } = useAuth();
+    const [showSignupPrompt, setShowSignupPrompt] = useState(false);
+
+    useEffect(() => {
+        // Show prompt after 30 seconds if user is not logged in
+        if (!user) {
+            const timer = setTimeout(() => {
+                setShowSignupPrompt(true);
+            }, 30000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [user]);
 
     const bestJob = JOBS.find((j) => j.id === bestId);
     const secondJob = JOBS.find((j) => j.id === secondId);
@@ -115,6 +130,11 @@ function ResultContent() {
                     </Button>
                 </div>
             </div>
+
+            <SignupPromptModal
+                isOpen={showSignupPrompt}
+                onClose={() => setShowSignupPrompt(false)}
+            />
         </div>
     );
 }

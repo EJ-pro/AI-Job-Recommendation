@@ -1,6 +1,6 @@
-import { JOBS, JobRole, QUESTIONS } from './data';
+import { JOBS, JobRole, QUESTIONS, Question } from './data';
 
-export function calculateRecommendation(answers: Record<number, number>): JobRole[] {
+export function calculateRecommendation(answers: Record<number, number>, questions: Question[] = QUESTIONS): JobRole[] {
     // answers: key is question ID, value is selected option index
 
     const scores: Record<string, number> = {};
@@ -13,7 +13,7 @@ export function calculateRecommendation(answers: Record<number, number>): JobRol
     // Calculate scores
     Object.entries(answers).forEach(([questionId, optionIndex]) => {
         const qId = parseInt(questionId);
-        const question = QUESTIONS.find((q) => q.id === qId);
+        const question = questions.find((q) => q.id === qId);
 
         if (question && question.options[optionIndex]) {
             const weights = question.options[optionIndex].weights;

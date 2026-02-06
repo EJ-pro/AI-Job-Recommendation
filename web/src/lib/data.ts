@@ -366,3 +366,206 @@ export const QUESTIONS: Question[] = [
         ],
     },
 ];
+
+export const QUESTIONS_BEGINNER: Question[] = [
+    // 1. 흥미 (만들기 vs 분석하기)
+    {
+        id: 1,
+        question: '무언가를 배울 때 더 재미있는 것은?',
+        options: [
+            { text: '화면에 그림이나 글자가 짠! 하고 나타나는 것 (웹사이트 만들기)', weights: { 'ai-app': 4, 'prompt-eng': 3 } },
+            { text: '복잡한 데이터를 정리해서 깔끔한 표로 만드는 것', weights: { 'data-sci': 4, 'data-eng': 3 } },
+            { text: '사람들이 왜 이걸 불편해하는지 이유를 찾는 것', weights: { 'pm': 5, 'ml-eng': 2 } },
+        ],
+    },
+    // 2. 컴퓨터 다루기
+    {
+        id: 2,
+        question: '검은색 화면(터미널)에 명령어를 치는 것이...',
+        options: [
+            { text: '뭔가 해커 같고 멋있다. 더 배우고 싶다.', weights: { 'mlops': 5, 'data-eng': 4, 'ml-eng': 3 } },
+            { text: '아직은 낯설고 무섭다. 버튼이 편하다.', weights: { 'pm': 4, 'ai-app': 3, 'prompt-eng': 3 } },
+            { text: '필요하다면 배울 수 있다.', weights: { 'research': 3, 'data-sci': 3 } },
+        ],
+    },
+    // 3. 문제 해결
+    {
+        id: 3,
+        question: '친구가 컴퓨터가 고장 났다고 물어보면?',
+        options: [
+            { text: '어디가 문제인지 하나씩 뜯어서 고쳐준다.', weights: { 'mlops': 4, 'ml-eng': 3 } },
+            { text: '인터넷에 검색해서 해결 방법을 찾아 보내준다.', weights: { 'ai-app': 4, 'data-eng': 3 } },
+            { text: '새로 사는 게 낫지 않아? 라고 조언한다.', weights: { 'pm': 3 } },
+        ],
+    },
+    // 4. 수업 시간
+    {
+        id: 4,
+        question: '수학 시간이나 통계학 수업 때...',
+        options: [
+            { text: '알쏭달쏭한 수수께끼를 푸는 것 같아 재밌었다.', weights: { 'research': 5, 'data-sci': 5 } },
+            { text: '공식 외우는 게 너무 싫었다.', weights: { 'ai-app': 3, 'pm': 3, 'prompt-eng': 3 } },
+            { text: '답이 딱 떨어지는 게 좋았다.', weights: { 'data-eng': 4, 'mlops': 3 } },
+        ],
+    },
+    // 5. 챗봇 사용
+    {
+        id: 5,
+        question: 'ChatGPT 같은 AI랑 대화할 때...',
+        options: [
+            { text: '어떻게 말해야 얘가 더 똑똑하게 대답할지 고민한다.', weights: { 'prompt-eng': 5, 'ai-app': 3 } },
+            { text: '신기하긴 한데, 이게 어떻게 작동하는지 원리가 궁금하다.', weights: { 'research': 4, 'ml-eng': 4 } },
+            { text: '이걸로 숙제를 하거나 일을 편하게 할 방법을 찾는다.', weights: { 'pm': 4, 'ai-app': 3 } },
+        ],
+    },
+    // 6. 꼼꼼함 vs 속도
+    {
+        id: 6,
+        question: '과제를 제출해야 할 때 나의 스타일은?',
+        options: [
+            { text: '조금 늦더라도 완벽하게 검토해서 낸다.', weights: { 'data-sci': 4, 'research': 4, 'mlops': 3 } },
+            { text: '일단 완성해서 빨리 제출하고 쉰다.', weights: { 'ai-app': 4, 'pm': 3, 'data-eng': 2 } },
+        ],
+    },
+    // 7. 관심 분야
+    {
+        id: 7,
+        question: 'IT 뉴스에서 가장 눈길이 가는 제목은?',
+        options: [
+            { text: '"AI가 그린 그림이 미술 대회 우승"', weights: { 'ai-app': 3, 'prompt-eng': 4 } },
+            { text: '"카카오톡 서버가 멈춘 이유와 해결 과정"', weights: { 'mlops': 5, 'data-eng': 4 } },
+            { text: '"새로운 AI 기술 논문 발표"', weights: { 'research': 5, 'ml-eng': 4 } },
+            { text: '"올해 가장 많이 팔린 IT 서비스 트렌드"', weights: { 'pm': 5, 'data-sci': 3 } },
+        ],
+    },
+    // 8. 팀플 역할
+    {
+        id: 8,
+        question: '조별 과제를 할 때 내가 주로 하는 말은?',
+        options: [
+            { text: '"자, 우리 이렇게 역할을 나누고 언제까지 하자."', weights: { 'pm': 5, 'mlops': 2 } },
+            { text: '"내가 자료 조사랑 정리를 싹 다 할게."', weights: { 'data-eng': 4, 'data-sci': 3 } },
+            { text: '"PPT 디자인이랑 발표는 내가 할게."', weights: { 'ai-app': 3, 'prompt-eng': 3 } },
+            { text: '"어려운 부분 있으면 내가 좀 도와줄게."', weights: { 'ml-eng': 4, 'research': 3 } },
+        ],
+    },
+    // 9. 정리 vs 창조
+    {
+        id: 9,
+        question: '책상은 어떤 상태인가요?',
+        options: [
+            { text: '모든 물건이 각 잡혀서 정해진 위치에 있다.', weights: { 'data-eng': 4, 'mlops': 4, 'pm': 3 } },
+            { text: '정신없어 보이지만 나만의 규칙이 있다.', weights: { 'ai-app': 4, 'research': 4 } },
+            { text: '치워야지 생각만 하고 계속 쌓인다.', weights: { 'prompt-eng': 3, 'data-sci': 2 } },
+        ],
+    },
+    // 10. 새로운 기술 습득
+    {
+        id: 10,
+        question: '새로운 핸드폰이나 기계를 샀을 때?',
+        options: [
+            { text: '설명서부터 꼼꼼히 읽어본다.', weights: { 'mlops': 4, 'data-eng': 3 } },
+            { text: '일단 이것저것 눌러보면서 기능을 익힌다.', weights: { 'ai-app': 5, 'prompt-eng': 3 } },
+            { text: '유튜브 리뷰 영상을 찾아본다.', weights: { 'pm': 3, 'data-sci': 2 } },
+        ],
+    },
+    // 11. 친구의 고민 상담
+    {
+        id: 11,
+        question: '친구가 힘든 일을 털어놓으면?',
+        options: [
+            { text: '"그래서 원인이 뭐야? 해결책을 찾아보자." (T성향)', weights: { 'ml-eng': 4, 'data-sci': 3, 'research': 3 } },
+            { text: '"많이 힘들었겠다.. 괜찮아?" (F성향)', weights: { 'pm': 5, 'prompt-eng': 4 } },
+        ],
+    },
+    // 12. 서비스 개선
+    {
+        id: 12,
+        question: '자주 쓰는 앱에서 불편한 점을 발견하면?',
+        options: [
+            { text: '"이런 기능 넣으면 대박 나겠는데?" 상상해본다.', weights: { 'pm': 5, 'ai-app': 3 } },
+            { text: '"서버가 느린가? 코드를 어떻게 짰길래.." 분석한다.', weights: { 'mlops': 4, 'ml-eng': 3 } },
+            { text: '그냥 참고 쓴다.', weights: { 'data-sci': 2 } },
+        ],
+    },
+    // 13. 완벽주의
+    {
+        id: 13,
+        question: '시험 공부를 할 때?',
+        options: [
+            { text: '기초부터 차근차근 원리를 이해해야 한다.', weights: { 'research': 5, 'data-sci': 4 } },
+            { text: '중요한 기출문제 위주로 빠르게 훑는다.', weights: { 'ai-app': 4, 'pm': 3 } },
+            { text: '나만의 요약 노트를 아주 예쁘게 만든다.', weights: { 'prompt-eng': 3, 'data-eng': 2 } },
+        ],
+    },
+    // 14. 리더십
+    {
+        id: 14,
+        question: '모임에서 장소를 정해야 할 때?',
+        options: [
+            { text: '맛집, 위치, 가격 비교해서 엑셀로 정리해 공유한다.', weights: { 'data-eng': 5, 'data-sci': 3, 'pm': 3 } },
+            { text: '"어디 가고 싶어?" 의견을 듣고 결정한다.', weights: { 'pm': 5, 'ml-eng': 3 } },
+            { text: '"그냥 아무 데나 가자." (따라가는 편)', weights: { 'research': 2, 'mlops': 2 } },
+        ],
+    },
+    // 15. 창작 욕구
+    {
+        id: 15,
+        question: '블로그나 SNS를 한다면?',
+        options: [
+            { text: '사람들이 좋아할 만한 꿀팁 정보를 올린다.', weights: { 'ai-app': 4, 'pm': 4 } },
+            { text: '내가 공부한 내용을 기록용으로 정리한다.', weights: { 'research': 4, 'data-sci': 3, 'ml-eng': 3 } },
+            { text: '감성적인 사진과 짧은 글을 올린다.', weights: { 'prompt-eng': 5 } },
+        ],
+    },
+    // 16. 문제 직면
+    {
+        id: 16,
+        question: '꽉 막힌 도로, 운전 중에 차가 안 움직인다면?',
+        options: [
+            { text: '내가 아는 지름길로 빠져나간다.', weights: { 'ai-app': 4, 'ml-eng': 3 } },
+            { text: '네비게이션이 알려주는 도착 시간을 믿고 기다린다.', weights: { 'data-sci': 3, 'research': 2 } },
+            { text: '동승자와 수다를 떨며 시간을 보낸다.', weights: { 'pm': 4, 'prompt-eng': 3 } },
+        ],
+    },
+    // 17. 선호하는 게임
+    {
+        id: 17,
+        question: '게임을 한다면 어떤 장르?',
+        options: [
+            { text: '심시티나 문명 같은 건설/경영 시뮬레이션', weights: { 'data-eng': 4, 'mlops': 4, 'pm': 3 } },
+            { text: '롤(LoL)이나 오버워치 같은 팀플레이 경쟁', weights: { 'pm': 3, 'ml-eng': 3 } },
+            { text: '혼자서 스토리를 즐기는 RPG', weights: { 'research': 3, 'prompt-eng': 3, 'ai-app': 2 } },
+        ],
+    },
+    // 18. 변화 적응
+    {
+        id: 18,
+        question: '자주 가던 식당 메뉴가 싹 바뀌었다면?',
+        options: [
+            { text: '새로운 메뉴를 도전해본다.', weights: { 'ai-app': 5, 'prompt-eng': 4 } },
+            { text: '맛없으면 어쩌지.. 리뷰부터 확인한다.', weights: { 'data-sci': 4, 'research': 3 } },
+            { text: '사장님께 왜 바뀌었는지 물어본다.', weights: { 'pm': 4 } },
+        ],
+    },
+    // 19. 설명 능력
+    {
+        id: 19,
+        question: '어려운 개념을 남에게 설명해야 한다면?',
+        options: [
+            { text: '예시를 들어서 아주 쉽게 비유한다.', weights: { 'pm': 5, 'prompt-eng': 5, 'ai-app': 3 } },
+            { text: '정확한 용어와 정의를 사용해 설명한다.', weights: { 'research': 5, 'mlops': 3, 'data-eng': 3 } },
+        ],
+    },
+    // 20. 최종 목표 (단순화)
+    {
+        id: 20,
+        question: '나중에 어떤 사람으로 불리고 싶나요?',
+        options: [
+            { text: '"저 사람한테 맡기면 무조건 해결돼" (해결사)', weights: { 'ml-eng': 5, 'mlops': 4 } },
+            { text: '"진짜 창의적이고 아이디어가 좋아" (크리에이터)', weights: { 'ai-app': 5, 'prompt-eng': 5 } },
+            { text: '"아는 게 정말 많고 깊이가 있어" (전문가)', weights: { 'research': 5, 'data-sci': 5 } },
+            { text: '"일 처리가 깔끔하고 정리를 잘해" (매니저)', weights: { 'pm': 5, 'data-eng': 4 } },
+        ],
+    },
+];

@@ -8,6 +8,7 @@ interface QuizCardProps {
     currentIndex: number;
     totalQuestions: number;
     onAnswer: (optionIndex: number) => void;
+    onSkip?: () => void;
     className?: string;
 }
 
@@ -16,6 +17,7 @@ export default function QuizCard({
     currentIndex,
     totalQuestions,
     onAnswer,
+    onSkip,
     className,
 }: QuizCardProps) {
     return (
@@ -50,6 +52,18 @@ export default function QuizCard({
                             </span>
                         </Button>
                     ))}
+
+                    {/* Skip Button */}
+                    {onSkip && (
+                        <div className="pt-4 flex justify-center">
+                            <button
+                                onClick={onSkip}
+                                className="text-muted-foreground hover:text-foreground underline-offset-4 hover:underline text-sm font-medium transition-colors"
+                            >
+                                이 질문 건너뛰기
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
