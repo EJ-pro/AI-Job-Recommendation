@@ -1,5 +1,7 @@
 import Button from '@/components/Button';
+import JobRoleList from '@/components/JobRoleList';
 import Link from 'next/link';
+import { JOBS } from '@/lib/data';
 import { ArrowRight, Sparkles, BrainCircuit, Target } from 'lucide-react'; // Need to install lucide-react if not present, or use text/emoji
 
 export default function Home() {
@@ -52,6 +54,18 @@ export default function Home() {
             <p className="text-muted-foreground leading-relaxed">{feature.desc}</p>
           </div>
         ))}
+      </section>
+
+      {/* Job Roles Introduction */}
+      <section className="w-full space-y-10 animate-in fade-in slide-in-from-bottom-16 duration-1000 delay-300">
+        <div className="text-center space-y-4">
+          <h2 className="text-3xl md:text-4xl font-bold">다루는 핵심 직무</h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            현재 AI 시장에서 가장 수요가 많은 7가지 핵심 직무를 분석합니다.
+          </p>
+        </div>
+
+        <JobRoleList jobs={JOBS} />
       </section>
     </div>
   );
