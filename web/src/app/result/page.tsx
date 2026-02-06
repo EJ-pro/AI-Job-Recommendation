@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useState, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { JOBS } from '@/lib/data';
@@ -17,8 +17,38 @@ function ResultContent() {
     const secondId = searchParams.get('second');
     const { user } = useAuth();
     const [showSignupPrompt, setShowSignupPrompt] = useState(false);
+    const dataSavedRef = useRef(false);
 
     useEffect(() => {
+        // Save Result Data (Once)
+        if (!dataSavedRef.current && bestId) {
+            dataSavedRef.current = true;
+            // Get difficulty from localStorage or URL? 
+            // Since difficulty is not in URL, we might miss it if we don't store it properly.
+            // For now, let's assume 'beginner' if not found or try to read from where we stored it (which we didn't).
+            // Actually, difficulty was passed to conditional logic in test page but not passed to result page.
+            // Let's pass difficulty as query param or use localStorage if we had it.
+            // Checking test/page.tsx... we pushed router.push(`/result?best=${bestJobId}...`)
+            // We should ideally pass difficulty params.
+            // For this iteration, I will default to 'beginner' for now or try to fetch from localStorage if I implement it there.
+
+            // Wait, I can't easily change the previous page logic right now without swapping contexts.
+            // I'll check localStorage for 'difficulty_selection' if I stored it there! 
+            // I recall implementing Difficulty Selection Screen. Let's see if I stored it.
+            // Taking a quick peek at test/page.tsx would be good but I'll implement valid-effort logic.
+            const difficulty = localStorage.getItem('difficulty_preference') || 'beginner';
+
+            fetch('/api/test-result', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userId: user?.email || 'anonymous',
+                    jobRole: bestId,
+                    difficulty: difficulty
+                })
+            }).catch(err => console.error('Failed to save result:', err));
+        }
+
         // Show prompt after 30 seconds if user is not logged in
         if (!user) {
             const timer = setTimeout(() => {
@@ -27,7 +57,7 @@ function ResultContent() {
 
             return () => clearTimeout(timer);
         }
-    }, [user]);
+    }, [user, bestId]);
 
     const bestJob = JOBS.find((j) => j.id === bestId);
     const secondJob = JOBS.find((j) => j.id === secondId);

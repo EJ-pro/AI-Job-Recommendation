@@ -7,6 +7,7 @@ import AIConsultant from '@/components/AIConsultant';
 import Button from '@/components/Button';
 import { User, LogOut } from 'lucide-react';
 import Link from 'next/link';
+import StatsDashboard from '@/components/StatsDashboard';
 
 export default function MyPage() {
     const { user, isLoading, logout } = useAuth();
@@ -55,6 +56,12 @@ export default function MyPage() {
                 <div className="space-y-4">
                     <h2 className="text-xl font-bold px-2 border-l-4 border-primary pl-4">나만의 AI 커리어 멘토</h2>
                     <AIConsultant />
+                </div>
+
+                {/* Statistics Dashboard */}
+                <div className="space-y-4 pt-4">
+                    <h2 className="text-xl font-bold px-2 border-l-4 border-primary pl-4">전체 참여자 데이터 분석</h2>
+                    <StatsDashboard />
                 </div>
             </div>
         </div>
