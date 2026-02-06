@@ -67,6 +67,15 @@ export default function Home() {
 
         <JobRoleList jobs={JOBS} />
       </section>
+
+      {/* Floating Login/MyPage Button (Simple implementation) */}
+      <div className="fixed top-6 right-6 z-50">
+        <Link href="/login">
+          <Button variant="outline" className="bg-background/80 backdrop-blur shadow-md hover:shadow-lg">
+            로그인 / 마이페이지
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }

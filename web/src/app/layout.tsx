@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { AuthProvider } from "@/context/AuthContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -42,17 +43,19 @@ export default function RootLayout({
         <main className="flex-1 w-full max-w-[1920px] mx-auto flex gap-4 p-4">
 
           {/* Left Ad (Desktop Only) */}
-          <aside className="hidden xl:block w-[200px] shrink-0 sticky top-4 h-fit">
+          <aside className="hidden xl:block w-[200px] shrink-0 sticky top-[calc(50vh-300px)] h-fit">
             <AdBanner dataAdSlot="1234567890" className="h-[600px] w-full" />
           </aside>
 
           {/* Main Content */}
           <section className="flex-1 w-full min-w-0">
-            {children}
+            <AuthProvider>
+              {children}
+            </AuthProvider>
           </section>
 
           {/* Right Ad (Desktop Only) */}
-          <aside className="hidden xl:block w-[200px] shrink-0 sticky top-4 h-fit">
+          <aside className="hidden xl:block w-[200px] shrink-0 sticky top-[calc(50vh-300px)] h-fit">
             <AdBanner dataAdSlot="0987654321" className="h-[600px] w-full" />
           </aside>
 
