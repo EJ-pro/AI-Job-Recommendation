@@ -154,6 +154,23 @@ export const JOBS: JobRole[] = [
             { step: '3개월차', action: '학습된 모델을 웹 서비스(Streamlit/FastAPI)에 연동하고 실제 사용자에게 배포하는 경험 쌓기' }
         ]
     },
+    {
+        id: 'physical-ai',
+        title: 'Physical AI Engineer',
+        description: '현실 세계의 로봇이나 장치를 제어하는 AI 모델을 개발하고, 센서 데이터를 처리하여 물리적인 상호작용을 구현합니다.',
+        tasks: ['로봇/드론 자율주행 알고리즘 개발', '센서 데이터(LiDAR, Camera) 퓨전 및 처리', '임베디드 AI 모델 최적화 (Edge AI)'],
+        tags: ['Robotics', 'Embedded', 'Hardware'],
+        focus_areas: [
+            'ROS (Robot Operating System) & Gazebo Sim',
+            'Computer Vision (SLAM, Object Detection)',
+            'Embedded System (NVIDIA Jetson, Raspberry Pi)'
+        ],
+        roadmap: [
+            { step: '1개월차', action: 'Python/C++로 기본 로봇 제어(모터/센서) 및 ROS 2 기초 학습하기' },
+            { step: '2개월차', action: '카메라/LiDAR 센서 데이터를 받아 장애물을 피하는 자율주행 봇 시뮬레이션 구현하기' },
+            { step: '3개월차', action: '실제 임베디드 보드(Jetson 등)에 경량화된 AI 모델을 탑재하여 미션을 수행하는 프로젝트 완성하기' }
+        ]
+    },
 ];
 
 export const QUESTIONS: Question[] = [
@@ -162,7 +179,7 @@ export const QUESTIONS: Question[] = [
         id: 1,
         question: '다음 중 가장 흥미를 느끼는 작업은 무엇인가요?',
         options: [
-            { text: '직접 코드를 짜서 무언가 만들어내는 것', weights: { 'ai-app': 3, 'data-eng': 3, 'mlops': 3, 'research': 2 } },
+            { text: '직접 코드를 짜서 무언가 만들어내는 것', weights: { 'ai-app': 3, 'data-eng': 3, 'mlops': 3, 'physical-ai': 3, 'research': 2 } },
             { text: '데이터를 보고 숨겨진 의미를 찾아내는 것', weights: { 'data-sci': 5, 'prompt-eng': 3 } },
             { text: '사람들의 문제를 정의하고 해결책을 기획하는 것', weights: { 'pm': 5, 'ml-eng': 4, 'prompt-eng': 2 } },
         ],
@@ -204,7 +221,7 @@ export const QUESTIONS: Question[] = [
         id: 5,
         question: '리눅스(Linux) 터미널과 클라우드(AWS/Docker) 화면을 보면 어떤가요?',
         options: [
-            { text: '검은 화면에 흰 글씨.. 뭔가 있어 보이고 재밌다.', weights: { 'mlops': 5, 'data-eng': 4 } },
+            { text: '검은 화면에 흰 글씨.. 뭔가 있어 보이고 재밌다.', weights: { 'mlops': 5, 'data-eng': 4, 'physical-ai': 4 } },
             { text: '필요하면 쓰지만, 가능하면 피하고 싶다.', weights: { 'data-sci': 3, 'ai-app': 2, 'research': 2 } },
             { text: '전혀 모르겠다. 그냥 버튼 누르면 되면 좋겠다.', weights: { 'pm': 4, 'prompt-eng': 3 } },
         ],
@@ -224,8 +241,8 @@ export const QUESTIONS: Question[] = [
         id: 7,
         question: '막히는 문제가 생겼을 때 해결 방식은?',
         options: [
-            { text: '최신 논문이나 해외 기술 블로그를 깊이 파본다.', weights: { 'research': 5, 'data-sci': 4 } },
-            { text: 'Stack Overflow나 공식 문서를 찾아서 빠르게 적용한다.', weights: { 'ai-app': 5, 'data-eng': 3 } },
+            { text: '최신 논문이나 해외 기술 블로그를 깊이 파본다.', weights: { 'research': 5, 'data-sci': 4, 'physical-ai': 3 } },
+            { text: 'Stack Overflow나 공식 문서를 찾아서 빠르게 적용한다.', weights: { 'ai-app': 5, 'data-eng': 3, 'physical-ai': 3 } },
             { text: '여러 가지 입력값을 바꿔가며 될 때까지 실험해본다.', weights: { 'prompt-eng': 5, 'mlops': 2 } },
             { text: '동료나 전문가에게 물어보고 구조적인 해결책을 찾는다.', weights: { 'ml-eng': 5, 'pm': 3 } },
         ],
@@ -235,7 +252,7 @@ export const QUESTIONS: Question[] = [
         id: 8,
         question: '학창 시절 확률과 통계, 미적분 수업 시간은 어땠나요?',
         options: [
-            { text: '수식이 주는 명쾌함이 좋았다.', weights: { 'research': 5, 'data-sci': 5 } },
+            { text: '수식이 주는 명쾌함이 좋았다.', weights: { 'research': 5, 'data-sci': 5, 'physical-ai': 4 } },
             { text: '필요성은 알지만 좋아하진 않았다.', weights: { 'mlops': 2, 'data-eng': 2, 'ai-app': 2 } },
             { text: '숫자만 봐도 머리가 아팠다.', weights: { 'pm': 2, 'prompt-eng': 3, 'ai-app': 1 } },
         ],
@@ -256,9 +273,9 @@ export const QUESTIONS: Question[] = [
         id: 10,
         question: '다음 중 가장 배워보고 싶은 기술은?',
         options: [
-            { text: 'Kubernetes, Docker, CI/CD', weights: { 'mlops': 5, 'data-eng': 4 } },
+            { text: 'Kubernetes, Docker, CI/CD', weights: { 'mlops': 5, 'data-eng': 4, 'physical-ai': 3 } },
             { text: 'React, Next.js, FastAPI', weights: { 'ai-app': 5 } },
-            { text: 'PyTorch, TensorFlow, Hugging Face', weights: { 'research': 4, 'data-sci': 4 } },
+            { text: 'PyTorch, TensorFlow, Hugging Face', weights: { 'research': 4, 'data-sci': 4, 'physical-ai': 3 } },
             { text: 'Tableau, SQL, Pandas', weights: { 'data-sci': 5, 'data-eng': 3 } },
         ],
     },
@@ -365,6 +382,17 @@ export const QUESTIONS: Question[] = [
             { text: '복잡한 비즈니스 문제를 데이터로 풀어내는 전문가', weights: { 'data-sci': 5, 'prompt-eng': 3 } },
         ],
     },
+    // 21. 하드웨어/로봇 (New for Physical AI)
+    {
+        id: 21,
+        question: '개발하고 싶은 대상이 무엇인가요?',
+        options: [
+            { text: '모니터 속의 소프트웨어 (웹, 앱, 서버)', weights: { 'ai-app': 4, 'pm': 2, 'data-sci': 2 } },
+            { text: '현실 세계에서 움직이는 기계 (로봇, 드론, 자동차)', weights: { 'physical-ai': 5, 'research': 2 } },
+            { text: '데이터 그 자체 (숫자와 통계)', weights: { 'data-sci': 4, 'data-eng': 3 } },
+            { text: '거대하고 복잡한 시스템 인프라', weights: { 'mlops': 4, 'data-eng': 4 } },
+        ],
+    },
 ];
 
 export const QUESTIONS_BEGINNER: Question[] = [
@@ -373,7 +401,7 @@ export const QUESTIONS_BEGINNER: Question[] = [
         id: 1,
         question: '무언가를 배울 때 더 재미있는 것은?',
         options: [
-            { text: '화면에 그림이나 글자가 짠! 하고 나타나는 것 (웹사이트 만들기)', weights: { 'ai-app': 4, 'prompt-eng': 3 } },
+            { text: '화면에 그림이나 글자가 짠! 하고 나타나는 것 (웹사이트 만들기)', weights: { 'ai-app': 4, 'prompt-eng': 3, 'physical-ai': 3 } },
             { text: '복잡한 데이터를 정리해서 깔끔한 표로 만드는 것', weights: { 'data-sci': 4, 'data-eng': 3 } },
             { text: '사람들이 왜 이걸 불편해하는지 이유를 찾는 것', weights: { 'pm': 5, 'ml-eng': 2 } },
         ],
@@ -383,7 +411,7 @@ export const QUESTIONS_BEGINNER: Question[] = [
         id: 2,
         question: '검은색 화면(터미널)에 명령어를 치는 것이...',
         options: [
-            { text: '뭔가 해커 같고 멋있다. 더 배우고 싶다.', weights: { 'mlops': 5, 'data-eng': 4, 'ml-eng': 3 } },
+            { text: '뭔가 해커 같고 멋있다. 더 배우고 싶다.', weights: { 'mlops': 5, 'data-eng': 4, 'ml-eng': 3, 'physical-ai': 4 } },
             { text: '아직은 낯설고 무섭다. 버튼이 편하다.', weights: { 'pm': 4, 'ai-app': 3, 'prompt-eng': 3 } },
             { text: '필요하다면 배울 수 있다.', weights: { 'research': 3, 'data-sci': 3 } },
         ],
@@ -393,7 +421,7 @@ export const QUESTIONS_BEGINNER: Question[] = [
         id: 3,
         question: '친구가 컴퓨터가 고장 났다고 물어보면?',
         options: [
-            { text: '어디가 문제인지 하나씩 뜯어서 고쳐준다.', weights: { 'mlops': 4, 'ml-eng': 3 } },
+            { text: '어디가 문제인지 하나씩 뜯어서 고쳐준다.', weights: { 'mlops': 4, 'ml-eng': 3, 'physical-ai': 5 } },
             { text: '인터넷에 검색해서 해결 방법을 찾아 보내준다.', weights: { 'ai-app': 4, 'data-eng': 3 } },
             { text: '새로 사는 게 낫지 않아? 라고 조언한다.', weights: { 'pm': 3 } },
         ],
@@ -403,7 +431,7 @@ export const QUESTIONS_BEGINNER: Question[] = [
         id: 4,
         question: '수학 시간이나 통계학 수업 때...',
         options: [
-            { text: '알쏭달쏭한 수수께끼를 푸는 것 같아 재밌었다.', weights: { 'research': 5, 'data-sci': 5 } },
+            { text: '알쏭달쏭한 수수께끼를 푸는 것 같아 재밌었다.', weights: { 'research': 5, 'data-sci': 5, 'physical-ai': 4 } },
             { text: '공식 외우는 게 너무 싫었다.', weights: { 'ai-app': 3, 'pm': 3, 'prompt-eng': 3 } },
             { text: '답이 딱 떨어지는 게 좋았다.', weights: { 'data-eng': 4, 'mlops': 3 } },
         ],
@@ -566,6 +594,17 @@ export const QUESTIONS_BEGINNER: Question[] = [
             { text: '"진짜 창의적이고 아이디어가 좋아" (크리에이터)', weights: { 'ai-app': 5, 'prompt-eng': 5 } },
             { text: '"아는 게 정말 많고 깊이가 있어" (전문가)', weights: { 'research': 5, 'data-sci': 5 } },
             { text: '"일 처리가 깔끔하고 정리를 잘해" (매니저)', weights: { 'pm': 5, 'data-eng': 4 } },
+        ],
+    },
+    // 21. 하드웨어/로봇 (New for Physical AI)
+    {
+        id: 21,
+        question: '개발하고 싶은 대상이 무엇인가요?',
+        options: [
+            { text: '모니터 속의 소프트웨어 (웹, 앱, 서버)', weights: { 'ai-app': 4, 'pm': 2, 'data-sci': 2 } },
+            { text: '현실 세계에서 움직이는 기계 (로봇, 드론, 자동차)', weights: { 'physical-ai': 5, 'research': 2 } },
+            { text: '데이터 그 자체 (숫자와 통계)', weights: { 'data-sci': 4, 'data-eng': 3 } },
+            { text: '거대하고 복잡한 시스템 인프라', weights: { 'mlops': 4, 'data-eng': 4 } },
         ],
     },
 ];
