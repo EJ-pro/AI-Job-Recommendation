@@ -45,63 +45,331 @@ export const JOBS: JobRole[] = [
     {
         id: 'ai-app',
         title: 'AI Application Engineer',
-        description: 'LLM API와 프레임워크를 활용해 실제 사용자가 쓰는 AI 서비스를 빠르게 개발합니다.',
-        long_description: 'AI Application Engineer는 최신 AI 모델(LLM)을 활용하여 실제 사용자가 사용할 수 있는 웹/앱 서비스를 만드는 역할입니다. 모델 자체를 학습시키는 것보다, 잘 만들어진 모델(OpenAI, Claude 등)을 API로 호출하고, 이를 기존 시스템과 연결하여 가치를 창출하는 데 집중합니다. "AI를 활용한 풀스택 개발자"에 가깝습니다.',
-        salary_range: '초봉 4,000 ~ 5,500만원',
+        description: '최신 AI 모델(LLM)과 도구를 활용하여 사용자가 원하는 실제 서비스와 기능을 구현합니다.',
+        long_description: 'AI Application Engineer는 "AI를 활용한 풀스택 개발자"입니다. 모델을 직접 학습시키기보다는, 잘 만들어진 모델(OpenAI, Claude, Llama)을 API로 호출하고 LangChain 등의 프레임워크를 활용해 서비스 로직을 개발합니다. RAG(검색 증강 생성) 파이프라인을 구축하여 AI가 똑똑하게 답변하도록 만들고, 이를 웹/앱 서비스로 배포하여 운영합니다.',
+        salary_range: '초봉 4,000 ~ 6,000만원',
         difficulty: 'Medium',
         demand: 'Very High',
         responsibilities: [
-            'LangChain/LlamaIndex를 활용한 LLM 애플리케이션 개발',
-            'RAG(검색 증강 생성) 파이프라인 구축 및 최적화',
-            'FastAPI/Streamlit을 이용한 백엔드 및 데모 페이지 구현',
-            'Prompt Engineering을 통한 답변 품질 개선'
+            'GenAI Service Development (LLM API 연동)',
+            'RAG Pipeline Construction (Vector DB 구축 및 검색 최적화)',
+            'AI Agent Implementation (LangGraph/CrewAI 활용)',
+            'Backend API & Frontend Demo (FastAPI/Streamlit)',
+            'Prompt Optimization & Evaluation'
         ],
         tech_stack: [
-            { category: 'Language', skills: ['Python', 'TypeScript', 'JavaScript'] },
-            { category: 'Framework', skills: ['FastAPI', 'Next.js', 'Streamlit', 'LangChain'] },
-            { category: 'Database', skills: ['PostgreSQL', 'Pinecone (Vector DB)', 'Redis'] },
-            { category: 'AI Tools', skills: ['OpenAI API', 'Hugging Face', 'Ollama'] }
+            { category: 'Frameworks', skills: ['LangChain', 'LlamaIndex', 'LangGraph', 'FastAPI'] },
+            { category: 'AI Models', skills: ['OpenAI API', 'Claude API', 'Hugging Face', 'Ollama'] },
+            { category: 'Database', skills: ['Pinecone', 'ChromaDB', 'PostgreSQL (pgvector)', 'Redis'] },
+            { category: 'DevOps', skills: ['Docker', 'Vercel', 'AWS', 'GitHub Actions'] }
         ],
-        tags: ['Service', 'API', 'Fast-Paced'],
+        tags: ['Service', 'Engineering', 'API', 'Fullstack'],
         focus_areas: [
-            'LangChain/LlamaIndex 프레임워크 마스터',
-            'Python 백엔드 (FastAPI/Streamlit)',
-            'Prompt Engineering 기초'
+            'Building RAG Systems',
+            'AI Agent Orchestration',
+            'Backend API Development'
         ],
         roadmap: [
+            // 1. Fundamentals
             {
-                step: 'Phase 1: AI 서비스 기초',
-                title: 'LLM API 활용 및 챗봇 만들기',
-                description: 'API를 통해 AI 모델과 대화하는 방법을 익히고, 간단한 챗봇 인터페이스를 구현합니다.',
-                topics: ['REST API 호출', 'OpenAI Playground 사용법', 'Streamlit 기초', 'Python Asyncio'],
+                step: 'Phase 1: AI 서비스 개발 기초',
+                title: 'LLM API Integration',
+                description: 'OpenAI, Anthropic 등의 API를 사용하여 텍스트 생성 기능을 구현합니다.',
+                topics: ['REST API & JSON', 'Authentication (API Key)', 'Temperature & Max Tokens', 'Streaming Responses'],
                 resources: [
-                    { name: 'OpenAI Quickstart', url: 'https://platform.openai.com/docs/quickstart' },
-                    { name: 'Streamlit Documentation', url: 'https://docs.streamlit.io/' }
+                    { name: 'OpenAI API Docs', url: 'https://platform.openai.com/docs/introduction' }
                 ],
                 quiz: {
-                    question: 'OpenAI API를 사용할 때, 대화의 맥락(Context)을 유지하기 위해 보내야 하는 메시지 리스트의 역할(Role)이 아닌 것은?',
-                    options: ['System', 'User', 'Assistant', 'Manager'],
-                    correctAnswer: 3
+                    question: 'OpenAI API 호출 시, 답변이 완성될 때까지 기다리지 않고 한 글자씩 실시간으로 받아오는 기능은?',
+                    options: ['Streaming (스트리밍)', 'Polling', 'Websocket', 'Batching'],
+                    correctAnswer: 0
                 }
             },
             {
-                step: 'Phase 2: 프레임워크 심화',
-                title: 'LangChain & RAG 구현',
-                description: '단순 대화를 넘어, 내 데이터를 참조하여 답변하는 RAG 시스템을 구축합니다.',
-                topics: ['LangChain Components', 'Vector Database 원리', 'Embedding 개념', 'Chain & Agent'],
+                step: 'Phase 2: 프롬프트 엔지니어링 기초',
+                title: 'Basic Prompting for Devs',
+                description: '개발자 관점에서 입력(Input)을 구조화하여 원하는 출력(Output)을 얻는 법을 익힙니다.',
+                topics: ['System/User/Assistant Role', 'Delimiter Usage', 'Few-shot Prompting', 'Output Parsing (JSON)'],
                 resources: [
-                    { name: 'LangChain Academy', url: 'https://python.langchain.com/docs/get_started/introduction' },
-                    { name: 'Pinecone Learning Center', url: 'https://www.pinecone.io/learn/' }
-                ]
+                    { name: 'DeepLearning.ai ChatGPT Prompt Engineering', url: 'https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/' }
+                ],
+                quiz: {
+                    question: 'LLM에게 JSON 형식으로만 답변하라고 지시할 때, 가장 효과적인 방법은?',
+                    options: ['프롬프트에 예시를 제공하고 JSON 모드를 활성화한다', '기도한다', '온도를 1.0으로 높인다', '문장을 짧게 쓴다'],
+                    correctAnswer: 0
+                }
             },
             {
-                step: 'Phase 3: 실전 프로젝트',
-                title: '나만의 AI 서비스 배포',
-                description: '기획부터 배포까지 전체 과정을 경험하며 포트폴리오를 완성합니다.',
-                topics: ['FastAPI 백엔드 구조화', 'Docker 배포', 'Vercel/Fly.io 호스팅', '서비스 모니터링'],
+                step: 'Phase 3: 파이썬 백엔드 (FastAPI)',
+                title: 'Python Backend (FastAPI)',
+                description: 'AI 모델을 감싸는 REST API 서버를 구축합니다.',
+                topics: ['FastAPI Basics', 'Pydantic Models', 'Async/Await (비동기 처리)', 'Dependency Injection'],
                 resources: [
-                    { name: 'Full Stack Deep Learning', url: 'https://fullstackdeeplearning.com/' }
-                ]
+                    { name: 'FastAPI Tutorial', url: 'https://fastapi.tiangolo.com/' }
+                ],
+                quiz: {
+                    question: 'FastAPI에서 요청/응답 데이터의 유효성을 검사하고 문서를 자동 생성해주는 라이브러리는?',
+                    options: ['Pydantic', 'NumPy', 'Pandas', 'Requests'],
+                    correctAnswer: 0
+                }
+            },
+            // 2. RAG & Data
+            {
+                step: 'Phase 4: 벡터 데이터베이스 이해',
+                title: 'Vector Databases',
+                description: '텍스트를 벡터로 변환하여 저장하고 검색하는 원리를 파악합니다.',
+                topics: ['Embeddings (Text-to-Vector)', 'Cosine Similarity', 'Pinecone/ChromaDB', 'Vector Search'],
+                resources: [
+                    { name: 'Pinecone Learning Center', url: 'https://www.pinecone.io/learn/' }
+                ],
+                quiz: {
+                    question: '단어의 의미적 유사성을 파악하기 위해 텍스트를 고차원의 숫자 배열로 변환하는 기술은?',
+                    options: ['Embedding (임베딩)', 'Hashing', 'Encryption', 'Compression'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 5: RAG 파이프라인 구축',
+                title: 'Building RAG',
+                description: 'LangChain을 활용해 문서를 검색하고 답변을 생성하는 RAG 시스템을 만듭니다.',
+                topics: ['Document Loaders', 'Text Splitters', 'Retriever', 'Context Stuffing'],
+                resources: [
+                    { name: 'LangChain RAG', url: 'https://python.langchain.com/docs/use_cases/question_answering/' }
+                ],
+                quiz: {
+                    question: '긴 문서를 LLM의 컨텍스트 윈도우에 넣기 위해 작은 단위로 자르는 작업은?',
+                    options: ['Chunking (Text Splitting)', 'Padding', 'Embedding', 'Training'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 6: 고급 검색 기법 (Advanced Retrieval)',
+                title: 'Advanced RAG',
+                description: '단순 검색의 한계를 극복하는 하이브리드 검색과 재순위화(Re-ranking)를 적용합니다.',
+                topics: ['Hybrid Search (Keyword + Semantic)', 'Re-ranking (Cross-encoder)', 'Multi-query Retriever', 'Context Compression'],
+                resources: [
+                    { name: 'Advanced RAG Patterns', url: 'https://eugeneyan.com/writing/llm-patterns/' }
+                ],
+                quiz: {
+                    question: '벡터 검색이 놓치는 키워드 매칭을 보완하기 위해 키워드 검색(BM25)과 벡터 검색을 결합하는 방식은?',
+                    options: ['Hybrid Search', 'Full-text Search', 'Linear Search', 'Binary Search'],
+                    correctAnswer: 0
+                }
+            },
+            // 3. Frameworks & Agents
+            {
+                step: 'Phase 7: 랭체인 심화 (LangChain)',
+                title: 'LangChain Deep Dive',
+                description: 'LCEL(LangChain Expression Language)과 Custom Chain을 자유자재로 다룹니다.',
+                topics: ['LCEL Syntax', 'Runnables', 'Callbacks & Tracing', 'Custom Retrievers'],
+                resources: [
+                    { name: 'LangChain Cheatsheet', url: 'https://github.com/langchain-ai/langchain' }
+                ],
+                quiz: {
+                    question: 'LangChain에서 파이프라인을 구성할 때, 각 단계의 출력을 다음 단계의 입력으로 연결하는 연산자(|)를 사용하는 문법은?',
+                    options: ['LCEL', 'SQL', 'RegEx', 'JSONPath'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 8: 라마인덱스 (LlamaIndex)',
+                title: 'LlamaIndex Master',
+                description: '데이터 중심의 프레임워크인 LlamaIndex로 복잡한 데이터 구조를 처리합니다.',
+                topics: ['Data Agents', 'Router Query Engine', 'Recursive Retrieval', 'Knowledge Graphs'],
+                resources: [
+                    { name: 'LlamaIndex Docs', url: 'https://docs.llamaindex.ai/' }
+                ],
+                quiz: {
+                    question: 'LlamaIndex에서 쿼리의 종류에 따라 적절한 검색 도구나 엔진을 선택해주는 컴포넌트는?',
+                    options: ['Router', 'Splitter', 'Embedder', 'Parser'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 9: AI 에이전트 (Agents)',
+                title: 'Building Agents',
+                description: 'LLM이 스스로 도구를 선택하고 행동을 결정하는 에이전트를 개발합니다.',
+                topics: ['Tool Calling (Function Calling)', 'ReAct Pattern', 'AgentExecutor', 'Memory (Short/Long-term)'],
+                resources: [
+                    { name: 'Agents in LangChain', url: 'https://python.langchain.com/docs/modules/agents/' }
+                ],
+                quiz: {
+                    question: 'LLM에게 계산기나 검색 엔진 같은 외부 기능을 사용할 수 있도록 도구의 사용법을 알려주는 기능은?',
+                    options: ['Tool / Function Calling', 'Fine-tuning', 'Prompting', 'Embedding'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 10: 멀티 에이전트 & LangGraph',
+                title: 'LangGraph & Multi-Agents',
+                description: '순환(Cycle)이 있는 복잡한 에이전트 워크플로우를 상태 머신(State Machine)으로 제어합니다.',
+                topics: ['StateGraph', 'Nodes & Edges', 'Human-in-the-loop', 'CrewAI Framework'],
+                resources: [
+                    { name: 'LangGraph Tutorial', url: 'https://github.com/langchain-ai/langgraph' }
+                ],
+                quiz: {
+                    question: 'LangChain 팀이 만든, 에이전트의 흐름을 그래프(Nodes/Edges) 형태로 정의하고 상태(State)를 관리하는 라이브러리는?',
+                    options: ['LangGraph', 'NetworkX', 'Matplotlib', 'D3.js'],
+                    correctAnswer: 0
+                }
+            },
+            // 4. Frontend & Demo
+            {
+                step: 'Phase 11: 프로토타이핑 (Streamlit)',
+                title: 'Rapid Prototyping',
+                description: 'Streamlit을 사용하여 Python만으로 빠르게 챗봇 UI를 만듭니다.',
+                topics: ['Streamlit Chat Elements', 'Session State Management', 'File Upload Processing', 'Sidebar Layout'],
+                resources: [
+                    { name: 'Streamlit Gallery', url: 'https://streamlit.io/gallery' }
+                ],
+                quiz: {
+                    question: 'Streamlit에서 사용자의 입력이나 변수 값이 페이지 리로드 후에도 유지되도록 저장하는 공간은?',
+                    options: ['Session State', 'Cache', 'Cookie', 'Database'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 12: 모던 프론트엔드 (Next.js)',
+                title: 'Next.js for AI Apps',
+                description: 'Vercel AI SDK와 Next.js를 활용해 전문적인 AI 채팅 인터페이스를 구축합니다.',
+                topics: ['Vercel AI SDK (useChat)', 'React Server Components', 'Streaming UI', 'Tailwind CSS'],
+                resources: [
+                    { name: 'Vercel AI SDK', url: 'https://sdk.vercel.ai/docs' }
+                ],
+                quiz: {
+                    question: 'Vercel에서 제공하는, React/Next.js 앱에서 LLM 스트리밍 답변을 쉽게 구현하도록 돕는 라이브러리는?',
+                    options: ['AI SDK', 'SWR', 'Redux', 'Axios'],
+                    correctAnswer: 0
+                }
+            },
+            // 5. Deployment & Ops
+            {
+                step: 'Phase 13: 컨테이너와 배포',
+                title: 'Docker & Deployment',
+                description: '애플리케이션을 도커 컨테이너로 패키징하고 클라우드에 배포합니다.',
+                topics: ['DockerFile', 'Docker Compose', 'Railway/Fly.io Deployment', 'Environment Variables'],
+                resources: [
+                    { name: 'Docker for Beginners', url: 'https://docker-curriculum.com/' }
+                ],
+                quiz: {
+                    question: '애플리케이션과 그 실행 환경을 "이미지"로 만들어, 어디서든 동일하게 실행되도록 하는 기술은?',
+                    options: ['Docker (Containerization)', 'Virtual Machine', 'Compiler', 'Interpreter'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 14: 클라우드 AI 서비스',
+                title: 'Cloud AI Services',
+                description: 'AWS Bedrock, Azure OpenAI 등 클라우드 매니지드 AI 서비스를 활용합니다.',
+                topics: ['AWS Bedrock', 'Azure OpenAI Service', 'GCP Vertex AI', 'Serverless Functions'],
+                resources: [
+                    { name: 'AWS Bedrock', url: 'https://aws.amazon.com/bedrock/' }
+                ],
+                quiz: {
+                    question: 'AWS에서 제공하는, 다양한 파운데이션 모델을 API로 쉽게 사용할 수 있게 해주는 완전 관리형 서비스는?',
+                    options: ['Amazon Bedrock', 'SageMaker', 'Lambda', 'EC2'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 15: 로컬 LLM (Ollama)',
+                title: 'Local LLM Inference',
+                description: '비용 절감과 보안을 위해 로컬 장비에서 LLM을 구동합니다.',
+                topics: ['Ollama Basics', 'Llama.cpp', 'Quantization (GGUF)', 'Local API Server'],
+                resources: [
+                    { name: 'Ollama GitHub', url: 'https://github.com/ollama/ollama' }
+                ],
+                quiz: {
+                    question: '모델의 파라미터 정밀도를 16비트에서 4비트 등으로 줄여, 성능 저하를 최소화하면서 메모리 사용량을 줄이는 기술은?',
+                    options: ['Quantization (양자화)', 'Pruning', 'Distillation', 'Training'],
+                    correctAnswer: 0
+                }
+            },
+            // 6. Production & Optimization
+            {
+                step: 'Phase 16: 모니터링과 추적 (Observability)',
+                title: 'LLM Monitoring',
+                description: 'LangSmith 등을 이용해 실제 서비스의 입출력 로그와 비용을 추적합니다.',
+                topics: ['LangSmith Tracing', 'Arize Phoenix', 'Log Analysis', 'Cost Tracking'],
+                resources: [
+                    { name: 'LangSmith Docs', url: 'https://docs.smith.langchain.com/' }
+                ],
+                quiz: {
+                    question: 'LangChain 애플리케이션의 실행 과정을 시각화하여 디버깅과 최적화를 돕는 플랫폼은?',
+                    options: ['LangSmith', 'TensorBoard', 'Grafana', 'Jira'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 17: 평가 (Evaluation)',
+                title: 'RAG Evaluation',
+                description: 'Ragas 등을 활용해 검색 품질과 답변 정확도를 정량적으로 평가합니다.',
+                topics: ['Ragas Metrics', 'Ground Truth Creation', 'DeepEval', 'LLM-as-a-Judge'],
+                resources: [
+                    { name: 'Ragas', url: 'https://github.com/explodinggradients/ragas' }
+                ],
+                quiz: {
+                    question: 'LLM을 심판(Judge)으로 사용하여, 다른 LLM의 답변 품질을 채점하게 하는 기법은?',
+                    options: ['LLM-as-a-Judge', 'Human Evaluation', 'BLEU Score', 'Perplexity'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 18: 보안 (Security)',
+                title: 'LLM Security',
+                description: '프롬프트 인젝션 공격을 방어하고 개인정보를 보호합니다.',
+                topics: ['Prompt Injection', 'PII Masking', 'Rate Limiting', 'Guardrails'],
+                resources: [
+                    { name: 'OWASP LLM Top 10', url: 'https://owasp.org/www-project-top-10-for-large-language-model-applications/' }
+                ],
+                quiz: {
+                    question: '사용자가 악의적인 프롬프트를 입력하여 모델이 시스템의 규칙을 어기도록 유도하는 공격은?',
+                    options: ['Prompt Injection (Jailbreaking)', 'DDoS', 'XSS', 'Phishing'],
+                    correctAnswer: 0
+                }
+            },
+            // 7. Advanced Career
+            {
+                step: 'Phase 19: 멀티모달 서비스',
+                title: 'Multimodal Apps',
+                description: '이미지(Vision)와 음성(Audio)을 처리하는 서비스를 만듭니다.',
+                topics: ['GPT-4 Vision', 'OpenAI Whisper (STT)', 'TTS (Text-to-Speech)', 'Gradio Demos'],
+                resources: [
+                    { name: 'OpenAI Whisper', url: 'https://github.com/openai/whisper' }
+                ],
+                quiz: {
+                    question: 'OpenAI가 만든 강력한 다국어 음성 인식(Speech-to-Text) 모델은?',
+                    options: ['Whisper', 'DALL-E', 'Sora', 'Jukebox'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 20: 실전 포트폴리오',
+                title: 'Build Portfolio',
+                description: '문제를 해결하는 완성도 높은 AI 서비스 2~3개를 만들어 배포합니다.',
+                topics: ['Idea Ideation', 'End-to-End Implementation', 'Demo Video', 'Readme Writing'],
+                resources: [
+                    { name: 'DevPost Hackathons', url: 'https://devpost.com/' }
+                ],
+                quiz: {
+                    question: '포트폴리오에서 가장 중요한 요소는?',
+                    options: ['해결하고자 한 문제와 그 결과물(데모 link)', '복잡한 코드', '사용된 라이브러리 목록', '학교 성적'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 21: 최신 트렌드 팔로업',
+                title: 'Stay Updated',
+                description: '매일 쏟아지는 AI 신기술을 학습하고 적용하는 습관을 기릅니다.',
+                topics: ['Twitter/X AI Community', 'ArXiv Papers', 'Hugging Face Daily Papers', 'Open Source Contrib'],
+                resources: [
+                    { name: 'AK\'s Twitter', url: 'https://twitter.com/_akhaliq' }
+                ],
+                quiz: {
+                    question: 'AI 분야의 최신 논문과 모델이 가장 활발하게 공유되는 플랫폼은?',
+                    options: ['Hugging Face', 'Facebook', 'LinkedIn', 'TikTok'],
+                    correctAnswer: 0
+                }
             }
         ],
         faq: [
