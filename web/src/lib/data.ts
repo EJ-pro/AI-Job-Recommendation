@@ -1778,60 +1778,335 @@ export const JOBS: JobRole[] = [
     {
         id: 'pm',
         title: 'AI Product Manager',
-        description: 'AI 기술을 활용한 제품을 기획하고, 개발팀과 비즈니스팀 사이의 가교 역할을 합니다.',
-        long_description: 'AI Product Manager는 기술과 시장을 연결하는 "지휘자"입니다. 소비자가 원하는 것이 무엇인지 파악하고, 이를 AI 기술로 어떻게 해결할 수 있을지 기획합니다. 개발자, 디자이너, 비즈니스 팀과 끊임없이 소통하며 제품이 성공적으로 출시되고 운영되도록 관리합니다. 기술에 대한 이해도가 높을수록 좋은 PM이 될 수 있습니다.',
+        description: 'AI 기술을 적용하여 해결할 수 있는 비즈니스 문제를 정의하고, 제품의 기획부터 출시, 개선까지 이르는 전체 생애주기를 관리합니다.',
+        long_description: 'AI Product Manager는 기술과 시장을 연결하는 "지휘자"입니다. 사용자 요구사항을 분석하여 AI가 구현할 기능 명세를 작성하고, 기술적 실현 가능성을 검토하여 제품 로드맵을 수립합니다. 데이터 기반으로 성과 지표(KPI)를 설정하고, 개발팀/디자인팀과 협업하여 AI 모델이 실제 비즈니스 가치를 창출하도록 리드합니다.',
         salary_range: '초봉 3,500 ~ 5,500만원',
         difficulty: 'Medium',
         demand: 'High',
         responsibilities: [
-            'AI 기반 서비스 기획 및 요구사항 명세(PRD) 작성',
-            '제품 로드맵 수립 및 일정 관리',
-            '데이터 기반 의사결정 및 성과 분석',
-            '유관부서 커뮤니케이션 및 조율'
+            'AI Opportunity Discovery (전략적 기회 발굴)',
+            'Product Requirement Definition (PRD 작성 및 유스케이스 정의)',
+            'Data-driven Decision Making (A/B 테스트 및 지표 분석)',
+            'Stakeholder Management (개발/비즈니스 팀 조율)',
+            'AI Ethics & Compliance (윤리적 리스크 관리)'
         ],
         tech_stack: [
-            { category: 'Planning', skills: ['Figma', 'Jira', 'Confluence', 'Notion'] },
-            { category: 'Data', skills: ['SQL', 'Google Analytics', 'Excel/Spreadsheet'] },
-            { category: 'Tech Literacy', skills: ['API 이해', 'ML 개발 프로세스 이해', 'Prompting'] }
+            { category: 'Planning', skills: ['Figma', 'Jira', 'Confluence', 'Miro'] },
+            { category: 'Data Analysis', skills: ['SQL', 'Tableau', 'Amplitude', 'Excel'] },
+            { category: 'AI Literacy', skills: ['Prompt Engineering', 'Model Evaluation Metrics', 'RAG 이해'] }
         ],
-        tags: ['Communication', 'Planning', 'Business'],
+        tags: ['Business', 'Strategy', 'Communication', 'Data'],
         focus_areas: [
-            'AI 기술 이해 (한계와 가능성)',
-            '데이터 기반 의사결정 (SQL/GA)',
-            '기획서/요구사항 명세서 작성'
+            'Product Strategy & Roadmap',
+            'Data Analytics (SQL/Metrics)',
+            'AI Technology Understanding'
         ],
         roadmap: [
+            // 1. Fundamentals
             {
-                step: 'Phase 1: 기획 역량',
-                title: 'Service Planning Basics',
-                description: '문제를 정의하고 해결책을 문서화하는 능력을 기릅니다.',
-                topics: ['User Persona', 'User Journey Map', 'Wireframing', 'PRD 작성법'],
+                step: 'Phase 1: PM의 역할과 마인드셋',
+                title: 'PM Fundamentals',
+                description: 'Product Manager의 핵심 역할과 제품 생애주기(PLC)를 이해합니다.',
+                topics: ['What is PM?', 'Product Lifecycle', 'Agile & Scrum Basics', 'Design Thinking'],
                 resources: [
-                    { name: 'Brunch (Planner Tips)', url: 'https://brunch.co.kr/' }
-                ]
+                    { name: 'Inspired (Book)', url: 'https://www.svpg.com/books/inspired/' }
+                ],
+                quiz: {
+                    question: '제품 개발 방법론 중, 짧은 주기(Sprint)로 개발과 피드백을 반복하며 유연하게 대응하는 방식은?',
+                    options: ['Agile (애자일)', 'Waterfall (워터폴)', 'Six Sigma', 'Lean'],
+                    correctAnswer: 0
+                }
             },
             {
-                step: 'Phase 2: AI 리터러시',
-                title: 'Understanding AI',
-                description: 'AI로 무엇이 가능하고 불가능한지 기술적 한계를 이해합니다.',
-                topics: ['AI Terminology', 'Development Cycle', 'Cost & Latency', 'API Capabilities'],
+                step: 'Phase 2: 시장 조사와 사용자 이해',
+                title: 'Market & User Research',
+                description: '고객의 페인 포인트를 찾고 시장의 기회를 분석합니다.',
+                topics: ['User Persona', 'User Journey Map', 'Competitor Analysis', 'Tam/Sam/Som'],
+                resources: [
+                    { name: 'User Interview Guide', url: 'https://www.nngroup.com/articles/user-interviews/' }
+                ],
+                quiz: {
+                    question: '특정 제품이나 서비스를 사용할 대표적인 가상 사용자를 설정하여 니즈와 행동 패턴을 구체화한 것은?',
+                    options: ['Persona (페르소나)', 'Stakeholder', 'Focus Group', 'Beta Tester'],
+                    correctAnswer: 0
+                }
+            },
+            // 2. Planning & Strategy
+            {
+                step: 'Phase 3: 문제 정의와 가설 수립',
+                title: 'Problem Definition',
+                description: '해결해야 할 "진짜 문제"를 정의하고 솔루션 가설을 세웁니다.',
+                topics: ['5 Whys', 'Problem Statement', 'Hypothesis Setting', 'MECE Framework'],
+                resources: [
+                    { name: 'Lean Canvas', url: 'https://leanstack.com/lean-canvas' }
+                ],
+                quiz: {
+                    question: '문제의 근본 원인을 찾기 위해 "왜?"라는 질문을 반복하는 기법은?',
+                    options: ['5 Whys', 'SWOT Analysis', 'PEST Analysis', 'Brainstorming'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 4: 제품 전략과 로드맵',
+                title: 'Strategy & Roadmapping',
+                description: '제품의 비전을 수립하고, 단기/중장기 실행 계획(로드맵)을 그립니다.',
+                topics: ['Product Vision & Mission', 'Objective Key Results (OKR)', 'Roadmap Prioritization (RICE/ICE)', 'MVP Strategy'],
+                resources: [
+                    { name: 'Product Roadmaps Guide', url: 'https://www.aha.io/roadmapping/guide/product-roadmaps' }
+                ],
+                quiz: {
+                    question: '우선순위를 정할 때 도달(Reach), 영향(Impact), 자신감(Confidence), 노력(Effort)을 점수화하는 프레임워크는?',
+                    options: ['RICE Score', 'MoSCoW', 'Kano Model', 'Cost-Benefit Analysis'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 5: 요구사항 정의 (PRD)',
+                title: 'Writing Requirements',
+                description: '개발자와 디자이너가 이해할 수 있는 명확한 제품 요구사항 문서(PRD)를 작성합니다.',
+                topics: ['PRD Structure', 'User Stories', 'Acceptance Criteria', 'Functional vs Non-functional'],
+                resources: [
+                    { name: 'PRD Templates', url: 'https://www.atlassian.com/agile/product-management/requirements' }
+                ],
+                quiz: {
+                    question: '애자일에서 사용자의 관점에서 필요한 기능을 서술하는 형식("As a user, I want to...")은?',
+                    options: ['User Story', 'Use Case', 'Flowchart', 'ERD'],
+                    correctAnswer: 0
+                }
+            },
+            // 3. AI Literacy
+            {
+                step: 'Phase 6: AI 기술 이해 (LLM)',
+                title: 'AI Literacy: LLMs',
+                description: '생성형 AI의 작동 원리와 한계(Hallucination 등)를 이해하여 기획에 반영합니다.',
+                topics: ['Transformer Basics', 'Prompt Engineering', 'Temperature & Context Window', 'Fine-tuning vs RAG'],
                 resources: [
                     { name: 'Google AI for Everyone', url: 'https://www.coursera.org/learn/ai-for-everyone' }
-                ]
+                ],
+                quiz: {
+                    question: 'AI가 사실이 아닌 정보를 마치 사실인 것처럼 그럴싸하게 생성해내는 현상은?',
+                    options: ['Hallucination (환각)', 'Overfitting', 'Bias', 'Latency'],
+                    correctAnswer: 0
+                }
             },
             {
-                step: 'Phase 3: 실전 매니지먼트',
-                title: 'Product Launching',
-                description: '실제 제품을 만들어보고 데이터를 보며 개선합니다.',
-                topics: ['Agile/Scrum', 'Data Driven Decision', 'A/B Testing', 'Growth Hacking'],
+                step: 'Phase 7: AI 기술 이해 (Vision/Predictive)',
+                title: 'AI Literacy: CV & Predictive',
+                description: '이미지 인식, 추천 시스템 등 다양한 AI 기술의 유스케이스를 파악합니다.',
+                topics: ['Computer Vision (OCR, Detection)', 'Recommendation Systems', 'Classification vs Regression', 'Clustering'],
                 resources: [
-                    { name: 'Lenny\'s Newsletter', url: 'https://www.lennysnewsletter.com/' }
-                ]
+                    { name: 'Machine Learning for PMs', url: 'https://bit.ly/3xXyZ' }
+                ],
+                quiz: {
+                    question: '넷플릭스나 유튜브처럼 사용자 취향에 맞는 콘텐츠를 제안하는 AI 시스템은?',
+                    options: ['Recommendation System (추천 시스템)', 'Computer Vision', 'Generative AI', 'Voice Recognition'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 8: AI 성능 평가 지표',
+                title: 'AI Metrics',
+                description: '정확도(Accuracy)뿐만 아니라 F1-Score, Precision, Recall 등 모델 성능 지표를 해석합니다.',
+                topics: ['Confusion Matrix', 'Precision/Recall', 'F1-Score', 'BLEU/ROUGE (GenAI Metrics)'],
+                resources: [
+                    { name: 'Evaluation Metrics for ML', url: 'https://www.evidentlyai.com/' }
+                ],
+                quiz: {
+                    question: '암 환자 예측처럼 "실제 환자를 놓치지 않는 것"이 중요할 때 가장 주의 깊게 봐야 하는 지표는?',
+                    options: ['Recall (재현율)', 'Precision (정밀도)', 'Accuracy (정확도)', 'Specificity'],
+                    correctAnswer: 0
+                }
+            },
+            // 4. Data & Analytics
+            {
+                step: 'Phase 9: 데이터 리터러시 & SQL',
+                title: 'Data Literacy & SQL',
+                description: '직접 데이터를 추출하여 가설을 검증할 수 있는 SQL 능력을 기릅니다.',
+                topics: ['Select/From/Where', 'Group By & Aggregation', 'Joins', 'Cohort Analysis'],
+                resources: [
+                    { name: 'SQL for Data Analysis', url: 'https://mode.com/sql-tutorial/' }
+                ],
+                quiz: {
+                    question: '데이터베이스에서 원하는 조건에 맞는 행(Row)만 필터링하기 위해 사용하는 SQL 구문은?',
+                    options: ['WHERE', 'GROUP BY', 'ORDER BY', 'HAVING'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 10: 데이터 시각화',
+                title: 'Data Visualization',
+                description: 'Tableau나 PowerBI 등을 활용해 데이터를 시각화하고 인사이트를 도출합니다.',
+                topics: ['Chart Types', 'Dashboard Design', 'Tableau/PowerBI Basics', 'Storytelling with Data'],
+                resources: [
+                    { name: 'Storytelling with Data', url: 'https://www.storytellingwithdata.com/' }
+                ],
+                quiz: {
+                    question: '시간의 흐름에 따른 데이터의 추세나 변화를 보여주기에 가장 적합한 차트는?',
+                    options: ['Line Chart (선 그래프)', 'Pie Chart', 'Scatter Plot', 'Heatmap'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 11: 실험 설계 (A/B Test)',
+                title: 'A/B Testing',
+                description: '데이터에 기반하여 두 가지 옵션 중 더 나은 것을 통계적으로 검증합니다.',
+                topics: ['Hypothesis Testing', 'Statistical Significance (p-value)', 'Sample Size Calculation', 'Metric Selection'],
+                resources: [
+                    { name: 'A/B Testing Guide', url: 'https://vwo.com/ab-testing/' }
+                ],
+                quiz: {
+                    question: 'A/B 테스트 결과가 우연에 의한 것이 아니라는 것을 확신할 수 있는 확률적 기준 지표는?',
+                    options: ['P-value (유의확률)', 'Conversion Rate', 'Bounce Rate', 'Retention'],
+                    correctAnswer: 0
+                }
+            },
+            // 5. Execution & Operations
+            {
+                step: 'Phase 12: 프로토타이핑 & MVP',
+                title: 'Prototyping & MVP',
+                description: '최소 기능 제품(MVP)을 빠르게 만들어 시장 반응을 확인합니다.',
+                topics: ['Wireframing (Figma)', 'No-code Tools', 'MVP Definition', 'Usability Testing'],
+                resources: [
+                    { name: 'Figma Tutorials', url: 'https://www.figma.com/resources/learn-design/' }
+                ],
+                quiz: {
+                    question: '고객에게 가치를 제공할 수 있는 최소한의 기능을 갖춘 제품 초기 버전을 무엇이라 하는가?',
+                    options: ['MVP (Minimum Viable Product)', 'Prototype', 'Mockup', 'Beta'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 13: 프로젝트 관리 (Delivery)',
+                title: 'Project Management',
+                description: '일정을 관리하고 리스크를 최소화하며 제품을 출시합니다.',
+                topics: ['Jira/Confluence Usage', 'Sprint Planning', 'Risk Management', 'Retrospectives'],
+                resources: [
+                    { name: 'Atlassian Agile Coach', url: 'https://www.atlassian.com/agile' }
+                ],
+                quiz: {
+                    question: '스프린트가 끝난 후, 팀이 지난 활동을 돌아보며 좋았던 점과 개선할 점을 논의하는 미팅은?',
+                    options: ['Retrospective (회고)', 'Daily Standup', 'Sprint Review', 'Backlog Grooming'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 14: AI 제품 운영 (MLOps for PM)',
+                title: 'AI Operations',
+                description: '출시된 AI 모델의 재학습 주기와 데이터 파이프라인 운영 이슈를 이해합니다.',
+                topics: ['Model Drift', 'Monitoring Dashboards', 'Feedback Loops', 'Cost Management'],
+                resources: [
+                    { name: 'MLOps for Managers', url: 'https://neptune.ai/blog/mlops-for-managers' }
+                ],
+                quiz: {
+                    question: '시간이 지남에 따라 사용자의 행동이나 데이터 패턴이 변하여 모델의 성능이 떨어지는 현상은?',
+                    options: ['Data/Concept Drift', 'Bug', 'Server Down', 'Latency'],
+                    correctAnswer: 0
+                }
+            },
+            // 6. Ethics & Strategy
+            {
+                step: 'Phase 15: AI 윤리와 규제',
+                title: 'AI Ethics & Law',
+                description: 'AI의 편향성, 저작권, 개인정보 보호 등 비즈니스 리스크를 관리합니다.',
+                topics: ['Bias & Fairness', 'Privacy (GDPR)', 'Copyright Issues', 'Explainability (XAI)'],
+                resources: [
+                    { name: 'AI Ethics Guidelines', url: 'https://www.ibm.com/artificial-intelligence/ethics' }
+                ],
+                quiz: {
+                    question: 'AI의 결정 근거를 사람이 이해할 수 있도록 설명 가능하게 만드는 연구 분야는?',
+                    options: ['XAI (Explainable AI)', 'Black box AI', 'Deep Learning', 'Reinforcement Learning'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 16: 가격 책정 및 마케팅',
+                title: 'Pricing & GTM',
+                description: 'AI 제품의 비용 구조(GPU/API 비용)를 고려한 가격 정책과 출시 전략(GTM)을 짭니다.',
+                topics: ['Cost Analysis (Token/GPU)', 'Freemium vs Subscription', 'Product Positioning', 'Sales Enablement'],
+                resources: [
+                    { name: 'SaaS Pricing Strategies', url: 'https://www.priceintelligently.com/blog' }
+                ],
+                quiz: {
+                    question: '제품 출시 시 타겟 고객, 마케팅 채널, 판매 전략 등을 포함하는 종합적인 계획을 무엇이라 하는가?',
+                    options: ['Go-To-Market (GTM) Strategy', 'Business Model Canvas', 'Roadmap', 'Blueprint'],
+                    correctAnswer: 0
+                }
+            },
+            // 7. Advanced & Career
+            {
+                step: 'Phase 17: 이해관계자 커뮤니케이션',
+                title: 'Stakeholder Management',
+                description: '개발자, 디자이너, 경영진 등 다양한 이해관계자와 효과적으로 소통하고 설득합니다.',
+                topics: ['Managing Up', 'Conflict Resolution', 'Negotiation', 'Presentation Skills'],
+                resources: [
+                    { name: 'Crucial Conversations', url: 'https://www.vitalsmarts.com/resource/crucial-conversations/' }
+                ],
+                quiz: {
+                    question: '권한 없이 영향력을 발휘하여 팀을 이끄는 리더십을 표현하는 말은?',
+                    options: ['Influence without Authority', 'Micro-management', 'Dictatorship', 'Laissez-faire'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 18: 제품 분석과 성장 (Growth)',
+                title: 'Product Growth',
+                description: 'AARRR 프레임워크 등을 활용하여 사용자를 유치하고 유지시키는 성장 전략을 실행합니다.',
+                topics: ['AARRR Funnel', 'Retention Strategies', 'Viral Loops', 'North Star Metric'],
+                resources: [
+                    { name: 'Reforge Growth Series', url: 'https://www.reforge.com/' }
+                ],
+                quiz: {
+                    question: '해적 지표(AARRR) 중, 사용자가 제품을 계속 사용하는지(재방문)를 나타내는 단계는?',
+                    options: ['Retention (유지)', 'Acquisition (획득)', 'Activatiln (활성화)', 'Revenue (매출)'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 19: 케이스 스터디 (Case Studies)',
+                title: 'AI Product Analysis',
+                description: '성공한 AI 제품(ChatGPT, Midjourney 등)과 실패 사례를 분석하여 인사이트를 얻습니다.',
+                topics: ['Success Factors', 'Failure Analysis', 'Market Fit', 'UX Analysis'],
+                resources: [
+                    { name: 'Product Hunt', url: 'https://www.producthunt.com/' }
+                ],
+                quiz: {
+                    question: '시장이 원하고 필요로 하는 제품을 만들어 고객을 만족시키는 상태를 뜻하는 용어는?',
+                    options: ['Product-Market Fit (PMF)', 'MVP', 'Pivot', 'Unicorn'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 20: 포트폴리오와 면접',
+                title: 'Career Prep',
+                description: '자신의 경험을 논리적으로 정리한 포트폴리오를 만들고 PM 면접(Product Sense)을 준비합니다.',
+                topics: ['Portfolio Building', 'Product Sense Interview', 'Behavioral Questions', 'Mock Interviews'],
+                resources: [
+                    { name: 'Exponent PM Interview', url: 'https://www.tryexponent.com/' }
+                ],
+                quiz: {
+                    question: '면접에서 상황(Situation), 과제(Task), 행동(Action), 결과(Result) 순서로 경험을 답변하는 기법은?',
+                    options: ['STAR Method', 'SWOT', 'PEST', 'MECE'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 21: 미래 기술 트렌드',
+                title: 'Future Trends',
+                description: '에이전트(Agentic AI), 멀티모달 등 AI의 미래 흐름을 읽고 대비합니다.',
+                topics: ['Autonomous Agents', 'Multimodal AI', 'Quantum Computing Impact', 'Web3 & AI'],
+                resources: [
+                    { name: 'a16z AI Canon', url: 'https://a16z.com/ai-canon/' }
+                ],
+                quiz: {
+                    question: '단순한 질의응답을 넘어, 스스로 계획을 세우고 도구를 사용하여 작업을 수행하는 AI 시스템의 진화 방향은?',
+                    options: ['Agentic AI (AI 에이전트)', 'Chatbot', 'Search Engine', 'Plugin'],
+                    correctAnswer: 0
+                }
             }
         ],
         faq: [
-            { question: '개발을 할 줄 알아야 하나요?', answer: '직접 코딩은 안 해도 되지만, 개발자와 대화가 통할 정도의 기술 이해도(API, DB, 서버 등)는 반드시 필요합니다.' },
-            { question: '어떤 전공이 유리한가요?', answer: '전공 무관합니다. 인문계열이라도 논리적 사고력과 커뮤니케이션 능력이 뛰어나면 충분합니다.' }
+            { question: '개발을 할 줄 알아야 하나요?', answer: '직접 코딩은 안 해도 되지만, 개발자와의 원활한 소통과 기술적 제약사항 이해를 위해 API, DB, AI 모델의 기본 원리는 반드시 알아야 합니다.' },
+            { question: '어떤 전공이 유리한가요?', answer: '전공 무관합니다. 인문계열이라도 논리적 사고력, 데이터 분석 능력, 그리고 사용자에 대한 집착이 있다면 훌륭한 PM이 될 수 있습니다.' }
         ]
     },
     {
