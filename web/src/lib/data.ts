@@ -112,115 +112,669 @@ export const JOBS: JobRole[] = [
     {
         id: 'prompt-eng',
         title: 'Prompt Engineer',
-        description: 'LLM이 최적의 답변을 내놓도록 프롬프트를 설계/최적화하고, 모델의 한계를 극복합니다.',
-        long_description: 'Prompt Engineer는 AI 모델과 소통하는 "통역사"입니다. 모델이 의도한 대로 정확하고 일관된 답변을 하도록 지시어(Prompt)를 설계하고, 다양한 케이스에 대해 실험하며 최적의 효율을 찾아냅니다. 최근에는 단순한 문장 작성을 넘어, 데이터를 평가하고 자동화하는 엔지니어링 영역으로 확장되고 있습니다.',
-        salary_range: '초봉 3,500 ~ 5,000만원',
+        description: '거대 언어 모델(LLM)의 잠재력을 극대화하기 위해 최적의 입력값(Prompt)을 설계하고 정제하는 전문가입니다.',
+        long_description: 'Prompt Engineer는 "인공지능 소통 및 제어 전략가"입니다. 단순한 명령어 작성을 넘어, AI가 맥락에 맞는 답변을 생성하도록 논리적 추론 체계(Chain of Thought)를 구축합니다. RAG(검색 증강 생성) 기술을 활용해 외부 지식 데이터를 정확히 참조하도록 인터페이스를 구축하고, AI의 거짓 정보(Hallucination)를 제어하며 윤리적 가드레일을 설계합니다.',
+        salary_range: '초봉 3,500 ~ 5,500만원',
         difficulty: 'Medium',
-        demand: 'Medium',
+        demand: 'Very High',
         responsibilities: [
-            'System Prompt 설계 및 최적화',
-            'Few-shot 예제 데이터셋 구축',
-            'LLM 답변 품질 평가(Evaluation) 및 개선',
-            '비용 및 응답 속도 최적화'
+            'Prompt Strategy Design (CoT, ToT, ReAct)',
+            'RAG (Retrieval-Augmented Generation) 파이프라인 최적화',
+            'LLM 품질 검증 및 벤치마킹 (Evaluation)',
+            'Hallucination 방지 및 윤리적 가드레일 설계',
+            '프롬프트 자동화 및 시스템 통합 (LangChain)'
         ],
         tech_stack: [
-            { category: 'Concepts', skills: ['CoT (Chain of Thought)', 'ReAct', 'Zero-shot/Few-shot'] },
-            { category: 'Tools', skills: ['OpenAI Playground', 'Anthropic Console', 'LangSmith'] },
-            { category: 'Scripting', skills: ['Python (Basic)', 'Jupyter Notebook'] }
+            { category: 'LLM Models', skills: ['GPT-4', 'Claude 3', 'Gemini', 'Llama 3'] },
+            { category: 'Frameworks', skills: ['LangChain', 'LlamaIndex', 'DSPy'] },
+            { category: 'Data & DB', skills: ['Pinecone', 'ChromaDB', 'SQL', 'JSON'] },
+            { category: 'DevOps', skills: ['Python', 'Docker', 'API (REST)', 'Git'] }
         ],
-        tags: ['Logical', 'Language', 'Creative'],
+        tags: ['LLM', 'Creative', 'Logic', 'Engineering'],
         focus_areas: [
-            'Advanced Prompting (CoT, ReAct)',
-            'LLM 평가 방법론 (Evals)',
-            '기초 Python 스크립팅'
+            'Advanced Prompting (Chain-of-Thought)',
+            'RAG Architecture & Vector DB',
+            'LLM Evaluation & Fine-tuning Basics'
         ],
         roadmap: [
+            // 1. LLM Foundations
             {
-                step: 'Phase 1: 프롬프트 기초',
-                title: 'LLM의 작동 원리 이해',
-                description: '모델이 텍스트를 생성하는 원리를 이해하고 기본적인 지시 기법을 익힙니다.',
-                topics: ['Transformer 개요', 'Temperature & Top P', 'Role Play', 'Zero/One/Few-shot'],
+                step: 'Phase 1: LLM 작동 원리 (Foundations)',
+                title: 'How LLMs Work',
+                description: '트랜스포머 아키텍처와 토큰(Token), 확률적 생성 원리를 이해합니다.',
+                topics: ['Transformer Architecture', 'Tokenization & Embeddings', 'Temperature & Top-P', 'Context Window'],
                 resources: [
-                    { name: 'Prompt Engineering Guide', url: 'https://www.promptingguide.ai/' }
-                ]
+                    { name: 'The Illustrated Transformer', url: 'https://jalammar.github.io/illustrated-transformer/' }
+                ],
+                quiz: {
+                    question: 'LLM이 텍스트를 생성할 때, 다음 단어를 선택하는 기준이 되는 확률 분포를 조절하여 창의성(무작위성)을 높이는 파라미터는?',
+                    options: ['Temperature', 'Attention Mask', 'Batch Size', 'Learning Rate'],
+                    correctAnswer: 0
+                }
             },
             {
-                step: 'Phase 2: 고급 기법',
-                title: '복잡한 문제 해결하기',
-                description: 'Chain of Thought 등 논리적 추론을 유도하는 고급 기법을 적용합니다.',
-                topics: ['CoT', 'Tree of Thoughts', 'Self-Consistency', 'Prompt Chaining'],
+                step: 'Phase 2: 프롬프트 기초 (Basic Prompting)',
+                title: 'Prompting Basics',
+                description: '명확하고 구체적인 지시를 통해 모델을 제어하는 기본 기법을 익힙니다.',
+                topics: ['Zero-shot vs One-shot vs Few-shot', 'Role Prompting (Persona)', 'Instruction Formatting', 'Delimiters usage'],
                 resources: [
-                    { name: 'Anthropic Prompt Library', url: 'https://docs.anthropic.com/claude/prompt-library' }
-                ]
+                    { name: 'OpenAI Prompt Engineering Guide', url: 'https://platform.openai.com/docs/guides/prompt-engineering' }
+                ],
+                quiz: {
+                    question: '모델에게 예시를 전혀 주지 않고 바로 작업을 수행하도록 요청하는 프롬프트 방식은?',
+                    options: ['Zero-shot Prompting', 'Few-shot Prompting', 'Chain-of-Thought', 'Fine-tuning'],
+                    correctAnswer: 0
+                }
             },
             {
-                step: 'Phase 3: 엔지니어링 & 자동화',
-                title: '프롬프트 최적화 자동화',
-                description: 'Python 스크립트를 통해 프롬프트 테스트를 자동화하고 성능을 정량적으로 평가합니다.',
-                topics: ['LLM Evaluation', 'OpenAI Evals', 'DSPy (Declarative Programming)', 'A/B Testing'],
+                step: 'Phase 3: 언어 모델 비교 분석',
+                title: 'Model Comparison',
+                description: 'GPT-4, Claude 3, Llama 3 등 주요 모델의 특성과 장단점을 파악합니다.',
+                topics: ['OpenAI (GPT) vs Anthropic (Claude)', 'Open Source Models (Llama, Mistral)', 'Cost & Speed Latency', 'Reasoning Capabilities'],
                 resources: [
-                    { name: 'HPC AI Tech Blog', url: 'https://medium.com/@hpcai' }
-                ]
+                    { name: 'LLM Leaderboard (Hugging Face)', url: 'https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard' }
+                ],
+                quiz: {
+                    question: '긴 문맥(Long Context) 처리에 강점이 있어, 책 한 권 분량의 텍스트 분석에 특히 유리한 모델 계열은?',
+                    options: ['Claude (Anthropic)', 'BERT', 'T5', 'DALL-E'],
+                    correctAnswer: 0
+                }
+            },
+            // 2. Advanced Prompting Techniques
+            {
+                step: 'Phase 4: 생각의 사슬 (Chain of Thought)',
+                title: 'Chain of Thought (CoT)',
+                description: '복잡한 문제를 단계별로 추론하여 풀도록 유도하는 핵심 기법입니다.',
+                topics: ['Zero-shot CoT ("Let\'s think step by step")', 'Manual CoT (Few-shot)', 'Math & Logic Reasoning', 'Hallucination Reduction'],
+                resources: [
+                    { name: 'CoT Paper', url: 'https://arxiv.org/abs/2201.11903' }
+                ],
+                quiz: {
+                    question: '모델에게 "단계별로 생각해 보자(Let\'s think step by step)"라고 추가하여 추론 능력을 획기적으로 높이는 기법은?',
+                    options: ['Zero-shot CoT', 'RAG', 'ReAct', 'Self-Consistency'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 5: 심화 추론 기법',
+                title: 'Advanced Reasoning',
+                description: '생각의 나무(ToT) 등 더 정교한 추론 프레임워크를 적용합니다.',
+                topics: ['Tree of Thoughts (ToT)', 'Self-Consistency (Majority Voting)', 'Generated Knowledge Prompting', 'Least-to-Most Prompting'],
+                resources: [
+                    { name: 'Tree of Thoughts', url: 'https://arxiv.org/abs/2305.10601' }
+                ],
+                quiz: {
+                    question: '여러 개의 추론 경로를 생성하고, 다수결(Majority Vote) 등을 통해 가장 신뢰할 수 있는 답을 선택하는 기법은?',
+                    options: ['Self-Consistency', 'Zero-shot', 'Instruction Tuning', 'Embedding'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 6: 구조화된 출력 (Structured Output)',
+                title: 'Structuring Outputs',
+                description: 'AI의 답변을 JSON, XML 등 시스템이 처리 가능한 형식을 갖추도록 제어합니다.',
+                topics: ['JSON Mode', 'Function Calling', 'Markdown Formatting', 'Output Parsers'],
+                resources: [
+                    { name: 'OpenAI Function Calling', url: 'https://platform.openai.com/docs/guides/function-calling' }
+                ],
+                quiz: {
+                    question: 'LLM이 외부 API를 호출하거나 정형화된 데이터를 반환하도록, 사전에 정의된 함수 스키마를 JSON 형태로 출력하게 하는 기능은?',
+                    options: ['Function Calling', 'Vector Database', 'RAG', 'Fine-tuning'],
+                    correctAnswer: 0
+                }
+            },
+            // 3. Technical Implementation & Data
+            {
+                step: 'Phase 7: 임베딩과 벡터 DB',
+                title: 'Embeddings & Vector Databases',
+                description: '텍스트를 숫자로 변환(Vector)하여 의미론적 검색을 수행하는 원리를 배웁니다.',
+                topics: ['Vector Embeddings', 'Cosine Similarity', 'Pinecone / ChromaDB / Weaviate', 'Semantic Search'],
+                resources: [
+                    { name: 'Pinecone Learning Center', url: 'https://www.pinecone.io/learn/' }
+                ],
+                quiz: {
+                    question: '두 벡터(문장) 사이의 유사도를 측정할 때 가장 널리 사용되는 지표로, 두 벡터 사이의 각도를 기반으로 하는 것은?',
+                    options: ['Cosine Similarity (코사인 유사도)', 'Euclidean Distance', 'Manhattan Distance', 'Jaccard Similarity'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 8: RAG 기초 (Retrieval-Augmented Generation)',
+                title: 'RAG Fundamentals',
+                description: 'LLM이 학습하지 않은 최신 정보나 사내 데이터를 참조하여 답변하도록 만듭니다.',
+                topics: ['Document Loading & Splitting', 'Retrieval Strategies', 'Context Injection', 'Handling Context Limits'],
+                resources: [
+                    { name: 'LangChain RAG Tutorial', url: 'https://python.langchain.com/docs/use_cases/question_answering/' }
+                ],
+                quiz: {
+                    question: 'LLM의 환각(Hallucination)을 줄이고 최신 정보를 반영하기 위해, 외부 지식 베이스에서 관련 문서를 검색하여 프롬프트에 포함시키는 기술은?',
+                    options: ['RAG (검색 증강 생성)', 'Fine-tuning', 'Pre-training', 'RLHF'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 9: 고급 RAG 기법',
+                title: 'Advanced RAG',
+                description: '검색 정확도를 높이고 답변 품질을 최적화하는 고급 RAG 시스템을 구축합니다.',
+                topics: ['Hybrid Search (Keyword + Semantic)', 'Re-ranking', 'Parent Document Retriever', 'HyDE (Hypothetical Document Embeddings)'],
+                resources: [
+                    { name: 'Advanced RAG Techniques', url: 'https://www.deeplearning.ai/' }
+                ],
+                quiz: {
+                    question: '1차 검색된 문서들의 순위를 다시 매겨(Re-ranking), 가장 관련성 높은 문서를 상위에 배치하여 LLM에게 전달하는 기술은?',
+                    options: ['Re-ranking', 'Embedding', 'Clustering', 'Tokenization'],
+                    correctAnswer: 0
+                }
+            },
+            // 4. Frameworks & Tools
+            {
+                step: 'Phase 10: 랭체인 (LangChain)',
+                title: 'LangChain Mastery',
+                description: 'LLM 애플리케이션 개발의 표준 프레임워크인 LangChain을 깊이 있게 다룹니다.',
+                topics: ['Chains & LCEL', 'Memory Management', 'Document Loaders', 'Custom Tools'],
+                resources: [
+                    { name: 'LangChain Documentation', url: 'https://python.langchain.com' }
+                ],
+                quiz: {
+                    question: 'LangChain에서 여러 컴포넌트(프롬프트, 모델, 출력 파서 등)를 선언적으로 연결하여 파이프라인을 구성하는 문법은?',
+                    options: ['LCEL (LangChain Expression Language)', 'SQL', 'RegEx', 'Gremlin'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 11: 라마인덱스 (LlamaIndex)',
+                title: 'Data Framework (LlamaIndex)',
+                description: '데이터 중심의 LLM 앱 개발을 위한 LlamaIndex를 익힙니다.',
+                topics: ['Data Connectors', 'Index Structures', 'Query Engines', 'Router'],
+                resources: [
+                    { name: 'LlamaIndex Docs', url: 'https://docs.llamaindex.ai/' }
+                ],
+                quiz: {
+                    question: 'LlamaIndex에서 비정형 데이터를 LLM이 이해하기 쉬운 구조(Index)로 변환하고, 이를 쿼리할 수 있게 돕는 핵심 역할은?',
+                    options: ['Indexing & Querying', 'Training', 'Fine-tuning', 'Reinforcement Learning'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 12: 프롬프트 최적화 도구 (DSPy)',
+                title: 'DSPy & Prompt Optimization',
+                description: '수동 프롬프팅을 넘어, 프로그래밍 방식으로 프롬프트를 최적화하는 DSPy를 배웁니다.',
+                topics: ['Declarative Self-improving Language Models', 'Signatures & Modules', 'Teleprompters (Optimizers)', 'Automated Prompt Tuning'],
+                resources: [
+                    { name: 'DSPy GitHub', url: 'https://github.com/stanfordnlp/dspy' }
+                ],
+                quiz: {
+                    question: '스탠포드에서 개발한 프레임워크로, 프롬프트를 하드코딩하는 대신 "Signature"로 입출력을 정의하면 최적의 프롬프트를 자동으로 찾아내는 도구는?',
+                    options: ['DSPy', 'PyTorch', 'TensorFlow', 'React'],
+                    correctAnswer: 0
+                }
+            },
+            // 5. Build Agents
+            {
+                step: 'Phase 13: 에이전트 기초 (Agents)',
+                title: 'Building AI Agents',
+                description: '스스로 도구를 선택하고 행동을 결정하는 AI 에이전트를 만듭니다.',
+                topics: ['ReAct Pattern', 'Tool Use (Function Calling)', 'Agent Executors', 'Planning'],
+                resources: [
+                    { name: 'ReAct Paper', url: 'https://arxiv.org/abs/2210.03629' }
+                ],
+                quiz: {
+                    question: 'LLM이 "생각(Reasoning)"과 "행동(Acting)"을 번갈아 수행하며 도구를 사용하여 문제를 해결하는 프롬프트 패턴은?',
+                    options: ['ReAct', 'CoT', 'Few-shot', 'RAG'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 14: 멀티 에이전트 시스템',
+                title: 'Multi-Agent Systems',
+                description: '여러 AI 에이전트가 협력하여 복잡한 과업을 수행하는 시스템을 구축합니다.',
+                topics: ['LangGraph', 'AutoGPT / BabyAGI', 'CrewAI', 'Role-based Collaboration'],
+                resources: [
+                    { name: 'LangGraph Tutorials', url: 'https://github.com/langchain-ai/langgraph' }
+                ],
+                quiz: {
+                    question: '여러 개의 특화된 에이전트(예: 연구원, 작가, 검수자)가 서로 대화하며 작업을 수행하는 프레임워크는?',
+                    options: ['Multi-Agent System (e.g., CrewAI)', 'Single Agent', 'RAG', 'Vector DB'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 15: 자율 운영 (Autonomous AI)',
+                title: 'Autonomous Operations',
+                description: 'BabyAGI, AutoGPT와 같이 목표만 주어지면 스스로 하위 태스크를 생성하고 실행하는 원리를 파악합니다.',
+                topics: ['Task Queues & Prioritization', 'Memory Management (Short/Long-term)', 'Self-Correction', 'Human-in-the-loop'],
+                resources: [
+                    { name: 'AutoGPT GitHub', url: 'https://github.com/Significant-Gravitas/Auto-GPT' }
+                ],
+                quiz: {
+                    question: '자율 에이전트가 무한 루프에 빠지거나 엉뚱한 행동을 하는 것을 방지하기 위해, 중간에 사람이 개입하여 피드백을 주는 방식은?',
+                    options: ['Human-in-the-loop', 'Reinforcement Learning', 'Unsupervised Learning', 'Zero-shot'],
+                    correctAnswer: 0
+                }
+            },
+            // 6. Evaluation & OPS
+            {
+                step: 'Phase 16: 프롬프트 평가 (Evaluation)',
+                title: 'Prompt Evaluation (Evals)',
+                description: '주관적인 "좋아 보인다"가 아닌, 정량적인 지표로 프롬프트 성능을 측정합니다.',
+                topics: ['LLM-as-a-Judge', 'Ragas (RAG Evaluation)', 'LangSmith Tracing', 'G-Eval'],
+                resources: [
+                    { name: 'Ragas Documentation', url: 'https://docs.ragas.io/' }
+                ],
+                quiz: {
+                    question: 'RAG 파이프라인의 성능을 평가할 때, "검색된 문서가 질문과 얼마나 관련이 있는가"를 측정하는 지표는?',
+                    options: ['Context Relevance', 'Faithfulness', 'Answer Correctness', 'Latency'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 17: 프롬프트 보안 (Security)',
+                title: 'Prompt Injection & Security',
+                description: 'AI 모델을 속이려는 공격을 이해하고 방어하는 기법을 배웁니다.',
+                topics: ['Prompt Injection', 'Jailbreaking (DAN mode)', 'Input Validation', 'Plaque / Guardrails'],
+                resources: [
+                    { name: 'OWASP Top 10 for LLM', url: 'https://owasp.org/www-project-top-10-for-large-language-model-applications/' }
+                ],
+                quiz: {
+                    question: '악의적인 사용자가 프롬프트에 숨겨진 명령어를 주입하여, 모델이 원래 지침을 무시하고 해로운 동작을 하게 만드는 공격은?',
+                    options: ['Prompt Injection', 'SQL Injection', 'DDOS', 'Phishing'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 18: 비용 및 성능 최적화',
+                title: 'Cost & Latency Optimization',
+                description: '토큰 사용량을 줄이고 응답 속도를 높이는 실무적인 최적화 기술입니다.',
+                topics: ['Prompt Compression', 'Caching (Semantic Cache)', 'Model Selection Strategy', 'Streaming Responses'],
+                resources: [
+                    { name: 'LiteLLM Proxy', url: 'https://docs.litellm.ai/' }
+                ],
+                quiz: {
+                    question: '이전에 동일하거나 유사한 질문이 들어왔을 때, LLM을 호출하지 않고 저장된 답변을 바로 반환하여 비용과 시간을 아끼는 기술은?',
+                    options: ['Semantic Caching', 'Compression', 'Shard', 'Batching'],
+                    correctAnswer: 0
+                }
+            },
+            // 7. Domain & Career
+            {
+                step: 'Phase 19: 파인튜닝 기초 (Fine-tuning)',
+                title: 'Prompt Engineering vs Fine-tuning',
+                description: '프롬프트만으로 부족할 때, 모델 자체를 미세조정하는 시점과 방법을 이해합니다.',
+                topics: ['Instruction Tuning', 'PEFT (LoRA)', 'Data Formatting (JSONL)', 'When to Fine-tune'],
+                resources: [
+                    { name: 'Brex\'s Prompt Engineering vs Fine-tuning', url: 'https://github.com/brexhq/prompt-engineering' }
+                ],
+                quiz: {
+                    question: '프롬프트 엔지니어링의 한계(토큰 제한, 복잡한 스타일 모방 불가 등)를 극복하기 위해, 데이터셋으로 모델 가중치를 업데이트하는 방법은?',
+                    options: ['Fine-tuning', 'RAG', 'Embedding', 'Inferencing'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 20: 윤리와 규제 (Ethics)',
+                title: 'AI Ethics & Responsibility',
+                description: '편향성(Bias), 저작권, 개인정보 보호 등 AI 윤리 문제를 다룹니다.',
+                topics: ['Bias Mitigation', 'Copyright Issues', 'PII (개인정보) Masking', 'Responsible AI'],
+                resources: [
+                    { name: 'Google Responsible AI Practices', url: 'https://ai.google/responsibility/principles/' }
+                ],
+                quiz: {
+                    question: 'AI 모델이 학습 데이터의 편향을 그대로 반영하여 특정 인종이나 성별에 대해 차별적인 발언을 하는 것을 방지하는 작업은?',
+                    options: ['Bias Mitigation (편향 완화)', 'Data Augmentation', 'Overfitting', 'Pruning'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 21: 포트폴리오 (Portfolio)',
+                title: 'Building a Portfolio',
+                description: '실제 문제를 해결한 프롬프트 사례집과 AI 앱 데모를 준비합니다.',
+                topics: ['Prompt Library 구축', 'LangChain 데모 앱', 'Technical Blog', 'Hackathons'],
+                resources: [
+                    { name: 'Vercel AI SDK', url: 'https://sdk.vercel.ai/docs' }
+                ],
+                quiz: {
+                    question: '프롬프트 엔지니어의 포트폴리오로 가장 적절하지 않은 것은?',
+                    options: ['단순히 "ChatGPT 써봤음"이라고 적는 것', '해결한 문제와 개선된 성능 지표(Before/After) 제시', '직접 개발한 챗봇 데모 링크', '작성한 프롬프트 템플릿 공유'],
+                    correctAnswer: 0
+                }
             }
         ],
         faq: [
-            { question: '개발 지식이 없어도 되나요?', answer: '초기에는 괜찮지만, 전문적인 커리어를 위해서는 파이썬을 활용한 데이터 처리나 자동화 스크립트 작성 능력은 필수입니다.' },
-            { question: '미래에도 유망한가요?', answer: '모델이 똑똑해지면서 단순 프롬프팅은 줄겠지만, 복잡한 시스템을 지휘하고 평가하는 "AI 오케스트레이션" 능력은 더 중요해질 것입니다.' }
+            { question: '개발 지식이 없어도 되나요?', answer: '초기에는 괜찮지만, RAG나 에이전트 구축 등 고급 업무를 위해서는 Python과 API 활용 능력이 필수적입니다.' },
+            { question: '미래에도 유망한가요?', answer: '단순한 "질문 작성"은 사라지겠지만, 복잡한 시스템을 지휘하고 AI를 평가/검증하는 "AI 오케스트레이터"로서의 역할은 더욱 커질 것입니다.' }
         ]
     },
     {
         id: 'mlops',
         title: 'MLOps Engineer',
-        description: '머신러닝 모델의 학습부터 배포, 모니터링까지의 전체 라이프사이클을 자동화하고 관리합니다.',
-        long_description: 'MLOps Engineer는 "Machine Learning"과 "Operations(운영)"의 합성어로, AI 모델을 연구실에서 꺼내 실제 서비스 환경에서 안정적으로 돌아가게 만드는 핵심 인프라 전문가입니다. DevOps 문화를 ML에 적용하여, 모델 학습-배포-모니터링의 과정을 자동화(CI/CD/CT)합니다.',
-        salary_range: '초봉 4,500 ~ 6,000만원',
+        description: '머신러닝 모델의 개발부터 배포, 운영, 모니터링까지 전 과정을 자동화하고 최적화하는 파이프라인 전문가입니다.',
+        long_description: 'MLOps Engineer는 "Machine Learning"과 "Operations"의 합성어로, 안정적이고 효율적인 머신러닝 시스템을 구축하는 역할을 합니다. 데이터 사이언티스트가 만든 모델을 실제 서비스에 적용하기 위해 필요한 인프라(AWS/GCP), CI/CD 파이프라인, 모델 서빙, 모니터링 시스템을 설계하고 운영합니다. 코드 품질 관리부터 모델 성능 모니터링까지 AI 서비스의 라이프사이클 전체를 책임집니다.',
+        salary_range: '초봉 4,500 ~ 6,500만원',
         difficulty: 'Hard',
         demand: 'High',
         responsibilities: [
-            'ML 파이프라인(학습/전처리/배포) 자동화 구축',
-            'Kubernetes 기반의 모델 서빙 인프라 관리',
-            '모델 성능 및 리소스 모니터링 시스템 구축',
-            '클라우드(AWS/GCP) 비용 최적화'
+            'End-to-End ML Pipeline 구축 및 자동화 (Airflow, Kubeflow)',
+            '모델 서빙 인프라 설계 및 운영 (Kubernetes, Docker)',
+            '실험 추적 및 모델 레지스트리 관리 (MLflow, Weights & Biases)',
+            '데이터 및 모델 품질 모니터링 (Drift Detection)'
         ],
         tech_stack: [
-            { category: 'Cloud', skills: ['AWS', 'GCP', 'Azure'] },
-            { category: 'Container', skills: ['Docker', 'Kubernetes', 'Helm'] },
-            { category: 'CI/CD', skills: ['GitHub Actions', 'Jenkins', 'ArgoCD'] },
-            { category: 'MLOps Tools', skills: ['MLflow', 'Kubeflow', 'Airflow', 'Prometheus'] }
+            { category: 'Cloud & Infrastructure', skills: ['AWS/GCP/Azure', 'Docker', 'Kubernetes', 'Terraform'] },
+            { category: 'MLOps Tools', skills: ['MLflow', 'Kubeflow', 'Airflow', 'Jenkins/GitHub Actions'] },
+            { category: 'Serving', skills: ['FastAPI', 'TorchServe', 'Triton Inference Server'] },
+            { category: 'Monitoring', skills: ['Prometheus', 'Grafana', 'Evidently AI'] }
         ],
-        tags: ['Infrastructure', 'DevOps', 'Stability'],
+        tags: ['Infrastructure', 'Cloud', 'Pipeline', 'Automation'],
         focus_areas: [
-            'Docker & Kubernetes',
-            'Cloud Platform (AWS/GCP)',
-            'CI/CD for ML (GitHub Actions)'
+            'Container Orchestration (K8s)',
+            'Continuous Integration/Deployment (CI/CD)',
+            'Model Serving Optimization',
+            'Infrastructure as Code (IaC)'
         ],
         roadmap: [
+            // 1. Foundations
             {
-                step: 'Phase 1: 컨테이너 & 클라우드',
-                title: 'Docker와 AWS 기초',
-                description: '애플리케이션을 격리된 환경(컨테이너)으로 만들고 클라우드 서버에 배포합니다.',
-                topics: ['DockerFile 작성', 'EC2/Lambda 배포', 'Linux 터미널 명령어', 'Networking 기초'],
+                step: 'Phase 1: 개발 환경 & 버전 관리',
+                title: 'Development Environment',
+                description: '효율적인 협업과 재현성을 위해 리눅스, Git, Python 환경을 완벽하게 세팅합니다.',
+                topics: ['Linux/Bash Scripting', 'Git Flow & GitHub', 'Python Virtual Environments (Poetry/Conda)', 'IDE Setup (VS Code)'],
+                resources: [
+                    { name: 'Missing Semester (MIT)', url: 'https://missing.csail.mit.edu/' }
+                ],
+                quiz: {
+                    question: 'Git에서 여러 브랜치의 변경 사항을 병합할 때, 커밋 히스토리를 깔끔하게 유지하기 위해 사용하는 명령어옵션은?',
+                    options: ['git rebase', 'git merge --no-ff', 'git checkout', 'git stash'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 2: 컨테이너 가상화 (Docker)',
+                title: 'Containerization',
+                description: '어떤 환경에서도 동일하게 실행되는 "컨테이너" 기술을 마스터합니다.',
+                topics: ['Docker Architecture', 'Dockerfile Optimization', 'Multi-stage Builds', 'Docker Compose'],
                 resources: [
                     { name: 'Docker for Beginners', url: 'https://docker-curriculum.com/' }
-                ]
+                ],
+                quiz: {
+                    question: 'Docker 컨테이너가 종료되어도 데이터를 영구적으로 저장하기 위해 사용하는 기능은?',
+                    options: ['Docker Volume', 'Docker Network', 'Docker Image', 'Docker Socket'],
+                    correctAnswer: 0
+                }
             },
             {
-                step: 'Phase 2: CI/CD 파이프라인',
-                title: '자동화 시스템 구축',
-                description: '코드가 변경되면 자동으로 테스트하고 배포하는 파이프라인을 만듭니다.',
-                topics: ['GitHub Actions', 'Unit Testing', 'Automated Deployment', 'Model Registry (MLflow)'],
+                step: 'Phase 3: 컨테이너 오케스트레이션 (Kubernetes)',
+                title: 'Kubernetes Fundamentals',
+                description: '수많은 컨테이너를 관리하고 스케일링하기 위한 사실상의 표준, K8s를 배웁니다.',
+                topics: ['Pods, Services, Deployments', 'ConfigMaps & Secrets', 'Helm Charts', 'Ingress Controller'],
                 resources: [
-                    { name: 'MLOps Zoomcamp', url: 'https://github.com/DataTalksClub/mlops-zoomcamp' }
-                ]
+                    { name: 'Kubernetes Docs', url: 'https://kubernetes.io/docs/home/' }
+                ],
+                quiz: {
+                    question: 'Kubernetes에서 애플리케이션의 설정 정보(DB 주소 등)를 코드와 분리하여 저장하는 리소스 객체는?',
+                    options: ['ConfigMap', 'Pod', 'Service', 'PersistentVolume'],
+                    correctAnswer: 0
+                }
+            },
+            // 2. Continuous X (CI/CD/CT)
+            {
+                step: 'Phase 4: CI/CD 파이프라인',
+                title: 'Continuous Integration/Deployment',
+                description: '코드 변경 사항을 자동으로 테스트하고 배포하는 자동화 파이프라인을 구축합니다.',
+                topics: ['GitHub Actions', 'Jenkins/GitLab CI', 'Automated Testing (PyTest)', 'Linting & Formatting'],
+                resources: [
+                    { name: 'GitHub Actions Documentation', url: 'https://docs.github.com/en/actions' }
+                ],
+                quiz: {
+                    question: 'CI/CD 파이프라인에서 코드가 푸시될 때마다 자동으로 실행되어야 하는 가장 기본적인 단계는?',
+                    options: ['Unit Test & Build', 'Deploy to Production', 'Model Training', 'Data Ingestion'],
+                    correctAnswer: 0
+                }
             },
             {
-                step: 'Phase 3: 오케스트레이션 & 모니터링',
-                title: 'Kubernetes & Serving',
-                description: '대규모 트래픽을 처리하는 클러스터를 운영하고 모델 상태를 감시합니다.',
-                topics: ['K8s Pods/Services', 'Model Serving (Triton/TorchServe)', 'Grafana/Prometheus', 'GPU Resource Management'],
+                step: 'Phase 5: 머신러닝 파이프라인 (Orchestration)',
+                title: 'Workflow Orchestration',
+                description: '데이터 전처리부터 학습까지 복잡한 워크플로우를 스케줄링하고 관리합니다.',
+                topics: ['Apache Airflow', 'Kubeflow Pipelines', 'Task Dependencies (DAGs)', 'Workflow Monitoring'],
                 resources: [
-                    { name: 'Kubernetes Tutorials', url: 'https://kubernetes.io/docs/tutorials/' }
-                ]
+                    { name: 'Apache Airflow Tutorial', url: 'https://airflow.apache.org/docs/apache-airflow/stable/tutorial.html' }
+                ],
+                quiz: {
+                    question: 'Airflow에서 작업(Task)들의 실행 순서와 의존성을 정의하는 그래프 구조를 무엇이라 하는가?',
+                    options: ['DAG (Directed Acyclic Graph)', 'Tree', 'Queue', 'Stack'],
+                    correctAnswer: 0
+                }
+            },
+            // 3. Model Tracking & Management
+            {
+                step: 'Phase 6: 실험 추적 (Experiment Tracking)',
+                title: 'Tracking Experiments',
+                description: '모델의 하이퍼파라미터, 성능 지표, 아티팩트를 체계적으로 기록하고 비교합니다.',
+                topics: ['MLflow Tracking', 'Weights & Biases (W&B)', 'Metrics Logging', 'Artifact Storage'],
+                resources: [
+                    { name: 'MLflow Documentation', url: 'https://mlflow.org/docs/latest/index.html' }
+                ],
+                quiz: {
+                    question: 'MLflow Tracking 서버에 기록되지 않는 정보는?',
+                    options: ['Source Code Line-by-Line Execution', 'Parameters', 'Metrics', 'Artifacts (Model files)'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 7: 모델 레지스트리 (Model Registry)',
+                title: 'Model Versioning',
+                description: '학습된 모델의 버전을 관리하고, Staging/Production 단계로 승격시키는 프로세스를 익힙니다.',
+                topics: ['Model Versioning', 'Model Staging', 'Model Lineage', 'Release Management'],
+                resources: [
+                    { name: 'MLflow Model Registry', url: 'https://mlflow.org/docs/latest/model-registry.html' }
+                ],
+                quiz: {
+                    question: '모델 레지스트리에서 검증이 완료된 모델을 서비스 가능한 상태로 표시하는 태그나 단계(Stage)는?',
+                    options: ['Production', 'Archived', 'Development', 'N/A'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 8: 피처 스토어 (Feature Store)',
+                title: 'Feature Engineering Platform',
+                description: '학습과 추론 시점에 동일한 데이터를 제공하여 Training-Serving Skew를 방지합니다.',
+                topics: ['Online vs Offline Stores', 'Feast (Feature Store)', 'Feature Sharing', 'Point-in-Time Correctness'],
+                resources: [
+                    { name: 'Feast Documentation', url: 'https://docs.feast.dev/' }
+                ],
+                quiz: {
+                    question: '피처 스토어(Feature Store)의 핵심 기능 중 하나로, 과거 특정 시점의 데이터 상태를 정확히 조회하는 기능은?',
+                    options: ['Point-in-Time (Time Travel) Query', 'Data Augmentation', 'Real-time Streaming', 'Batch Processing'],
+                    correctAnswer: 0
+                }
+            },
+            // 4. Model Serving & Deployment
+            {
+                step: 'Phase 9: 모델 서빙 API',
+                title: 'Model Serving Basics',
+                description: '학습된 모델을 REST API나 gRPC 형태로 패키징하여 외부에서 호출할 수 있게 합니다.',
+                topics: ['FastAPI', 'Flask', 'Serialization (Pickle/ONNX)', 'API Documentation (Swagger)'],
+                resources: [
+                    { name: 'FastAPI Tutorial', url: 'https://fastapi.tiangolo.com/tutorial/' }
+                ],
+                quiz: {
+                    question: 'Python 비동기(ASGI) 프레임워크로, 높은 성능과 자동 문서화를 제공하여 모델 서빙에 자주 쓰이는 것은?',
+                    options: ['FastAPI', 'Flask', 'Django', 'Bottle'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 10: 고성능 서빙 엔진',
+                title: 'Advanced Model Serving',
+                description: '대량의 트래픽 처리를 위해 최적화된 전문 서빙 프레임워크를 사용합니다.',
+                topics: ['TorchServe / TensorFlow Serving', 'NVIDIA Triton Inference Server', 'Dynamic Batching', 'Model Ensemble'],
+                resources: [
+                    { name: 'Triton Inference Server', url: 'https://developer.nvidia.com/nvidia-triton-inference-server' }
+                ],
+                quiz: {
+                    question: '여러 개의 추론 요청을 모아서 한 번에 처리하여 GPU 활용률과 처리량(Throughput)을 높이는 기법은?',
+                    options: ['Dynamic Batching', 'Model Pruning', 'Quantization', 'Caching'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 11: 배포 전략 (Deployment Strategies)',
+                title: 'Safe Deployment',
+                description: '서비스 중단 없이 안전하게 새로운 모델을 배포하는 전략을 배웁니다.',
+                topics: ['Blue-Green Deployment', 'Canary Release', 'A/B Testing', 'Shadow Deployment'],
+                resources: [
+                    { name: 'Deployment Strategies on K8s', url: 'https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy' }
+                ],
+                quiz: {
+                    question: '새 버전의 모델을 일부 사용자에게만 노출시켜 안정성을 검증한 후 점진적으로 트래픽을 늘리는 배포 방식은?',
+                    options: ['Canary Release', 'Blue-Green Deployment', 'Recreate', 'Big Bang'],
+                    correctAnswer: 0
+                }
+            },
+            // 5. Monitoring & Observability
+            {
+                step: 'Phase 12: 시스템 모니터링',
+                title: 'Infrastructure Monitoring',
+                description: '서버의 CPU, Memory, GPU 사용량과 응답 속도 등을 실시간으로 감시합니다.',
+                topics: ['Prometheus (Metrics Collection)', 'Grafana (Visualization)', 'Alert Manager', 'Log Aggregation (ELK/Loki)'],
+                resources: [
+                    { name: 'Prometheus Basics', url: 'https://prometheus.io/docs/introduction/overview/' }
+                ],
+                quiz: {
+                    question: '시계열 데이터(Time Series Data)를 수집하고 쿼리하는 데 특화된 오픈소스 모니터링 시스템은?',
+                    options: ['Prometheus', 'MySQL', 'Redis', 'MongoDB'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 13: 모델 성능 모니터링',
+                title: 'Model Observability',
+                description: '모델의 예측 성능이 시간이 지남에 따라 저하되는지(Drift)를 감지합니다.',
+                topics: ['Data Drift vs Concept Drift', 'Evidently AI / Arize', 'Outlier Detection', 'Model Fairness'],
+                resources: [
+                    { name: 'Evidently AI', url: 'https://www.evidentlyai.com/' }
+                ],
+                quiz: {
+                    question: '입력 데이터의 분포(P(X))가 학습 시점과 달라져서 모델 성능이 떨어지는 현상은?',
+                    options: ['Covariate Shift (Data Drift)', 'Concept Drift', 'Label Shift', 'Prior Probability Shift'],
+                    correctAnswer: 0
+                }
+            },
+            // 6. Infrastructure & Cloud
+            {
+                step: 'Phase 14: 클라우드 (Cloud Providers)',
+                title: 'Cloud ML Platforms',
+                description: 'AWS, GCP 등 클라우드 벤더가 제공하는 매니지드 ML 서비스를 활용합니다.',
+                topics: ['AWS SageMaker', 'GCP Vertex AI', 'Azure ML', 'Serverless Inference (Lambda)'],
+                resources: [
+                    { name: 'AWS SageMaker', url: 'https://aws.amazon.com/sagemaker/' }
+                ],
+                quiz: {
+                    question: 'AWS에서 제공하는 완전 관리형 머신러닝 서비스로, 빌드/학습/배포를 통합 제공하는 플랫폼은?',
+                    options: ['SageMaker', 'EC2', 'Lambda', 'Fargate'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 15: IaC (Infrastructure as Code)',
+                title: 'Infrastructure Automation',
+                description: '클라우드 인프라를 코드로 정의하여 생성, 변경, 삭제를 자동화합니다.',
+                topics: ['Terraform', 'Ansible', 'Pulumi', 'State Management'],
+                resources: [
+                    { name: 'Terraform Introduction', url: 'https://developer.hashicorp.com/terraform/intro' }
+                ],
+                quiz: {
+                    question: 'Terraform에서 인프라의 현재 상태를 저장하고 실제 리소스와 매핑하는 파일은?',
+                    options: ['State File (.tfstate)', 'Config File', 'Log File', 'Manifest'],
+                    correctAnswer: 0
+                }
+            },
+            // 7. Data Engineering for MLOps
+            {
+                step: 'Phase 16: 데이터 처리 (Data Processing)',
+                title: 'Big Data Processing',
+                description: '대용량 데이터를 효율적으로 처리하기 위한 분산 처리 프레임워크를 익힙니다.',
+                topics: ['Apache Spark', 'Dask', 'Data Lakes (S3/GCS)', 'Extract-Transform-Load (ETL)'],
+                resources: [
+                    { name: 'PySpark Documentation', url: 'https://spark.apache.org/docs/latest/api/python/' }
+                ],
+                quiz: {
+                    question: '메모리 기반의 분산 데이터 처리 프레임워크로, 하둡(Hadoop)보다 훨씬 빠른 속도를 제공하는 것은?',
+                    options: ['Apache Spark', 'Hive', 'Pig', 'MapReduce'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 17: 데이터 버전 관리 (DVC)',
+                title: 'Data Version Control',
+                description: '코드뿐만 아니라 대용량 데이터셋의 변경 사항도 버전 관리합니다.',
+                topics: ['DVC (Data Version Control)', 'Pachyderm', 'Data Lineage', 'Reproducibility'],
+                resources: [
+                    { name: 'DVC.org', url: 'https://dvc.org/' }
+                ],
+                quiz: {
+                    question: 'Git과 유사한 명령어를 사용하며, 실제 대용량 데이터는 S3 등에 저장하고 메타데이터만 Git으로 관리하는 도구는?',
+                    options: ['DVC', 'Git LFS', 'SVN', 'Mercurial'],
+                    correctAnswer: 0
+                }
+            },
+            // 8. Security & Governance
+            {
+                step: 'Phase 18: 보안과 거버넌스',
+                title: 'ML Security & Governance',
+                description: '모델의 보안 취약점을 방어하고, 윤리적/법적 규제를 준수합니다.',
+                topics: ['Adversarial Attacks', 'Model Explainability (XAI)', 'RBAC (Role-Based Access Control)', 'GDPR & Compliance'],
+                resources: [
+                    { name: 'Adversarial Machine Learning', url: 'https://github.com/dberkholz/adversarial-machine-learning' }
+                ],
+                quiz: {
+                    question: '입력 데이터에 미세한 노이즈를 섞어 AI 모델을 오작동하게 만드는 공격 기법은?',
+                    options: ['Adversarial Attack (적대적 공격)', 'DDoS', 'SQL Injection', 'Man-in-the-Middle'],
+                    correctAnswer: 0
+                }
+            },
+            // 9. Advanced Trends
+            {
+                step: 'Phase 19: LLM Ops',
+                title: 'Large Language Model Ops',
+                description: '거대 언어 모델(LLM)을 효율적으로 튜닝하고 서빙하기 위한 특화된 운영 기술입니다.',
+                topics: ['Fine-tuning (PEFT)', 'Vector Databases', 'Prompt Management', 'LLM Evaluation'],
+                resources: [
+                    { name: 'Full Stack LLM Bootcamp', url: 'https://fullstackdeeplearning.com/llm-bootcamp/' }
+                ],
+                quiz: {
+                    question: 'LLM의 출력을 제어하고 최적화하기 위해 입력 텍스트(Prompt)를 체계적으로 관리하고 버전 관리하는 기술은?',
+                    options: ['Prompt Engineering & Management', 'Feature Engineering', 'Hyperparameter Tuning', 'Data Cleaning'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 20: 엣지 MLOps (Edge AI)',
+                title: 'MLOps on Edge',
+                description: '리소스가 제한된 엣지 디바이스에 모델을 배포하고 업데이트하는기술입니다.',
+                topics: ['OTA (Over-The-Air) Updates', 'Model Compression', 'TensorLite / Edge TPU', 'Fleet Management'],
+                resources: [
+                    { name: 'Edge Impulse', url: 'https://www.edgeimpulse.com/' }
+                ],
+                quiz: {
+                    question: '원격지에 있는 수많은 엣지 디바이스의 펌웨어나 모델을 무선으로 업데이트하는 기술은?',
+                    options: ['OTA (Over-The-Air)', 'SSH', 'FTP', 'USB'],
+                    correctAnswer: 0
+                }
+            },
+            // 10. Career
+            {
+                step: 'Phase 21: 커리어 & 프로젝트',
+                title: 'End-to-End Project',
+                description: '문제 정의부터 배포, 모니터링까지 전 과정을 아우르는 MLOps 프로젝트를 완성합니다.',
+                topics: ['System Design Interview', 'Open Source Contribution', 'Tech Blog', 'Portfolio Building'],
+                resources: [
+                    { name: 'Made With ML', url: 'https://madewithml.com/' }
+                ],
+                quiz: {
+                    question: 'MLOps 프로젝트 포트폴리오에서 가장 강조해야 할 역량은?',
+                    options: ['전체 파이프라인의 자동화 및 문제 해결 과정', '가장 복잡한 모델 사용', 'UI 디자인', '데이터의 양'],
+                    correctAnswer: 0
+                }
             }
         ],
         faq: [
@@ -231,56 +785,335 @@ export const JOBS: JobRole[] = [
     {
         id: 'data-eng',
         title: 'Data Engineer',
-        description: '데이터의 수집, 저장, 처리를 위한 견고한 파이프라인을 구축하여 모델 학습을 지원합니다.',
-        long_description: 'Data Engineer는 데이터의 "배관공"입니다. 다양한 곳에 흩어진 데이터를 수집(Extract)하고, 사용하기 좋게 가공(Transform)하여, 저장소(Load)에 적재하는 ETL 파이프라인을 책임집니다. 데이터 과학자나 분석가가 데이터를 분석할 수 있도록 깨끗한 데이터를 안정적으로 공급하는 것이 목표입니다.',
-        salary_range: '초봉 4,000 ~ 5,500만원',
+        description: '대규모 데이터를 수집, 저장, 처리 및 관리하는 파이프라인과 아키텍처를 설계하는 데이터 인프라 전문가입니다.',
+        long_description: 'Data Engineer는 데이터 사이언티스트와 ML 엔지니어가 작업할 수 있는 "데이터 고속도로"를 건설합니다. 원천 데이터(Raw Data)를 다양한 소스에서 추출(Extract)하고, 비즈니스 로직에 맞게 변환(Transform)하여, 데이터 웨어하우스나 호수(Lake)에 적재(Load)하는 ETL/ELT 파이프라인을 구축합니다. 또한 데이터의 품질(Validation), 보안(Governance), 흐름(Lineage)을 관리하여 "믿을 수 있는 데이터"를 제공하는 것이 핵심 미션입니다.',
+        salary_range: '초봉 4,000 ~ 6,000만원',
         difficulty: 'Medium',
-        demand: 'High',
+        demand: 'Very High',
         responsibilities: [
-            'ETL/ELT 파이프라인 설계 및 운영',
-            'Data Warehouse / Data Lake 구축 및 관리',
-            '대용량 데이터 분산 처리 (Spark 등)',
-            '데이터 품질(Quality) 및 정합성 관리'
+            'ETL/ELT 파이프라인 설계 및 운영 (Airflow, dbt)',
+            '대용량 데이터 분산 처리 시스템 구축 (Spark, Hadoop)',
+            '데이터 웨어하우스/레이크 모델링 (Snowflake, BigQuery)',
+            '실시간 데이터 스트리밍 처리 (Kafka, Flink)'
         ],
         tech_stack: [
-            { category: 'Language', skills: ['Python', 'SQL', 'Scala', 'Java'] },
-            { category: 'Big Data', skills: ['Apache Spark', 'Kafka', 'Hadoop'] },
-            { category: 'Workflow', skills: ['Apache Airflow', 'Prefect', 'dbt'] },
-            { category: 'Storage', skills: ['Snowflake', 'BigQuery', 'Redshift', 'S3'] }
+            { category: 'Language', skills: ['Python', 'SQL (Advanced)', 'Scala', 'Java'] },
+            { category: 'Compute', skills: ['Apache Spark', 'Databricks', 'Hadoop MapReduce'] },
+            { category: 'Orchestration', skills: ['Apache Airflow', 'Prefect', 'Dagster', 'dbt'] },
+            { category: 'Storage & Warehouse', skills: ['Snowflake', 'BigQuery', 'Redshift', 'S3', 'HDFS'] }
         ],
-        tags: ['BigData', 'Pipeline', 'Spark/Kafka'],
+        tags: ['BigData', 'Infrastructure', 'ETL', 'Architecture'],
         focus_areas: [
-            'SQL & Database Design',
-            'Python ETL (Airflow/Prefect)',
-            'Cloud Data Warehouse (BigQuery 등)'
+            'Advanced SQL & Data Modeling',
+            'Distributed Computing (Spark)',
+            'Workflow Orchestration (Airflow)',
+            'Cloud Data Warehousing'
         ],
         roadmap: [
+            // 1. Fundamentals
             {
-                step: 'Phase 1: 데이터 베이스 기초',
-                title: 'SQL Master & Python Data',
-                description: '데이터를 저장하고 조회하는 가장 기본적인 언어를 완벽하게 익힙니다.',
-                topics: ['Advanced SQL (Window Functions)', 'Data Modeling (Star/Snowflake Schema)', 'Pandas Data Cleaning'],
+                step: 'Phase 1: CS 기초 & 리눅스',
+                title: 'CS Basics & Linux',
+                description: '터미널 환경에서 대용량 파일을 다루고 자동화 스크립트를 작성하는 능력을 기릅니다.',
+                topics: ['Linux/Bash Commands', 'Shell Scripting', 'SSH & Network Basics', 'File Systems (HDFS 기초)'],
                 resources: [
-                    { name: 'Mode SQL Tutorial', url: 'https://mode.com/sql-tutorial/' }
-                ]
+                    { name: 'Linux Command Line Basics', url: 'https://ubuntu.com/tutorials/command-line-for-beginners' }
+                ],
+                quiz: {
+                    question: '리눅스에서 대용량 로그 파일의 마지막 100줄을 실시간으로 계속 확인하고 싶을 때 사용하는 명령어는?',
+                    options: ['tail -f filename.log', 'cat filename.log', 'head -n 100 filename.log', 'grep filename.log'],
+                    correctAnswer: 0
+                }
             },
             {
-                step: 'Phase 2: 파이프라인 구축',
-                title: 'Airflow & ETL',
-                description: '데이터 이동을 스케줄링하고 자동화하는 워크플로우를 만듭니다.',
-                topics: ['DAG 작성', 'Cron Expression', 'Web Scraping -> DB 적재', 'API Data Fetching'],
+                step: 'Phase 2: 프로그래밍 언어 (Python/SQL)',
+                title: 'Programming skills',
+                description: '데이터 조작을 위한 Python과 복잡한 쿼리 작성을 위한 SQL을 마스터합니다.',
+                topics: ['Python Data Structures', 'Pandas/Polars', 'Functional Programming', 'Advanced SQL (Optimization)'],
                 resources: [
-                    { name: 'Apache Airflow Docs', url: 'https://airflow.apache.org/' }
-                ]
+                    { name: 'LeetCode Database Problems', url: 'https://leetcode.com/problemset/database/' }
+                ],
+                quiz: {
+                    question: 'SQL에서 윈도우 함수(Window Function)를 사용하여, 부서별로 급여 순위를 매길 때 사용하는 구문은?',
+                    options: ['RANK() OVER (PARTITION BY dept ORDER BY salary)', 'GROUP BY dept ORDER BY salary', 'SELECT * FROM salary WHERE dept=...', 'JOIN dept ON salary'],
+                    correctAnswer: 0
+                }
+            },
+            // 2. Database & Modeling
+            {
+                step: 'Phase 3: 관계형 데이터베이스 (RDBMS)',
+                title: 'Relational Databases',
+                description: '데이터의 정합성을 보장하는 RDBMS의 내부 동작 원리와 설계를 배웁니다.',
+                topics: ['PostgreSQL/MySQL', 'ACID Transaction', 'Normalization Forms', 'Indexing Strategy'],
+                resources: [
+                    { name: 'CMU Database Systems Course', url: 'https://15445.courses.cs.cmu.edu/' }
+                ],
+                quiz: {
+                    question: '데이터베이스에서 트랜잭션이 안전하게 수행된다는 것을 보장하는 성질인 ACID에 포함되지 않는 것은?',
+                    options: ['Atomicity (원자성)', 'Consistency (일관성)', 'Isolation (고립성)', 'Dependency (의존성)'],
+                    correctAnswer: 3
+                }
             },
             {
-                step: 'Phase 3: 빅데이터 & 클라우드',
-                title: 'Distributed Processing',
-                description: '메모리에 다 들어가지 않는 거대한 데이터를 다루는 기술을 배웁니다.',
-                topics: ['Spark Architecture', 'AWS EMR / Glue', 'Streaming Data (Kafka)', 'Data Governance'],
+                step: 'Phase 4: 데이터 모델링 & NoSQL',
+                title: 'Data Modeling & NoSQL',
+                description: '데이터의 용도에 맞는 스키마 설계와 비정형 데이터 저장소를 익힙니다.',
+                topics: ['Star Schema vs Snowflake Schema', 'Dimensional Modeling (Kimball)', 'MongoDB (Document)', 'Cassandra (Wide-Column)'],
                 resources: [
-                    { name: 'Data Engineering Cookbook', url: 'https://github.com/andkret/Cookbook' }
-                ]
+                    { name: 'Data Warehouse Toolkit', url: 'https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/' }
+                ],
+                quiz: {
+                    question: '데이터 웨어하우스 모델링에서 "Fact Table"과 "Dimension Table"로 구성된 가장 일반적인 스키마 형태는?',
+                    options: ['Star Schema', 'Relational Schema', 'Graph Schema', 'Network Schema'],
+                    correctAnswer: 0
+                }
+            },
+            // 3. Data Warehousing
+            {
+                step: 'Phase 5: 클라우드 데이터 웨어하우스',
+                title: 'Modern Data Warehouse',
+                description: '클라우드 환경에서 페타바이트급 데이터를 분석할 수 있는 차세대 DW를 배웁니다.',
+                topics: ['Snowflake Architecture', 'Google BigQuery', 'Amazon Redshift', 'Columnar Storage'],
+                resources: [
+                    { name: 'Snowflake Documentation', url: 'https://docs.snowflake.com/' }
+                ],
+                quiz: {
+                    question: 'Snowflake나 BigQuery 같은 모던 DW가 기존 DB와 달리 대용량 분석에 빠른 이유는 데이터를 어떻게 저장하기 때문인가?',
+                    options: ['Columnar Storage (컬럼 기반 저장)', 'Row-based Storage', 'Text Files', 'Linked List'],
+                    correctAnswer: 0
+                }
+            },
+            // 4. Data Processing (ETL/ELT)
+            {
+                step: 'Phase 6: 데이터 파이프라인 (Orchestration)',
+                title: 'Workflow Orchestration',
+                description: '복잡한 데이터 의존성을 관리하고 자동화하는 워크플로우 도구를 사용합니다.',
+                topics: ['Apache Airflow', 'DAGs (Directed Acyclic Graphs)', 'Scheduling & Backfill', 'Task Operators'],
+                resources: [
+                    { name: 'Apache Airflow Fundamentals', url: 'https://airflow.apache.org/' }
+                ],
+                quiz: {
+                    question: 'Airflow에서 과거의 특정 시점으로 돌아가서 해당 기간의 데이터를 다시 처리하는 작업을 무엇이라 하는가?',
+                    options: ['Backfill', 'Restore', 'Rollback', 'Retry'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 7: 데이터 변환 (Transformation)',
+                title: 'Transformation with dbt',
+                description: 'SQL만으로 데이터 웨어하우스 내부에서 데이터를 변환하고 테스트하는 ELT 방식을 익힘니다.',
+                topics: ['dbt (data build tool)', 'Jinja Templating', 'Data Lineage', 'Data Quality Tests'],
+                resources: [
+                    { name: 'dbt Fundamentals', url: 'https://courses.getdbt.com/courses/fundamentals' }
+                ],
+                quiz: {
+                    question: 'dbt(data build tool)가 채택하고 있는 데이터 처리 방식은?',
+                    options: ['ELT (Extract-Load-Transform)', 'ETL (Extract-Transform-Load)', 'Streaming', 'Batch Only'],
+                    correctAnswer: 0
+                }
+            },
+            // 5. Big Data & Distributed Computing
+            {
+                step: 'Phase 8: 빅데이터 프레임워크 (Spark)',
+                title: 'Apache Spark',
+                description: '인메모리 분산 처리 기술을 이용해 대규모 데이터를 빠르게 처리합니다.',
+                topics: ['RDD vs DataFrame', 'SparkSQL', 'Optimization (Catalyst Optimizer)', 'PySpark'],
+                resources: [
+                    { name: 'Spark The Definitive Guide', url: 'https://github.com/databricks/Spark-The-Definitive-Guide' }
+                ],
+                quiz: {
+                    question: 'Spark에서 작업을 지연 실행(Lazy Evaluation)하며, 실제 결과가 필요할 때(Action) 연산을 수행하는 구조의 장점은?',
+                    options: ['실행 계획 최적화 가능', '메모리 사용량 증가', '디버깅이 쉬워짐', '코드가 복잡해짐'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 9: 분산 저장소 (Data Lake)',
+                title: 'Data Lake & Formats',
+                description: 'Raw 데이터를 저렴하고 안전하게 저장하는 기술과 효율적인 파일 포맷을 다룹니다.',
+                topics: ['Hadoop HDFS', 'AWS S3 / GCS', 'Parquet / Avro / ORC', 'Data Partitioning'],
+                resources: [
+                    { name: 'Parquet File Format', url: 'https://parquet.apache.org/' }
+                ],
+                quiz: {
+                    question: '빅데이터 저장 포맷 중 컬럼 기반이며 압축률이 높아서 분석 용도로 가장 널리 쓰이는 포맷은?',
+                    options: ['Parquet', 'CSV', 'JSON', 'XML'],
+                    correctAnswer: 0
+                }
+            },
+            // 6. Streaming Data
+            {
+                step: 'Phase 10: 메세지 큐 & 스트리밍',
+                title: 'Message Queues',
+                description: '시스템 간의 비동기 데이터 전달을 위한 메시징 미들웨어를 익힙니다.',
+                topics: ['Apache Kafka', 'Producer & Consumer', 'Topics & Partitions', 'RabbitMQ'],
+                resources: [
+                    { name: 'Kafka The Definitive Guide', url: 'https://kafka.apache.org/documentation/' }
+                ],
+                quiz: {
+                    question: 'Kafka에서 데이터를 분산 저장하고 병렬 처리를 가능하게 하는 기본 단위는?',
+                    options: ['Partition', 'Topic', 'Broker', 'Zookeeper'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 11: 실시간 스트림 처리',
+                title: 'Stream Processing',
+                description: '끊임없이 들어오는 데이터를 실시간으로 집계하고 분석합니다.',
+                topics: ['Spark Streaming', 'Apache Flink', 'Window Functions (Tumpling/Sliding)', 'State Management'],
+                resources: [
+                    { name: 'Apache Flink Docs', url: 'https://flink.apache.org/' }
+                ],
+                quiz: {
+                    question: '스트림 처리에서 "이벤트 발생 시간(Event Time)"과 "처리 시간(Processing Time)"의 차이를 보정하기 위해 사용하는 개념은?',
+                    options: ['Watermark', 'Timestamp', 'Latency', 'Checkpoint'],
+                    correctAnswer: 0
+                }
+            },
+            // 7. Cloud Infrastructure
+            {
+                step: 'Phase 12: 클라우드 인프라 활용',
+                title: 'Cloud Data Platforms',
+                description: 'AWS, GCP, Azure의 관리형 데이터 서비스를 조합하여 아키텍처를 구성합니다.',
+                topics: ['AWS Glue / EMR', 'GCP Dataflow / Dataproc', 'Azure Synapse', 'Serverless Functions'],
+                resources: [
+                    { name: 'AWS Data Analytics', url: 'https://aws.amazon.com/big-data/datalakes-and-analytics/' }
+                ],
+                quiz: {
+                    question: 'AWS의 완전 관리형 서버리스 ETL 서비스는?',
+                    options: ['AWS Glue', 'EC2', 'RDS', 'S3'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 13: 인프라 자동화 (IaC)',
+                title: 'Infrastructure as Code',
+                description: '복잡한 클라우드 리소스를 코드로 정의하여 버전 관리하고 배포합니다.',
+                topics: ['Terraform', 'Pulumi', 'AWS CloudFormation', 'State Management'],
+                resources: [
+                    { name: 'Terraform Registry', url: 'https://registry.terraform.io/' }
+                ],
+                quiz: {
+                    question: 'Terraform을 사용하여 여러 클라우드 프로바이더(AWS, GCP 등)의 리소스를 통합 관리할 수 있는가?',
+                    options: ['가능하다 (Provider 기반)', '불가능하다', 'AWS만 가능하다', 'GCP만 가능하다'],
+                    correctAnswer: 0
+                }
+            },
+            // 8. CI/CD & Containers
+            {
+                step: 'Phase 14: 컨테이너화',
+                title: 'Docker & Kubernetes',
+                description: '데이터 애플리케이션의 배포 환경을 표준화하고 격리합니다.',
+                topics: ['Dockerizing ETL Scripts', 'Kubernetes for Spark/Airflow', 'Helm Charts', 'Container Registry'],
+                resources: [
+                    { name: 'Kubernetes for Data Engineering', url: 'https://medium.com/' }
+                ],
+                quiz: {
+                    question: 'Airflow나 Spark 같은 데이터 도구를 Kubernetes 위에서 운영할 때의 장점으로 가장 적절하지 않은 것은?',
+                    options: ['항상 고정된 리소스만 사용 가능하다', '확장성(Scalability)이 좋다', '환경 격리가 잘 된다', '배포 관리가 용이하다'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 15: CI/CD for Data',
+                title: 'Data Ops',
+                description: '구축한 파이프라인 코드의 테스트와 배포를 자동화합니다.',
+                topics: ['GitHub Actions', 'Unit Testing for Data Pipelines', 'Data Quality Gates', 'Blue/Green Deployment'],
+                resources: [
+                    { name: 'The DataOps Manifesto', url: 'https://dataopsmanifesto.org/' }
+                ],
+                quiz: {
+                    question: 'DataOps의 핵심 원칙 중 하나로, 데이터 파이프라인의 변경 사항을 지속적으로 검증하는 것은?',
+                    options: ['Continuous Testing', 'Manual Review', 'Once-a-year Release', 'No Documentation'],
+                    correctAnswer: 0
+                }
+            },
+            // 9. Governance & Quality
+            {
+                step: 'Phase 16: 데이터 품질 관리',
+                title: 'Data Quality & Testing',
+                description: '데이터가 예상대로 들어오는지 검증하고 오류를 방지합니다.',
+                topics: ['Great Expectations', 'Soda Core', 'Data Validation Rules', 'Alerting'],
+                resources: [
+                    { name: 'Great Expectations Docs', url: 'https://docs.greatexpectations.io/' }
+                ],
+                quiz: {
+                    question: '데이터 파이프라인 실행 중에 "NULL 값이 없어야 함", "값의 범위는 0~100 사이" 등의 조건을 검사하는 도구는?',
+                    options: ['Great Expectations', 'Great Wall', 'Data Checker', 'Null Buster'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 17: 데이터 거버넌스',
+                title: 'Data Governance',
+                description: '데이터의 소유권, 보안, 카탈로그, 그리고 흐름(Lineage)을 관리합니다.',
+                topics: ['Data Catalog (DataHub/Amundsen)', 'Data Lineage', 'PII Security', 'Access Control (RBAC)'],
+                resources: [
+                    { name: 'DataHub Project', url: 'https://datahubproject.io/' }
+                ],
+                quiz: {
+                    question: '데이터가 어디서 생성되어 어떻게 변환되고 어디로 흘러가는지를 시각화한 것을 무엇이라 하는가?',
+                    options: ['Data Lineage', 'Data Flow Diagram', 'ER Diagram', 'Data Map'],
+                    correctAnswer: 0
+                }
+            },
+            // 10. Advanced Architectures
+            {
+                step: 'Phase 18: 데이터 레이크하우스',
+                title: 'Lakehouse Architecture',
+                description: '데이터 레이크의 유연성과 웨어하우스의 관리 기능을 결합한 최신 아키텍처입니다.',
+                topics: ['Delta Lake', 'Apache Iceberg', 'Apache Hudi', 'Table Formats'],
+                resources: [
+                    { name: 'Databricks Lakehouse', url: 'https://www.databricks.com/product/data-lakehouse' }
+                ],
+                quiz: {
+                    question: '데이터 레이크 상에서 ACID 트랜잭션, 스키마 관리, 시간 여행(Time Travel) 기능을 제공하는 오픈 테이블 포맷은?',
+                    options: ['Apache Iceberg / Delta Lake', 'CSV', 'Parquet', 'JSON'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 19: 데이터 메시 (Data Mesh)',
+                title: 'Data Mesh Concept',
+                description: '중앙 집중식 관리에서 벗어나 도메인 주도적인 분산 데이터 아키텍처를 이해합니다.',
+                topics: ['Domain-Oriented Design', 'Data as a Product', 'Self-serve Infrastructure', 'Federated Governance'],
+                resources: [
+                    { name: 'Data Mesh by Zhamak Dehghani', url: 'https://martinfowler.com/articles/data-mesh-principles.html' }
+                ],
+                quiz: {
+                    question: 'Data Mesh의 4대 원칙 중 하나로, 데이터를 단순한 자산이 아닌 "제품"처럼 관리하고 서비스해야 한다는 원칙은?',
+                    options: ['Data as a Product', 'Data Centralization', 'Data Hoarding', 'Data Silo'],
+                    correctAnswer: 0
+                }
+            },
+            // 11. Career
+            {
+                step: 'Phase 20: 캡스톤 프로젝트',
+                title: 'End-to-End Project',
+                description: '크롤링부터 대시보드 시각화까지 전 과정을 아우르는 나만의 프로젝트를 만듭니다.',
+                topics: ['Real-time Dashboard Project', 'Data Pipeline Project', 'Blog Writing', 'Resume Review'],
+                resources: [
+                    { name: 'Start Data Engineering', url: 'https://www.startdataengineering.com/' }
+                ],
+                quiz: {
+                    question: '데이터 엔지니어링 프로젝트에서 기술력만큼이나 중요한 것은?',
+                    options: ['비즈니스 문제 해결 능력과 문서화', '무조건 최신 툴 사용', '코드 라인 수', '복잡한 알고리즘'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 21: 시스템 디자인 면접',
+                title: 'System Design Interview',
+                description: '대규모 데이터 시스템 설계 질문에 대비합니다.',
+                topics: ['Scalability', 'Reliability', 'Maintainability', 'Back-of-the-envelope Calculation'],
+                resources: [
+                    { name: 'Designing Data-Intensive Applications', url: 'https://dataintensive.net/' }
+                ],
+                quiz: {
+                    question: '시스템 디자인 인터뷰에서 "Reliability(신뢰성)"의 의미는?',
+                    options: ['결함이나 오류가 있어도 시스템이 올바르게 기능을 지속하는 능력', '시스템의 처리 속도', '시스템의 확장 가능성', '시스템의 개발 비용'],
+                    correctAnswer: 0
+                }
             }
         ],
         faq: [
@@ -291,56 +1124,331 @@ export const JOBS: JobRole[] = [
     {
         id: 'data-sci',
         title: 'Data Scientist',
-        description: '복잡한 데이터에서 비즈니스 인사이트를 도출하고, 통계 및 머신러닝 알고리즘을 적용합니다.',
-        long_description: 'Data Scientist는 데이터를 통해 "가치"를 발견하는 탐험가입니다. 수집된 데이터에서 패턴을 찾고(EDA), 통계적 기법으로 가설을 검증하며, 예측 모델을 만들어 비즈니스 의사결정을 돕습니다. 기술적인 능력(코딩)뿐만 아니라 비즈니스 도메인에 대한 깊은 이해와 스토리텔링 능력이 필수적입니다.',
-        salary_range: '초봉 4,000 ~ 5,500만원',
+        description: '다양한 데이터에서 머신러닝과 통계 기술로 숨겨진 인사이트를 찾아내고, 비즈니스 의사결정을 돕는 데이터 전략가입니다.',
+        long_description: 'Data Scientist는 데이터를 통해 "가치"를 발견하는 탐험가이자 전략가입니다. 비즈니스 문제를 정의하고, 수집된 대규모 데이터에서 패턴을 찾으며(EDA), 통계적 기법과 머신러닝 모델링을 통해 가설을 검증합니다. 단순히 모델을 만드는 것을 넘어, 분석된 결과를 시각화하고 경영진이 이해할 수 있는 인사이트로 변환하여 실질적인 비즈니스 솔루션을 제안합니다.',
+        salary_range: '초봉 4,000 ~ 6,000만원',
         difficulty: 'Hard',
-        demand: 'Medium',
+        demand: 'High',
         responsibilities: [
-            '데이터 탐색적 분석(EDA) 및 시각화',
-            '예측 모델링 및 머신러닝 알고리즘 적용',
-            'A/B 테스트 설계 및 결과 분석',
-            '비즈니스 인사이트 도출 및 리포팅'
+            '비즈니스 문제 정의 및 실험 설계 (A/B Test)',
+            '대규모 데이터 수집, 전처리 및 탐색적 분석 (EDA)',
+            '예측 모델링 및 머신러닝 알고리즘 개발/검증',
+            '데이터 시각화 및 비즈니스 전략 제안'
         ],
         tech_stack: [
-            { category: 'Language', skills: ['Python', 'R', 'SQL'] },
-            { category: 'Analysis', skills: ['Pandas', 'NumPy', 'Scipy'] },
-            { category: 'ML', skills: ['Scikit-learn', 'XGBoost', 'LightGBM'] },
-            { category: 'Visualization', skills: ['Matplotlib', 'Seaborn', 'Tableau', 'PowerBI'] }
+            { category: 'Language', skills: ['Python', 'R', 'SQL', 'Scala'] },
+            { category: 'Analysis', skills: ['Pandas', 'NumPy', 'SciPy', 'Jupyter'] },
+            { category: 'ML & Stat', skills: ['Scikit-learn', 'XGBoost', 'TensorFlow', 'PyTorch', 'Statsmodels'] },
+            { category: 'Visualization', skills: ['Matplotlib', 'Seaborn', 'Tableau', 'PowerBI', 'Looker'] }
         ],
-        tags: ['Analysis', 'Statistics', 'Math'],
+        tags: ['Analysis', 'Statistics', 'Strategy', 'Math'],
         focus_areas: [
-            'Python 데이터 분석 (Pandas/Scikit-learn)',
-            '통계학 기초 및 가설 검정',
-            '데이터 시각화/스토리텔링'
+            'Statistical Analysis & Hypothesis Testing',
+            'Machine Learning Modeling',
+            'Business Insight & Visualization'
         ],
         roadmap: [
+            // 1. Math & Statistics
             {
-                step: 'Phase 1: 데이터 분석 기초',
-                title: 'Data Analysis & Visualization',
-                description: '데이터를 요리조리 뜯어보고 시각적으로 표현하는 능력을 기릅니다.',
-                topics: ['Python Basics', 'Pandas DataFrame', 'Charts & Graphs', 'Descriptive Statistics'],
+                step: 'Phase 1: 수학적 사고와 통계',
+                title: 'Math & Statistics',
+                description: '데이터 뒤에 숨은 진실을 파악하기 위한 확률과 통계의 기초를 다집니다.',
+                topics: ['Descriptive Statistics', 'Probability Distributions', 'Hypothesis Testing (p-value, t-test)', 'Bayesian Inference'],
                 resources: [
-                    { name: 'Kaggle Learn', url: 'https://www.kaggle.com/learn' }
-                ]
+                    { name: 'Khan Academy Statistics', url: 'https://www.khanacademy.org/math/statistics-probability' }
+                ],
+                quiz: {
+                    question: '가설 검정에서 "귀무가설(Null Hypothesis)이 참인데도 기각해버릴 확률"을 무엇이라 하는가?',
+                    options: ['Type I Error (1종 오류)', 'Type II Error (2종 오류)', 'Confidence Interval', 'Standard Deviation'],
+                    correctAnswer: 0
+                }
             },
             {
-                step: 'Phase 2: 머신러닝 & 통계',
-                title: 'Modeling & Inference',
-                description: '데이터로 미래를 예측하거나 숨겨진 관계를 증명합니다.',
-                topics: ['Regression/Classification', 'Hypothesis Testing', 'Feature Engineering', 'Model Evaluation Metrics'],
+                step: 'Phase 2: 선형대수와 미적분',
+                title: 'Linear Algebra & Calculus',
+                description: '머신러닝 알고리즘의 작동 원리를 이해하기 위한 수학을 배웁니다.',
+                topics: ['Vectors & Matrices', 'Eigenvalues & Eigenvectors', 'Derivatives & Gradients', 'Cost Functions'],
                 resources: [
-                    { name: 'StatQuest with Josh Starmer', url: 'https://www.youtube.com/c/joshstarmer' }
-                ]
+                    { name: '3Blue1Brown Linear Algebra', url: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab' }
+                ],
+                quiz: {
+                    question: '주성분 분석(PCA)에서 데이터의 분산이 가장 큰 방향을 나타내는 벡터는?',
+                    options: ['Eigenvector (고유벡터)', 'Zero Vector', 'Unit Vector', 'Support Vector'],
+                    correctAnswer: 0
+                }
+            },
+            // 2. Programming & Data
+            {
+                step: 'Phase 3: Python 데이터 분석',
+                title: 'Python for Data Science',
+                description: 'Python 생태계의 분석 도구를 자유자재로 다룹니다.',
+                topics: ['Pandas Advanced (MultiIndex, Pivot)', 'NumPy Broadcasting', 'Data Cleaning & Preprocessing', 'Lambda Functions'],
+                resources: [
+                    { name: 'Python for Data Analysis Book', url: 'https://wesmckinney.com/book/' }
+                ],
+                quiz: {
+                    question: 'Pandas에서 결측치(NaN)를 특정 값으로 채우는 메서드는?',
+                    options: ['fillna()', 'dropna()', 'isna()', 'replace()'],
+                    correctAnswer: 0
+                }
             },
             {
-                step: 'Phase 3: 실전 문제 해결',
-                title: 'Business Project',
-                description: '실제 비즈니스 시나리오에서 문제를 정의하고 해결책을 제안합니다.',
-                topics: ['Problem Definition', 'Dashboard Building', 'Presentation Skills', 'Domain Knowledge'],
+                step: 'Phase 4: SQL과 데이터베이스',
+                title: 'SQL & Database',
+                description: '원천 데이터를 직접 추출하고 가공하는 쿼리 능력을 기릅니다.',
+                topics: ['Complex Joins', 'Window Functions', 'CTEs (Common Table Expressions)', 'NoSQL Basics (MongoDB)'],
                 resources: [
-                    { name: 'Towards Data Science', url: 'https://towardsdatascience.com/' }
-                ]
+                    { name: 'SQLZoo', url: 'https://sqlzoo.net/' }
+                ],
+                quiz: {
+                    question: 'SQL 쿼리 실행 순서(Logical Processing Order) 중 가장 먼저 실행되는 절은?',
+                    options: ['FROM', 'SELECT', 'WHERE', 'ORDER BY'],
+                    correctAnswer: 0
+                }
+            },
+            // 3. Machine Learning
+            {
+                step: 'Phase 5: 머신러닝 기초',
+                title: 'Machine Learning Basics',
+                description: '데이터에서 패턴을 학습하는 고전적인 머신러닝 알고리즘을 익힙니다.',
+                topics: ['Linear/Logistic Regression', 'Decision Trees', 'K-Means Clustering', 'Bias-Variance Tradeoff'],
+                resources: [
+                    { name: 'Scikit-Learn User Guide', url: 'https://scikit-learn.org/stable/user_guide.html' }
+                ],
+                quiz: {
+                    question: '지도 학습(Supervised Learning)에 해당하지 않는 알고리즘은?',
+                    options: ['K-Means Clustering', 'Linear Regression', 'Support Vector Machine', 'Random Forest'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 6: 앙상블 기법',
+                title: 'Ensemble Methods',
+                description: '여러 모델을 조합하여 예측 성능을 극대화하는 기법을 배웁니다.',
+                topics: ['Random Forest', 'Gradient Boosting (XGBoost/LightGBM)', 'Stacking & Bagging', 'Hyperparameter Tuning'],
+                resources: [
+                    { name: 'XGBoost Documentation', url: 'https://xgboost.readthedocs.io/' }
+                ],
+                quiz: {
+                    question: '이전 모델이 틀린 오차(Residual)를 학습하여 성능을 개선해 나가는 앙상블 방식은?',
+                    options: ['Boosting', 'Bagging', 'Voting', 'Stacking'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 7: 딥러닝 입문',
+                title: 'Deep Learning Intro',
+                description: '비정형 데이터(이미지, 텍스트) 처리를 위한 신경망 기초를 다룹니다.',
+                topics: ['Neural Networks (MLP)', 'Activation Functions (ReLU, Sigmoid)', 'Overfitting & Regularization', 'TensorFlow/Keras Basics'],
+                resources: [
+                    { name: 'Deep Learning Specialization', url: 'https://www.coursera.org/specializations/deep-learning' }
+                ],
+                quiz: {
+                    question: '신경망에서 뉴런의 출력을 비선형으로 변환해주는 함수를 무엇이라 하는가?',
+                    options: ['Activation Function (활성화 함수)', 'Loss Function', 'Optimizer', 'Kernel'],
+                    correctAnswer: 0
+                }
+            },
+            // 4. Data Visualization & Storytelling
+            {
+                step: 'Phase 8: 데이터 시각화',
+                title: 'Data Visualization',
+                description: '데이터를 직관적인 그래프로 표현하여 패턴을 발견합니다.',
+                topics: ['Matplotlib & Seaborn', 'Interactive Plots (Plotly)', 'Color Theory', 'Chart Selection Guidelines'],
+                resources: [
+                    { name: 'Data to Viz', url: 'https://www.data-to-viz.com/' }
+                ],
+                quiz: {
+                    question: '시간의 흐름에 따른 데이터의 변화 추세를 보여주기에 가장 적합한 차트는?',
+                    options: ['Line Chart', 'Pie Chart', 'Scatter Plot', 'Bar Chart'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 9: 비즈니스 인텔리전스 (BI)',
+                title: 'Business Intelligence',
+                description: '경영진을 위한 대시보드를 만들고 리포팅합니다.',
+                topics: ['Tableau / PowerBI', 'Dashboard Design', 'Data Storytelling', 'KPI Metrics Definition'],
+                resources: [
+                    { name: 'Storytelling with Data', url: 'https://www.storytellingwithdata.com/' }
+                ],
+                quiz: {
+                    question: '좋은 대시보드의 조건으로 적절하지 않은 것은?',
+                    options: ['최대한 많은 정보를 한 화면에 빽빽하게 담는다', '핵심 지표(KPI)가 잘 보이게 배치한다', '사용자(청중)의 수준을 고려한다', '적절한 색상을 사용하여 강조한다'],
+                    correctAnswer: 0
+                }
+            },
+            // 5. Advanced Topics
+            {
+                step: 'Phase 10: 자연어 처리 (NLP)',
+                title: 'Natural Language Processing',
+                description: '텍스트 데이터를 분석하여 감정, 주제, 의미를 파악합니다.',
+                topics: ['Text Preprocessing (Tokenization)', 'TF-IDF & Word Embeddings', 'Sentiment Analysis', 'Basic Transformers'],
+                resources: [
+                    { name: 'Hugging Face Course', url: 'https://huggingface.co/course/chapter1/1' }
+                ],
+                quiz: {
+                    question: '단어를 벡터 공간에 매핑하여 단어 간의 의미적 유사도를 계산할 수 있게 하는 기술은?',
+                    options: ['Word Embedding', 'One-hot Encoding', 'Label Encoding', 'Hashing'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 11: 시계열 분석',
+                title: 'Time Series Analysis',
+                description: '시간의 흐름에 있는 데이터를 분석하고 미래를 예측합니다.',
+                topics: ['ARIMA/SARIMA', 'Prophet', 'Seasonality & Trend', 'LSTM for Time Series'],
+                resources: [
+                    { name: 'Forecasting: Principles and Practice', url: 'https://otexts.com/fpp3/' }
+                ],
+                quiz: {
+                    question: '시계열 데이터에서 일정한 주기로 반복되는 패턴을 무엇이라 하는가?',
+                    options: ['Seasonality (계절성)', 'Trend (추세)', 'Noise (잡음)', 'Stationarity (정상성)'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 12: 추천 시스템',
+                title: 'Recommender Systems',
+                description: '사용자의 취향을 분석하여 맞춤형 콘텐츠를 제안하는 알고리즘을 배웁니다.',
+                topics: ['Collaborative Filtering', 'Content-based Filtering', 'Matrix Factorization', 'Hybrid Models'],
+                resources: [
+                    { name: 'Google Recommendation Systems', url: 'https://developers.google.com/machine-learning/recommendation' }
+                ],
+                quiz: {
+                    question: '"나와 비슷한 취향을 가진 다른 사용자가 구매한 상품"을 추천해주는 방식은?',
+                    options: ['User-based Collaborative Filtering', 'Content-based Filtering', 'Random Recommendation', 'Popularity-based'],
+                    correctAnswer: 0
+                }
+            },
+            // 6. Big Data Ecosystem
+            {
+                step: 'Phase 13: 빅데이터 처리',
+                title: 'Big Data Frameworks',
+                description: '로컬 머신에서 처리할 수 없는 대용량 데이터를 다룹니다.',
+                topics: ['Apache Spark (PySpark)', 'Hadoop Ecosystem (Hive)', 'Distributed Computing Concept', 'Data Lakes'],
+                resources: [
+                    { name: 'PySpark Documentation', url: 'https://spark.apache.org/docs/latest/api/python/' }
+                ],
+                quiz: {
+                    question: 'Spark에서 데이터를 처리하는 기본 추상화 객체로, 분산 데이터 컬렉션을 의미하는 것은?',
+                    options: ['RDD (Resilient Distributed Dataset)', 'Pandas DataFrame', 'List', 'Array'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 14: 클라우드 컴퓨팅',
+                title: 'Cloud for Data Science',
+                description: 'AWS, GCP 등 클라우드 환경에서 분석 환경을 구축합니다.',
+                topics: ['AWS SageMaker', 'Google Vertex AI', 'Docker Basics', 'Serverless Functions'],
+                resources: [
+                    { name: 'AWS Setup for Data Science', url: 'https://aws.amazon.com/training/' }
+                ],
+                quiz: {
+                    question: 'AWS에서 Jupyter Notebook 환경을 완벽하게 관리형으로 제공하는 머신러닝 서비스는?',
+                    options: ['SageMaker', 'EC2', 'S3', 'Lambda'],
+                    correctAnswer: 0
+                }
+            },
+            // 7. Experimentation & Research
+            {
+                step: 'Phase 15: 실험 설계 (A/B Testing)',
+                title: 'A/B Testing',
+                description: '비즈니스 변경 사항의 효과를 통계적으로 검증합니다.',
+                topics: ['Control vs Treatment Group', 'Sample Size Calculation', 'Statistical Significance', 'Metric Selection'],
+                resources: [
+                    { name: 'A/B Testing Guide', url: 'https://vwo.com/ab-testing/' }
+                ],
+                quiz: {
+                    question: 'A/B 테스트에서 실험 결과를 신뢰할 수 있는지 판단하기 위해 확인하는 통계적 지표는?',
+                    options: ['p-value', 'Accuracy', 'Loss', 'Epoch'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 16: 인과 추론',
+                title: 'Causal Inference',
+                description: '상관관계를 넘어 진짜 원인과 결과를 파악합니다.',
+                topics: ['Correlation vs Causation', 'Simpson\'s Paradox', 'Propensity Score Matching', 'Diverse Counterfactuals'],
+                resources: [
+                    { name: 'The Book of Why', url: 'http://bayes.cs.ucla.edu/WHY/' }
+                ],
+                quiz: {
+                    question: '"아이스크림 판매량과 익사 사고 건수는 양의 상관관계가 있다"는 명제에서 숨겨진 제3의 변수(Confounder)는?',
+                    options: ['기온 (여름 날씨)', '상어의 수', '아이스크림 가격', '수영장 크기'],
+                    correctAnswer: 0
+                }
+            },
+            // 8. Career & Ethics
+            {
+                step: 'Phase 17: 데이터 윤리',
+                title: 'Data Ethics & Privacy',
+                description: '데이터 분석가로서 지켜야 할 윤리적 책임과 규제를 이해합니다.',
+                topics: ['GDPR/CCPA', 'Bias in AI', 'Data Anonymization', 'Responsible AI'],
+                resources: [
+                    { name: 'Data Ethics Course', url: 'https://ethics.fast.ai/' }
+                ],
+                quiz: {
+                    question: '학습 데이터의 편향(Bias)으로 인해 모델이 특정 인구 집단에 불리한 예측을 하는 현상은?',
+                    options: ['Algorithmic Bias', 'Overfitting', 'Underfitting', 'Feature Selection'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 18: 포트폴리오 프로젝트',
+                title: 'Capstone Project',
+                description: '자신만의 가설을 세우고 데이터를 수집/분석하여 결론을 도출하는 전체 과정을 수행합니다.',
+                topics: ['Project Scoping', 'Data Collection (Crawling)', 'Modeling', 'Storytelling/Reporting'],
+                resources: [
+                    { name: 'Kaggle Datasets', url: 'https://www.kaggle.com/datasets' }
+                ],
+                quiz: {
+                    question: '데이터 사이언스 포트폴리오에서 가장 중요한 요소는?',
+                    options: ['어떤 문제를 해결했고 어떤 비즈니스 임팩트를 냈는지 설명하는 능력', '가장 복잡한 딥러닝 모델 사용', '코드의 줄 수', '데이터의 크기'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 19: 이력서 및 면접 준비',
+                title: 'Career Preparation',
+                description: '데이터 사이언티스트 면접을 통과하기 위한 실전 팁을 익힙니다.',
+                topics: ['Technical Interview', 'Behavioral Interview', 'Resume Writing', 'Take-home Assignment'],
+                resources: [
+                    { name: 'Data Science Interview Prep', url: 'https://www.interviewquery.com/' }
+                ],
+                quiz: {
+                    question: '면접관이 "프로젝트에서 가장 어려웠던 점은 무엇인가요?"라고 물었을 때 가장 좋은 답변 방식은?',
+                    options: ['문제 상황(S) -> 행동(A) -> 결과(R) 구조로 구체적으로 설명', '어려운 점이 없었다고 답변', '팀원 탓을 한다', '기억이 안 난다고 한다'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 20: 최신 트렌드 팔로우',
+                title: 'Continuing Education',
+                description: 'LLM, GenAI 등 끊임없이 변화하는 데이터 분야의 최신 기술을 학습합니다.',
+                topics: ['LLM Applications', 'RAG (Retrieval-Augmented Generation)', 'Prompt Engineering', 'AI Newsletters'],
+                resources: [
+                    { name: 'The Batch (DeepLearning.AI)', url: 'https://www.deeplearning.ai/the-batch/' }
+                ],
+                quiz: {
+                    question: '최근 데이터 사이언스 분야에서 가장 뜨거운 화두인 "생성형 AI"의 영어 약자는?',
+                    options: ['GenAI', 'AGI', 'XAI', 'AutoML'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 21: 커리어 성장전략',
+                title: 'Career Growth',
+                description: '주니어에서 시니어로, 또는 매니저로 성장하기 위한 로드맵을 그립니다.',
+                topics: ['Mentoring', 'Networking', 'Specialization (NLP/CV/Inference)', 'Leadership'],
+                resources: [
+                    { name: 'Staff Engineer Path', url: 'https://staffeng.com/' }
+                ],
+                quiz: {
+                    question: '개인 기여(IC) 단계를 넘어 팀 전체의 기술적 의사결정을 주도하는 엔지니어 직군은?',
+                    options: ['Staff/Principal Engineer', 'Junior Engineer', 'Intern', 'Contractor'],
+                    correctAnswer: 0
+                }
             }
         ],
         faq: [
@@ -350,63 +1458,321 @@ export const JOBS: JobRole[] = [
     },
     {
         id: 'research',
-        title: 'AI Research Scientist',
-        description: '새로운 알고리즘을 연구하거나 최신 논문을 구현하여 기술의 한계를 넓힙니다.',
-        long_description: 'AI Research Scientist는 "미래의 기술"을 만드는 과학자입니다. 기존 모델의 성능을 뛰어넘는 새로운 아키텍처를 고안하거나, 아직 해결되지 않은 난제들을 딥러닝 기술로 풀어냅니다. 최신 논문을 끊임없이 읽고 구현하며, 학회에 논문을 발표하거나 기업의 핵심 원천 기술(Core Tech)을 개발합니다.',
-        salary_range: '초봉 5,000 ~ 8,000만원 (학위별 상이)',
+        title: 'AI Research Engineer',
+        description: '최신 AI 논문의 아이디어를 가장 빠르고 효율적인 코드로 현실화하여 시스템에 적용하는 연구 개발 전문가입니다.',
+        long_description: 'AI Research Engineer는 "연구(Research)"와 "구현(Engineering)"의 가교 역할을 합니다. Research Scientist가 제안한 혁신적인 알고리즘 가설을 실제 작동하는 고성능 시스템으로 변환하고, 수백 대의 GPU를 활용한 대규모 실험이 가능하도록 인프라와 파이프라인을 최적화합니다. 논문의 수식을 코드로 옮기는 능력뿐만 아니라, 모델 경량화와 속도 최적화까지 책임지는 "해결사"입니다.',
+        salary_range: '초봉 5,000 ~ 8,000만원 + @',
         difficulty: 'Extreme',
-        demand: 'Medium',
+        demand: 'Very High',
         responsibilities: [
-            '최신 AI 논문 리서치 및 구현 (SoTA 추구)',
-            '신규 모델 아키텍처 설계 및 실험',
-            '모델 경량화, 최적화 연구',
-            '특허 출원 및 논문 작성'
+            '최신 논문 구현 및 검증 (Paper to Code)',
+            '실험 자동화 및 파이프라인 효율화 (MLOps for Research)',
+            '대규모 분산 학습 최적화 (Multi-GPU/Node)',
+            '모델 경량화 및 추론 속도 개선 (Optimization)'
         ],
         tech_stack: [
-            { category: 'Framework', skills: ['PyTorch', 'TensorFlow', 'JAX'] },
-            { category: 'Theory', skills: ['Linear Algebra', 'Probability', 'Calculus', 'Optimization'] },
-            { category: 'Domain', skills: ['CV (Computer Vision)', 'NLP (Natural Language Processing)', 'RL (Reinforcement Learning)'] },
-            { category: 'Tools', skills: ['LaTeX', 'Weights & Biases', 'Linux'] }
+            { category: 'Framework', skills: ['PyTorch', 'JAX', 'TensorFlow', 'Hugging Face'] },
+            { category: 'Language', skills: ['Python', 'C++', 'CUDA'] },
+            { category: 'HPC & Infra', skills: ['Docker', 'Kubernetes', 'DeepSpeed', 'Slurm'] },
+            { category: 'Math', skills: ['Linear Algebra', 'Probability', 'Optimization Theory'] }
         ],
-        tags: ['Research', 'DeepLearning', 'Academic'],
+        tags: ['DeepLearning', 'HPC', 'PaperImplementation', 'R&D'],
         focus_areas: [
-            'Deep Learning Theory (PyTorch)',
-            '최신 논문 리딩 및 구현 능력',
-            '수학적 기초 (선형대수/확률)'
+            'Deep Learning Systems (Distributed Training)',
+            'Model Optimization (Quantization/Pruning)',
+            'Latest Architecture Implementation (LLM/Diffusion)'
         ],
         roadmap: [
+            // 1. Foundations
             {
-                step: 'Phase 1: 딥러닝 이론',
-                title: 'Deep Learning Foundations',
-                description: '신경망의 수학적 원리를 바닥부터 이해합니다.',
-                topics: ['Backpropagation', 'Gradient Descent', 'CNN/RNN Architecture', 'Pytorch Basics'],
+                step: 'Phase 1: 수학적 기초 (Mathematics)',
+                title: 'Math for AI',
+                description: '논문의 수식을 코드로 옮기기 위한 필수 수학을 다집니다.',
+                topics: ['Linear Algebra (Matrix Operations)', 'Calculus (Gradient, Chain Rule)', 'Probability & Statistics', 'Optimization Methods (Adam, L-BFGS)'],
                 resources: [
-                    { name: 'CS231n (Stanford)', url: 'http://cs231n.stanford.edu/' },
-                    { name: 'Deep Learning Book', url: 'https://www.deeplearningbook.org/' }
-                ]
+                    { name: 'Mathematics for Machine Learning', url: 'https://mml-book.github.io/' }
+                ],
+                quiz: {
+                    question: '딥러닝 최적화에서 Loss 함수의 최솟값을 찾기 위해 기울기(Gradient)의 반대 방향으로 이동하는 기본적인 방법은?',
+                    options: ['Gradient Descent (경사 하강법)', 'Newton Method', 'Genetic Algorithm', 'Random Search'],
+                    correctAnswer: 0
+                }
             },
             {
-                step: 'Phase 2: 논문 구현',
-                title: 'Paper Reproduction',
-                description: '유명한 논문을 읽고 코드로 똑같이 구현하며 디테일을 익힙니다.',
-                topics: ['Reading Papers', 'Model Debugging', 'Training Tricks', 'Transformer Deep Dive'],
+                step: 'Phase 2: CS & Python 심화',
+                title: 'CS & Python Expert',
+                description: '고성능 연산을 위한 Python 심화 기법과 알고리즘 효율성을 학습합니다.',
+                topics: ['Python Decorators & Generators', 'NumPy Broadcasting', 'C++ Basics for AI', 'Time Complexity (Big O)'],
                 resources: [
-                    { name: 'Papers With Code', url: 'https://paperswithcode.com/' }
-                ]
+                    { name: 'Grokking Algorithms', url: 'https://www.manning.com/books/grokking-algorithms' }
+                ],
+                quiz: {
+                    question: 'NumPy에서 모양(Shape)이 다른 배열 간의 연산을 가능하게 해주는 메커니즘은?',
+                    options: ['Broadcasting', 'Reshaping', 'Flattening', 'Slicing'],
+                    correctAnswer: 0
+                }
+            },
+            // 2. Core Deep Learning
+            {
+                step: 'Phase 3: 딥러닝 프레임워크 (PyTorch)',
+                title: 'PyTorch Mastery',
+                description: '연구 표준 프레임워크인 PyTorch를 바닥부터 자유자재로 다룹니다.',
+                topics: ['Tensor Operations & Autograd', 'Custom Dataset/DataLoader', 'nn.Module Customization', 'Einsum Operations'],
+                resources: [
+                    { name: 'PyTorch Official Tutorials', url: 'https://pytorch.org/tutorials/' }
+                ],
+                quiz: {
+                    question: 'PyTorch에서 텐서의 연산 기록을 추적하여 자동으로 기울기를 계산해주는 엔진은?',
+                    options: ['Autograd', 'AutoML', 'Backprop Engine', 'Gradient Booster'],
+                    correctAnswer: 0
+                }
             },
             {
-                step: 'Phase 3: 연구 수행',
-                title: 'Novel Research',
-                description: '자신만의 아이디어를 제안하고 실험을 통해 증명합니다.',
-                topics: ['Experiment Design', 'Ablation Study', 'Writing Papers', 'Conference Submission'],
+                step: 'Phase 4: 논문 구현 기초',
+                title: 'Paper Implementation',
+                description: '간단한 논문부터 시작해 수식을 코드로 변환하는 훈련을 합니다.',
+                topics: ['Reading Papers (Abstract to Conclusion)', 'Code Structure for Research', 'Debuging ML Models', 'Reproducibility'],
                 resources: [
-                    { name: 'ArXiv', url: 'https://arxiv.org/' }
-                ]
+                    { name: 'Papers with Code', url: 'https://paperswithcode.com/' }
+                ],
+                quiz: {
+                    question: '논문 구현 시, 실험 결과의 재현성(Reproducibility)을 보장하기 위해 가장 먼저 고정해야 하는 것은?',
+                    options: ['Random Seed', 'Learning Rate', 'Batch Size', 'GPU Model'],
+                    correctAnswer: 0
+                }
+            },
+            // 3. Architectures
+            {
+                step: 'Phase 5: CNN & Vision Architectures',
+                title: 'Computer Vision',
+                description: '이미지 처리를 위한 최신 컨볼루션 아키텍처를 구현합니다.',
+                topics: ['ResNet (Skip Connection)', 'EfficientNet (Scaling)', 'Vision Transformer (ViT)', 'Object Detection (YOLO)'],
+                resources: [
+                    { name: 'CS231n', url: 'http://cs231n.stanford.edu/' }
+                ],
+                quiz: {
+                    question: 'ResNet에서 깊은 신경망의 학습을 가능하게 만든 핵심 구조인 "Skip Connection"이 해결한 문제는?',
+                    options: ['Vanishing Gradient (기울기 소실)', 'Overfitting (과적합)', 'Memory Leak', 'Slow Inference'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 6: RNN & Transformers',
+                title: 'NLP Architectures',
+                description: '시퀀스 데이터를 처리하는 모델의 발전 과정을 따라 구현합니다.',
+                topics: ['LSTM/GRU', 'Attention Mechanism', 'Transformer (Self-Attention)', 'BERT & GPT Basics'],
+                resources: [
+                    { name: 'The Illustrated Transformer', url: 'https://jalammar.github.io/illustrated-transformer/' }
+                ],
+                quiz: {
+                    question: 'Transformer 모델의 핵심 메커니즘으로, 입력 시퀀스의 모든 위치 간의 관계를 계산하는 것은?',
+                    options: ['Self-Attention', 'Convolution', 'Recurrence', 'Pooling'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 7: 생성형 AI (Generative Models)',
+                title: 'Generative AI',
+                description: '데이터의 분포를 학습하여 새로운 데이터를 생성하는 모델을 다룹니다.',
+                topics: ['VAE (Variational AutoEncoder)', 'GANs (Adversarial Training)', 'Diffusion Models (DDPM)', 'Latent Space'],
+                resources: [
+                    { name: 'OpenAI Spinning Up', url: 'https://spinningup.openai.com/' }
+                ],
+                quiz: {
+                    question: 'Diffusion Model이 데이터를 생성하는 방식은?',
+                    options: ['노이즈를 단계적으로 제거(Denoising)하여 원본 복원', '노이즈를 한 번에 제거', '이미지를 회전시켜 생성', '이미지를 캡션으로 변환'],
+                    correctAnswer: 0
+                }
+            },
+            // 4. Optimization & HPC
+            {
+                step: 'Phase 8: 모델 학습 최적화',
+                title: 'Training Optimization',
+                description: '학습 속도를 높이고 수렴을 돕는 다양한 기법을 적용합니다.',
+                topics: ['Learning Rate Schedulers', 'Weight Initialization', 'Normalization (Batch/Layer/Group)', 'Mixed Precision (FP16/BF16)'],
+                resources: [
+                    { name: 'NVIDIA Mixed Precision Training', url: 'https://docs.nvidia.com/deeplearning/performance/mixed-precision-training/index.html' }
+                ],
+                quiz: {
+                    question: 'Mixed Precision Training(AMP)을 사용할 때 얻을 수 있는 주요 이점 두 가지는?',
+                    options: ['메모리 사용량 감소 및 학습 속도 향상', '모델 정확도 향상 및 오버피팅 방지', '코드 복잡도 감소 및 버그 감소', '데이터 전처리 속도 향상'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 9: 분산 학습 (Distributed Training)',
+                title: 'Multi-GPU Training',
+                description: '단일 GPU의 한계를 넘어 수백 대의 GPU로 학습하는 기술을 익힙니다.',
+                topics: ['Data Parallelism (DDP)', 'Model Parallelism', 'FSDP (Fully Sharded Data Parallel)', 'DeepSpeed / Megatron-LM'],
+                resources: [
+                    { name: 'PyTorch Distributed Tutorial', url: 'https://pytorch.org/tutorials/beginner/dist_overview.html' }
+                ],
+                quiz: {
+                    question: 'PyTorch에서 가장 권장되는 멀티 GPU 데이터 병렬 처리 방식은?',
+                    options: ['DistributedDataParallel (DDP)', 'DataParallel (DP)', 'SingleGPU', 'CPU Parallel'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 10: 고성능 컴퓨팅 (HPC)',
+                title: 'HPC & Infrastructure',
+                description: '대규모 실험을 위한 하드웨어와 클러스터 환경을 이해합니다.',
+                topics: ['CUDA Programming Basics', 'GPU Memory Hierarchy', 'Slurm Workload Manager', 'Introduction to Supercomputing'],
+                resources: [
+                    { name: 'NVIDIA CUDA Guide', url: 'https://docs.nvidia.com/cuda/' }
+                ],
+                quiz: {
+                    question: 'GPU 프로그래밍에서 CPU를 Host라 부르고, GPU를 무엇이라 부르는가?',
+                    options: ['Device', 'Server', 'Client', 'Node'],
+                    correctAnswer: 0
+                }
+            },
+            // 5. Research Engineering
+            {
+                step: 'Phase 11: 실험 관리 (Experiment Tracking)',
+                title: 'MLOps for Research',
+                description: '수많은 실험의 하이퍼파라미터와 결과를 체계적으로 기록하고 비교합니다.',
+                topics: ['Weights & Biases (W&B)', 'MLflow', 'Hydra / OmegaConf (Config Management)', 'Logging Best Practices'],
+                resources: [
+                    { name: 'Weights & Biases Logic', url: 'https://wandb.ai/' }
+                ],
+                quiz: {
+                    question: '딥러닝 실험에서 Config(설정값)와 결과를 매핑하여 시각화해주는 도구로 가장 널리 쓰이는 것은?',
+                    options: ['Weights & Biases', 'Excel', 'Notepad', 'PowerPoint'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 12: 모델 경량화 (Compression)',
+                title: 'Model Compression',
+                description: '거대 모델을 작은 디바이스에서도 돌릴 수 있게 최적화합니다.',
+                topics: ['Quantization (PTQ/QAT)', 'Pruning (Structured/Unstructured)', 'Knowledge Distillation', 'ONNX / TensorRT'],
+                resources: [
+                    { name: 'TinyML Book', url: 'https://www.oreilly.com/library/view/tinyml/9781492052036/' }
+                ],
+                quiz: {
+                    question: '큰 모델(Teacher)의 지식을 작은 모델(Student)에게 전달하여 학습시키는 기법은?',
+                    options: ['Knowledge Distillation', 'Knowledge Transfer', 'Model Resizing', 'Data Augmentation'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 13: 최신 LLM 엔지니어링',
+                title: 'LLM Engineering',
+                description: 'GPT와 같은 거대 언어 모델을 다루는 기술을 심도 있게 배웁니다.',
+                topics: ['PEFT (LoRA, QLoRA)', 'RLHF (PPO/DPO)', 'Prompt Engineering', 'LangChain Basics'],
+                resources: [
+                    { name: 'Hugging Face PEFT', url: 'https://huggingface.co/docs/peft/index' }
+                ],
+                quiz: {
+                    question: '거대 언어 모델의 모든 파라미터를 튜닝하지 않고, 일부 파라미터만 효율적으로 튜닝하는 기법을 통칭하는 말은?',
+                    options: ['PEFT (Parameter-Efficient Fine-Tuning)', 'Full Fine-Tuning', 'Pre-training', 'Zero-shot Learning'],
+                    correctAnswer: 0
+                }
+            },
+            // 6. Project & Career
+            {
+                step: 'Phase 14: 논문 리딩 및 리뷰',
+                title: 'Keeping up with AI',
+                description: '쏟아지는 ArXiv 논문 홍수 속에서 중요한 연구를 선별하고 빠르게 습득합니다.',
+                topics: ['Reading Strategy', 'Twitter/X AI Community', 'Conference (NeurIPS/ICML/CVPR)', 'Writing Review Articles'],
+                resources: [
+                    { name: 'AlphaSignal Newsletter', url: 'https://alphasignal.ai/' }
+                ],
+                quiz: {
+                    question: 'AI 분야의 Top-tier 학회가 아닌 것은?',
+                    options: ['CES', 'NeurIPS', 'ICML', 'ICLR'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 15: 오픈 소스 기여',
+                title: 'Open Source Contribution',
+                description: 'Hugging Face나 PyTorch 생태계에 기여하여 영향력을 넓힙니다.',
+                topics: ['GitHub PR Process', 'Documentation Contribution', 'Model Hub Upload', 'Creating Demo (Gradio/Streamlit)'],
+                resources: [
+                    { name: 'Hugging Face Transformers Code', url: 'https://github.com/huggingface/transformers' }
+                ],
+                quiz: {
+                    question: 'Hugging Face에 자신의 모델을 업로드하여 다른 사람들과 공유할 수 있는 플랫폼은?',
+                    options: ['Hugging Face Model Hub', 'GitHub Gist', 'Docker Hub', 'NPM'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 16: 고급 연구 주제',
+                title: 'Advanced Research Topics',
+                description: 'AI 연구의 최전선에 있는 주제들을 탐구합니다.',
+                topics: ['Meta-Learning (Learning to Learn)', 'Self-Supervised Learning (SimCLR/MAE)', 'Graph Neural Networks (GNN)', 'Neural Architecture Search (NAS)'],
+                resources: [
+                    { name: 'Lil\'Log SSL', url: 'https://lilianweng.github.io/posts/2021-05-31-contrastive/' }
+                ],
+                quiz: {
+                    question: '레이블이 없는 막대한 데이터로부터 스스로 표현(Representation)을 학습하는 방법론은?',
+                    options: ['Self-Supervised Learning', 'Supervised Learning', 'Reinforcement Learning', 'Active Learning'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 17: 강화학습 (Reinforcement Learning)',
+                title: 'Deep RL',
+                description: '에이전트가 환경과 상호작용하며 보상을 최대화하는 방법을 배웁니다.',
+                topics: ['Markov Decision Process (MDP)', 'Q-Learning & DQN', 'Policy Gradient (PPO)', 'AlphaGo Architecture'],
+                resources: [
+                    { name: 'Deep RL Course (Hugging Face)', url: 'https://huggingface.co/learn/deep-rl-course/unit0/introduction' }
+                ],
+                quiz: {
+                    question: '강화학습에서 에이전트가 취한 행동(Action)에 대해 환경(Environment)이 돌려주는 피드백은?',
+                    options: ['Reward (보상)', 'Loss (손실)', 'Gradient (기울기)', 'Label (정답)'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 18: 멀티모달 (Multimodal)',
+                title: 'Multimodal AI',
+                description: '텍스트, 이미지, 오디오 등 여러 모달리티를 결합하여 이해하는 모델을 다룹니다.',
+                topics: ['CLIP (Contrastive Language-Image Pretraining)', 'Stable Diffusion', 'Audio Spectrogram', 'Video Understanding'],
+                resources: [
+                    { name: 'OpenAI CLIP Paper', url: 'https://openai.com/research/clip' }
+                ],
+                quiz: {
+                    question: 'OpenAI의 CLIP 모델이 학습된 방식은?',
+                    options: ['이미지와 텍스트 캡션 쌍의 대조 학습 (Contrastive Learning)', '이미지 분류 학습', '텍스트 생성 학습', '강화 학습'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 19: 캡스톤 프로젝트',
+                title: 'SoTA Implementation',
+                description: '최신 논문(State-of-the-Art)을 직접 선정하여 바닥부터 구현하고 블로그에 정리합니다.',
+                topics: ['Paper Selection', 'Model Arch Implementation', 'Training Loop & Debugging', 'Result Visualization & Blog'],
+                resources: [
+                    { name: 'Papers with Code', url: 'https://paperswithcode.com/' }
+                ],
+                quiz: {
+                    question: '논문 구현 프로젝트에서 가장 중요한 마음가짐은?',
+                    options: ['끈기있게 디버깅하고 원본 저자의 코드를 참고하며 배우는 자세', '무조건 한 번에 성공하기', '모든 코드를 암기하기', '가장 복잡한 모델 고르기'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 20: 리서치 인터뷰 준비',
+                title: 'Interview Prep',
+                description: 'AI 리서치 엔지니어 면접에서 자주 나오는 질문을 대비합니다.',
+                topics: ['Live Coding (Python/PyTorch)', 'Paper Review Presentation', 'Core ML Theory Q&A', 'System Design for ML'],
+                resources: [
+                    { name: 'ML System Design Interview', url: 'https://github.com/chiphuyen/ml-interviews' }
+                ],
+                quiz: {
+                    question: '면접에서 "Overfitting이 발생했을 때 해결 방법"으로 적절하지 않은 것은?',
+                    options: ['모델의 파라미터 수를 대폭 늘린다', 'Dropout을 적용한다', 'Data Augmentation을 사용한다', 'L1/L2 Regularization을 추가한다'],
+                    correctAnswer: 0
+                }
             }
         ],
         faq: [
-            { question: '박사 학위가 꼭 필요한가요?', answer: '대부분의 리서치 직군은 석사/박사 학위를 강력히 선호합니다. 학사라면 뛰어난 구현 능력이나 논문 실적을 보여줘야 합니다.' },
-            { question: '수학을 얼마나 잘해야 하나요?', answer: '논문의 수식을 이해하고 코드로 옮길 수 있을 정도의 선형대수와 확률통계 지식은 필수입니다.' }
+            { question: '석/박사 학위가 없어도 되나요?', answer: 'Research Engineer는 구현 능력이 탁월하다면 학사 출신도 충분히 가능합니다. 다만, 최신 논문을 읽고 이해하는 능력은 필수입니다.' },
+            { question: 'Data Scientist와 무엇이 다른가요?', answer: 'Data Scientist가 비즈니스 인사이트와 통계적 분석에 집중한다면, Research Engineer는 딥러닝 모델의 "구현", "최적화", "대규모 학습 시스템"에 집중합니다.' }
         ]
     },
     {
