@@ -495,32 +495,310 @@ export const JOBS: JobRole[] = [
             'Model Serving & MLOps Basics'
         ],
         roadmap: [
+            // 1. Mathematics
             {
-                step: 'Phase 1: 머신러닝 기초',
-                title: 'Classical ML & Math',
-                description: '통계적 학습 이론과 기본 머신러닝 알고리즘을 마스터합니다.',
-                topics: ['Linear Regression', 'Decision Trees', 'Ensemble Methods', 'Math for ML'],
+                step: 'Phase 1: 수학적 기초 (Mathematics for ML)',
+                title: 'Linear Algebra & Calculus',
+                description: '머신러닝 알고리즘의 근간이 되는 선형대수와 미적분을 "직관적"으로 이해합니다.',
+                topics: ['Vectors & Matrices (행렬 연산)', 'Eigenvalues & Eigenvectors (고유값 분해)', 'Gradient Descent (경사하강법 원리)', 'Partial Derivatives (편미분과 Chain Rule)'],
                 resources: [
-                    { name: 'Andrew Ng ML Course', url: 'https://www.coursera.org/specializations/machine-learning-introduction' }
-                ]
+                    { name: 'Essence of Linear Algebra (3Blue1Brown)', url: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab' },
+                    { name: 'Mathematics for Machine Learning (Book)', url: 'https://mml-book.com/' }
+                ],
+                quiz: {
+                    question: '행렬 A의 고유값(Eigenvalue) λ와 고유벡터(Eigenvector) v의 관계식인 Av = λv에서, 고유벡터가 의미하는 기하학적 의미는?',
+                    options: ['회전하지 않고 크기만 변하는 벡터', '가장 길이가 긴 벡터', '원점을 통과하지 않는 벡터', '상수 벡터'],
+                    correctAnswer: 0
+                }
             },
             {
-                step: 'Phase 2: 딥러닝 & 프레임워크',
-                title: 'Deep Learning with PyTorch',
-                description: '현대 AI의 핵심인 신경망과 딥러닝 프레임워크를 다룹니다.',
-                topics: ['Neural Networks', 'CNN/RNN/LSTM', 'PyTorch Framework', 'TensorBoard'],
+                step: 'Phase 2: 통계와 확률 (Statistics & Probability)',
+                title: 'Probabilistic Thinking',
+                description: '불확실성을 다루는 언어인 확률과, 데이터에서 결론을 도출하는 통계를 익힙니다.',
+                topics: ['Probability Distributions (가우시안, 베르누이)', 'Bayes Theorem (베이즈 정리)', 'Hypothesis Testing (p-value, t-test)', 'Maximum Likelihood Estimation (MLE)'],
                 resources: [
-                    { name: 'PyTorch Tutorials', url: 'https://pytorch.org/tutorials/' }
-                ]
+                    { name: 'StatQuest with Josh Starmer', url: 'https://www.youtube.com/user/joshstarmer' }
+                ],
+                quiz: {
+                    question: '베이즈 정리(Bayes Theorem)에서 "사전 확률(Prior)"을 새로운 증거(Evidence)로 업데이트하여 얻는 확률을 무엇이라 하는가?',
+                    options: ['사후 확률 (Posterior)', '우도 (Likelihood)', '주변 확률 (Marginal)', '조건부 확률 (Conditional)'],
+                    correctAnswer: 0
+                }
+            },
+            // 2. Programming & Tools
+            {
+                step: 'Phase 3: Python 프로그래밍 심화',
+                title: 'Advanced Python for ML',
+                description: '단순 문법을 넘어, 효율적인 데이터 처리를 위한 고급 Python 기법을 마스터합니다.',
+                topics: ['List Comprehension & Generators', 'Decorators & Context Managers', 'Multiprocessing vs Threading', 'Type Hinting (mypy)'],
+                resources: [
+                    { name: 'Real Python', url: 'https://realpython.com/' },
+                    { name: 'Effective Python (Book)', url: 'https://effectivepython.com/' }
+                ],
+                quiz: {
+                    question: 'Python에서 대용량 데이터를 메모리에 한꺼번에 올리지 않고, 필요할 때마다 하나씩 생성하여 처리하기 위해 사용하는 객체는?',
+                    options: ['Generator', 'List', 'Dictionary', 'Set'],
+                    correctAnswer: 0
+                }
             },
             {
-                step: 'Phase 3: 엔지니어링 & 배포',
-                title: 'Production ML',
-                description: '학습된 모델을 실제 애플리케이션에 통합하는 기술을 익힙니다.',
-                topics: ['Model Persistence', 'API Serving', 'Optimization (Quantization)', 'Containerization'],
+                step: 'Phase 4: 데이터 핸들링 (NumPy & Pandas)',
+                title: 'Data Manipulation Expert',
+                description: '수치 연산과 정형 데이터 처리를 자유자재로 다룰 수 있어야 합니다.',
+                topics: ['Broadcasting & Vectorization (NumPy)', 'Pandas Optimization (Vectorized Operations)', 'Handling Missing Data', 'Time Series Data Handling'],
                 resources: [
-                    { name: 'Made With ML', url: 'https://madewithml.com/' }
-                ]
+                    { name: 'Pandas User Guide', url: 'https://pandas.pydata.org/docs/user_guide/index.html' },
+                    { name: '100 Numpy Exercises', url: 'https://github.com/rougier/numpy-100' }
+                ],
+                quiz: {
+                    question: 'Pandas에서 반복문(for-loop)을 사용하는 것보다 훨씬 빠르며, 배열 단위로 연산을 수행하는 기법을 무엇이라 하는가?',
+                    options: ['Vectorization (벡터화)', 'Serialization (직렬화)', 'Loop Unrolling', 'Memoization'],
+                    correctAnswer: 0
+                }
+            },
+            // 3. Data Engineering Basics
+            {
+                step: 'Phase 5: 데이터베이스와 SQL',
+                title: 'SQL & Database for ML',
+                description: '모델 학습에 필요한 데이터를 DB에서 직접 추출하고 가공할 줄 알아야 합니다.',
+                topics: ['Complex Joins & Subqueries', 'Window Functions (RANK, LEAD/LAG)', 'Indexing & Query Optimization', 'NoSQL Basics (MongoDB, Redis)'],
+                resources: [
+                    { name: 'Mode SQL Tutorial', url: 'https://mode.com/sql-tutorial/' }
+                ],
+                quiz: {
+                    question: 'SQL에서 그룹별 순위를 매기거나 이동 평균을 구할 때 사용하는 함수 통칭은?',
+                    options: ['Window Functions', 'Aggregate Functions', 'Scalar Functions', 'Trigger Functions'],
+                    correctAnswer: 0
+                }
+            },
+            // 4. Classical Machine Learning
+            {
+                step: 'Phase 6: 머신러닝 기초 (Supervised)',
+                title: 'Classical Supervised Learning',
+                description: '가장 기본이 되는 회귀와 분류 알고리즘의 작동 원리를 바닥부터 구현해봅니다.',
+                topics: ['Linear/Logistic Regression', 'Decision Trees', 'Support Vector Machines (SVM)', 'K-Nearest Neighbors (KNN)'],
+                resources: [
+                    { name: 'Scikit-Learn Documentation', url: 'https://scikit-learn.org/stable/' }
+                ],
+                quiz: {
+                    question: 'SVM(Support Vector Machine)에서 데이터를 고차원으로 매핑하여 비선형 분리를 가능하게 하는 기법은?',
+                    options: ['Kernel Trick', 'Regularization', 'Gradient Boosting', 'Feature Selection'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 7: 앙상블 학습 (Ensemble Methods)',
+                title: 'Ensemble & Boosting',
+                description: '여러 모델을 조합하여 강력한 성능을 내는 배깅과 부스팅 기법을 익힙니다.',
+                topics: ['Random Forest (Bagging)', 'XGBoost/LightGBM/CatBoost (Boosting)', 'Stacking & Blending', 'Feature Importance Analysis'],
+                resources: [
+                    { name: 'XGBoost Documentation', url: 'https://xgboost.readthedocs.io/' }
+                ],
+                quiz: {
+                    question: '이전 모델이 틀린 데이터(오답)에 가중치를 부여하여 다음 모델을 학습시키는 방식의 앙상블 기법은?',
+                    options: ['Boosting', 'Bagging', 'Stacking', 'Voting'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 8: 비지도 학습 & 차원 축소',
+                title: 'Unsupervised Learning',
+                description: '레이블이 없는 데이터에서 패턴을 찾고, 고차원 데이터를 시각화 가능한 형태로 줄입니다.',
+                topics: ['K-Means & DBSCAN Clustering', 'PCA (Principal Component Analysis)', 't-SNE & UMAP (Visualization)', 'Anomaly Detection (이상 탐지)'],
+                resources: [
+                    { name: 'Understanding PCA', url: 'https://setosa.io/ev/principal-component-analysis/' }
+                ],
+                quiz: {
+                    question: '데이터의 분산(Variance)을 최대한 보존하는 축을 찾아 데이터를 투영하여 차원을 축소하는 기법은?',
+                    options: ['PCA', 'K-Means', 'Logistic Regression', 'Dropout'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 9: 모델 평가와 실험 설계',
+                title: 'Evaluation Metrics & Validation',
+                description: '정확도(Accuracy)의 함정을 피하고, 모델의 진짜 성능을 검증하는 방법을 배웁니다.',
+                topics: ['Confusion Matrix', 'Precision, Recall, F1-Score', 'ROC Curve & AUC', 'Cross-Validation (K-Fold, Stratified)'],
+                resources: [
+                    { name: 'Google ML Crash Course - Classification', url: 'https://developers.google.com/machine-learning/crash-course/classification/video-lecture' }
+                ],
+                quiz: {
+                    question: '암 환자 예측 모델에서, 실제 암 환자(Positive)를 정상(Negative)으로 잘못 예측하는 것은 어떤 오류인가?',
+                    options: ['Type II Error (False Negative)', 'Type I Error (False Positive)', 'Overfitting', 'Underfitting'],
+                    correctAnswer: 0
+                }
+            },
+            // 5. Deep Learning Foundations
+            {
+                step: 'Phase 10: 딥러닝 기초 (Neural Networks)',
+                title: 'Deep Learning Foundations',
+                description: '인공신경망의 수학적 원리와 역전파 알고리즘을 코드로 직접 구현해봅니다.',
+                topics: ['Perceptron & Multi-Layer Perceptron (MLP)', 'Activation Functions (ReLU, Sigmoid, Tanh)', 'Backpropagation (Chain Rule application)', 'Loss Functions (MSE, Cross-Entropy)'],
+                resources: [
+                    { name: 'Neural Networks and Deep Learning', url: 'http://neuralnetworksanddeeplearning.com/' }
+                ],
+                quiz: {
+                    question: '딥러닝에서 층(Layer)이 깊어질수록 기울기가 0에 가까워져 학습이 안 되는 현상은?',
+                    options: ['Vanishing Gradient Problem', 'Exploding Gradient', 'Overfitting', 'Bias-Variance Tradeoff'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 11: 최적화와 규제 (Optimization)',
+                title: 'Training Deep Networks',
+                description: '딥러닝 모델을 더 빠르고 안정적으로 학습시키기 위한 테크닉들을 다룹니다.',
+                topics: ['Optimizers (Adam, RMSProp, SGD+Momentum)', 'Batch Normalization', 'Dropout & Regularization (L1/L2)', 'Learning Rate Scheduling'],
+                resources: [
+                    { name: 'cs231n - Optimization', url: 'https://cs231n.github.io/neural-networks-3/' }
+                ],
+                quiz: {
+                    question: '학습 과정에서 각 배치의 입력을 정규화(평균 0, 분산 1)하여 학습 속도를 높이고 초기화 민감도를 줄이는 기법은?',
+                    options: ['Batch Normalization', 'Dropout', 'Data Augmentation', 'Early Stopping'],
+                    correctAnswer: 0
+                }
+            },
+            // 6. Deep Learning Advanced (CV & NLP)
+            {
+                step: 'Phase 12: 컴퓨터 비전 (CNN)',
+                title: 'Convolutional Neural Networks',
+                description: '이미지의 공간적 특징을 추출하는 CNN 구조와 주요 아키텍처를 학습합니다.',
+                topics: ['Convolution & Pooling Operations', 'ResNet & Skip Connections', 'Object Detection (YOLO, Faster R-CNN)', 'Image Segmentation (U-Net)'],
+                resources: [
+                    { name: 'Stanford CS231n', url: 'http://cs231n.stanford.edu/' }
+                ],
+                quiz: {
+                    question: 'ResNet(Residual Network)에서 층이 깊어져도 학습이 잘 되도록 도입한 핵심 구조는?',
+                    options: ['Skip Connection (Residual Block)', 'Inception Module', 'Dense Block', 'Attention Mechanism'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 13: 시퀀스 데이터 (RNN & LSTM)',
+                title: 'Sequential Data Processing',
+                description: '시간의 흐름이 있는 데이터(텍스트, 시계열)를 처리하는 모델을 배웁니다.',
+                topics: ['RNN (Recurrent Neural Networks)', 'LSTM & GRU (Long-term dependencies)', 'Word Embeddings (Word2Vec, GloVe)', 'Seq2Seq Architecture'],
+                resources: [
+                    { name: 'Colah\'s Blog (LSTM)', url: 'https://colah.github.io/posts/2015-08-Understanding-LSTMs/' }
+                ],
+                quiz: {
+                    question: 'RNN의 장기 의존성(Long-term dependency) 문제를 해결하기 위해 Cell State와 Gate 구조를 도입한 모델은?',
+                    options: ['LSTM', 'CNN', 'MLP', 'Autoencoder'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 14: 트랜스포머와 LLM (Attention)',
+                title: 'Transformers & LLMs',
+                description: '현대 AI의 표준이 된 Transformer 아키텍처와 대형언어모델(LLM)을 심도 있게 파헤칩니다.',
+                topics: ['Self-Attention Mechanism', 'Transformer Encoder/Decoder (BERT vs GPT)', 'Positional Encoding', 'Instruction Tuning & RLHF'],
+                resources: [
+                    { name: 'The Illustrated Transformer', url: 'https://jalammar.github.io/illustrated-transformer/' }
+                ],
+                quiz: {
+                    question: 'Transformer 모델에서 입력 시퀀스의 모든 위치 간의 관계를 병렬적으로 계산하여 문맥을 파악하는 핵심 메커니즘은?',
+                    options: ['Self-Attention', 'Convolution', 'Recurrence', 'MaxPooling'],
+                    correctAnswer: 0
+                }
+            },
+            // 7. MLOps & Production
+            {
+                step: 'Phase 15: 모델 패키징 (Docker)',
+                title: 'Docker for ML',
+                description: '단순 코드 실행이 아닌, 어디서든 실행 가능한 "컨테이너"로 모델을 포장합니다.',
+                topics: ['Dockerfile 작성 최적화', 'Multi-stage Builds', 'Docker Compose', 'NVIDIA Container Toolkit (GPU Support)'],
+                resources: [
+                    { name: 'Docker Curriculum', url: 'https://docker-curriculum.com/' }
+                ],
+                quiz: {
+                    question: 'Docker 이미지의 용량을 줄이고 보안을 강화하기 위해 빌드 과정과 실행 과정을 분리하는 기법은?',
+                    options: ['Multi-stage Build', 'Docker Compose', 'Volume Mounting', 'Port Mapping'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 16: 모델 서빙 (Inference)',
+                title: 'Model Serving & API',
+                description: '학습된 모델을 웹 서비스나 애플리케이션에서 사용할 수 있도록 API 서버로 배포합니다.',
+                topics: ['FastAPI (Async Inference)', 'TorchServe / TensorFlow Serving', 'gRPC vs REST', 'Dynamic Batching'],
+                resources: [
+                    { name: 'FastAPI Documentation', url: 'https://fastapi.tiangolo.com/' }
+                ],
+                quiz: {
+                    question: '여러 개의 추론 요청을 모아서 한 번에 GPU로 처리하여 처리량(Throughput)을 높이는 기법은?',
+                    options: ['Dynamic Batching', 'Model Quantization', 'Pruning', 'Caching'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 17: 오케스트레이션 (Kubernetes)',
+                title: 'Kubernetes for ML',
+                description: '대규모 트래픽을 처리하고 GPU 자원을 효율적으로 관리하기 위한 클러스터 운영을 배웁니다.',
+                topics: ['Pods, Deployments, Services', 'KServe / Seldon Core', 'Horizontal Pod Autoscaling (HPA)', 'GPU Resource Scheduling'],
+                resources: [
+                    { name: 'Kubernetes Basics', url: 'https://kubernetes.io/docs/tutorials/kubernetes-basics/' }
+                ],
+                quiz: {
+                    question: 'Kubernetes에서 애플리케이션의 배포 상태를 선언하고, 파드(Pod)의 복제본(Replicas) 개수를 유지 관리하는 리소스는?',
+                    options: ['Deployment', 'Service', 'Ingress', 'ConfigMap'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 18: 파이프라인 자동화 (CI/CD/CT)',
+                title: 'ML Pipelines & Automation',
+                description: '데이터 전처리부터 학습, 배포까지 전 과정을 자동화하는 파이프라인을 구축합니다.',
+                topics: ['Apache Airflow / Kubeflow Pipelines', 'GitHub Actions (CI/CD)', 'Continuous Training (CT)', 'Feature Store (Feast)'],
+                resources: [
+                    { name: 'MLOps: Continuous Delivery for ML', url: 'https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning' }
+                ],
+                quiz: {
+                    question: '새로운 데이터가 들어오거나 성능이 떨어질 때 자동으로 모델을 재학습시키는 프로세스를 가리키는 용어는?',
+                    options: ['Continuous Training (CT)', 'Continuous Integration (CI)', 'Continuous Deployment (CD)', 'Code Review'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 19: 모니터링과 유지보수',
+                title: 'Monitoring & Observability',
+                description: '배포된 모델이 잘 동작하는지 감시하고, 데이터가 변하는 현상(Drift)을 탐지합니다.',
+                topics: ['Data Drift & Concept Drift', 'Prometheus & Grafana', 'Model Performance Monitoring', 'Outlier Detection'],
+                resources: [
+                    { name: 'Evidently AI (Drift Detection)', url: 'https://www.evidentlyai.com/' }
+                ],
+                quiz: {
+                    question: '학습 데이터의 분포와 실제 서비스 입력 데이터의 분포가 달라져서 모델 성능이 저하되는 현상은?',
+                    options: ['Data Drift (Covariate Shift)', 'Overfitting', 'Underfitting', 'Label Leakage'],
+                    correctAnswer: 0
+                }
+            },
+            // 8. Trends
+            {
+                step: 'Phase 20: 최신 트렌드 (GenAI & LLM Ops)',
+                title: 'Generative AI & LLM Ops',
+                description: '지금 가장 핫한 생성형 AI 튜닝과 운영 기술을 익혀 대체 불가능한 인재가 됩니다.',
+                topics: ['RAG (Retrieval-Augmented Generation)', 'PEFT (LoRA, QLoRA)', 'Vector Database (Pinecone, Milvus)', 'LLM Evaluation (Ragas, LangSmith)'],
+                resources: [
+                    { name: 'LangChain Documentation', url: 'https://python.langchain.com/docs/get_started/introduction' }
+                ],
+                quiz: {
+                    question: '거대 언어 모델(LLM)의 모든 파라미터를 튜닝하지 않고, 일부 파라미터만 학습시켜 효율적으로 미세조정(Fine-tuning)하는 기법은?',
+                    options: ['PEFT (Parameter-Efficient Fine-Tuning)', 'Pre-training', 'Prompt Engineering', 'RAG'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 21: 커리어 & 포트폴리오',
+                title: 'Career & Portfolio Strategy',
+                description: '지금까지 배운 내용을 바탕으로 매력적인 포트폴리오를 만들고 면접을 준비합니다.',
+                topics: ['End-to-End ML Project', 'Tech Blog Writing', 'Open Source Contribution', 'System Design Interview'],
+                resources: [
+                    { name: 'Machine Learning System Design Interview', url: 'https://github.com/chiphuyen/ml-system-design-case-studies' }
+                ],
+                quiz: {
+                    question: 'ML 엔지니어 면접에서 "시스템 디자인" 질문이 나올 때 가장 중요하게 고려해야 할 사항이 아닌 것은?',
+                    options: ['무조건 가장 최신의 복잡한 모델 사용하기', '요구사항 분석 및 메트릭 설정', '데이터 파이프라인 설계', '추론 지연시간(Latency)과 비용 고려'],
+                    correctAnswer: 0
+                }
             }
         ],
         faq: [
@@ -531,56 +809,333 @@ export const JOBS: JobRole[] = [
     {
         id: 'physical-ai',
         title: 'Physical AI Engineer',
-        description: '현실 세계의 로봇이나 장치를 제어하는 AI 모델을 개발하고, 센서 데이터를 처리하여 물리적인 상호작용을 구현합니다.',
-        long_description: 'Physical AI Engineer는 코드를 "현실 세계"로 가져오는 마법사입니다. 로봇, 드론, 자율주행차, 스마트 팩토리 등 물리적인 하드웨어에 AI를 탑재하여, 주변 환경을 인식하고 판단하고 움직이게 만듭니다. 소프트웨어뿐만 아니라 하드웨어에 대한 이해와 센서 데이터 처리가 매우 중요합니다.',
-        salary_range: '초봉 4,000 ~ 5,500만원',
+        description: '인공지능의 지능을 실제 물리적인 몸체(로봇, 자동차, 드론 등)에 이식하여, 현실 세계에서 스스로 판단하고 움직이게 만드는 전문가입니다.',
+        long_description: 'Physical AI Engineer는 단순 소프트웨어 개발을 넘어, AI(두뇌)와 하드웨어(몸)를 연결하여 물리 법칙이 지배하는 현실에서 임무를 수행하도록 설계하는 "현대판 로봇 조물주"입니다. 카메라, LiDAR 등으로 환경을 인지하고(Perception), 강화학습 등을 통해 최적의 행동을 결정하며(Decision), 이를 실제 로봇 팔이나 다리로 실행(Control)하는 전 과정을 다룹니다. 또한 위험한 현실 테스팅을 대신할 정교한 시뮬레이션(Digital Twin) 환경 구축 능력도 필수적입니다.',
+        salary_range: '초봉 4,000 ~ 6,000만원',
         difficulty: 'Hard',
         demand: 'Medium',
         responsibilities: [
-            '로봇/드론 자율주행 및 경로 계획 알고리즘 개발',
-            'Computer Vision 기반의 객체 인식 및 상황 판단',
-            'Sensor Fusion (LiDAR, Camera, IMU) 및 데이터 처리',
-            '임베디드 보드(Edge Device) 기반 AI 모델 최적화 및 포팅'
+            '물리적 인지 및 환경 모델링 (Sensor Fusion & Perception)',
+            '자율 행동 제어 알고리즘 설계 (Reinforcement Learning based Control)',
+            'Sim-to-Real 가교 역할 (Simulation & Digital Twin)',
+            '실시간 시스템 최적화 및 임베디드 AI 포팅'
         ],
         tech_stack: [
             { category: 'Language', skills: ['C++', 'Python'] },
-            { category: 'Robotics', skills: ['ROS (Robot Operating System)', 'Gazebo', 'SLAM'] },
-            { category: 'Vision', skills: ['OpenCV', 'PCL (Point Cloud Library)', 'YOLO'] },
-            { category: 'Hardware', skills: ['NVIDIA Jetson', 'Raspberry Pi', 'Arduino', 'Sensors'] }
+            { category: 'Robotics', skills: ['ROS 2', 'Gazebo', 'Isaac Sim', 'Mujoco'] },
+            { category: 'AI & Vision', skills: ['PyTorch', 'OpenCV', 'PCL', 'Reinforcement Learning'] },
+            { category: 'Hardware', skills: ['NVIDIA Jetson', 'Raspberry Pi', 'Arduino', 'Sensors (LiDAR/IMU)'] }
         ],
-        tags: ['Robotics', 'Embedded', 'Hardware'],
+        tags: ['Robotics', 'Embedded', 'Reinforcement Learning', 'Simulation'],
         focus_areas: [
-            'ROS (Robot Operating System) & Gazebo Sim',
-            'Computer Vision (SLAM, Object Detection)',
-            'Embedded System (NVIDIA Jetson, Raspberry Pi)'
+            'Robotics Middleware (ROS 2)',
+            'Deep Reinforcement Learning (DRL)',
+            'Physics Simulation (Isaac Sim)',
+            'Embedded AI Optimization'
         ],
         roadmap: [
+            // 1. Foundations (Math & Physics)
             {
-                step: 'Phase 1: 로보틱스 기초',
-                title: 'Robotics Software (ROS)',
-                description: '로봇 소프트웨어의 표준인 ROS와 기본 제어 이론을 배웁니다.',
-                topics: ['ROS 2 Basics', 'Nodes & Topics', 'Linux Environment', 'C++ Programming'],
+                step: 'Phase 1: 수학적 기초 (Math for Robotics)',
+                title: 'Linear Algebra & Calculus',
+                description: '로봇의 움직임을 기술하기 위한 필수 수학인 선형대수와 미적분을 익힙니다.',
+                topics: ['Vectors & Matrices (Rotation Matrix)', 'Eigenvalues (PCA)', 'Calculus (Gradient Descent)', 'Optimization Basics'],
                 resources: [
-                    { name: 'ROS 2 Documentation', url: 'https://docs.ros.org/en/humble/index.html' }
-                ]
+                    { name: 'Essence of Linear Algebra (3Blue1Brown)', url: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab' }
+                ],
+                quiz: {
+                    question: '3차원 공간에서 물체의 회전을 표현할 때, 짐벌 락(Gimbal Lock) 현상을 피하기 위해 사용하는 수학적 도구는?',
+                    options: ['Quaternion (쿼터니언)', 'Euler Angles (오일러 각)', 'Rotation Matrix', 'Vector Product'],
+                    correctAnswer: 0
+                }
             },
             {
-                step: 'Phase 2: 인지 & 판단',
-                title: 'Perception & Navigation',
-                description: '로봇이 세상을 보고(Vision) 길을 찾는(Navigation) 기술을 구현합니다.',
-                topics: ['Computer Vision', 'SLAM (Simultaneous Localization and Mapping)', 'Path Planning (A*)', 'Sensor Fusion'],
+                step: 'Phase 2: 물리학과 역학 (Physics & Dynamics)',
+                title: 'Kinematics & Dynamics',
+                description: '로봇 팔과 다리의 움직임을 계산하는 운동학(Kinematics)과 힘의 관계인 동역학(Dynamics)을 배웁니다.',
+                topics: ['Forward/Inverse Kinematics (FK/IK)', 'Rigid Body Dynamics', 'Newton-Euler Equations', 'Jacobian Matrix'],
+                resources: [
+                    { name: 'Modern Robotics (Coursera)', url: 'https://www.coursera.org/specializations/modernrobotics' }
+                ],
+                quiz: {
+                    question: '로봇 팔의 끝점(End-effector)의 위치를 알 때, 각 관절의 각도를 계산하는 과정을 무엇이라 하는가?',
+                    options: ['Inverse Kinematics (역운동학)', 'Forward Kinematics (순운동학)', 'Dynamics', 'Motion Planning'],
+                    correctAnswer: 0
+                }
+            },
+            // 2. Programming Systems
+            {
+                step: 'Phase 3: 프로그래밍 기초 (C++ & Python)',
+                title: 'C++ & Python for Robotics',
+                description: '로봇 제어의 표준인 C++의 고성능 메모리 관리와 AI 모델링을 위한 Python을 마스터합니다.',
+                topics: ['C++ OOP & STL', 'Python Interaction (pybind11)', 'Memory Management (Pointers)', 'Real-time Constraints'],
+                resources: [
+                    { name: 'Learn C++', url: 'https://www.learncpp.com/' }
+                ],
+                quiz: {
+                    question: 'C++에서 메모리 누수를 방지하기 위해 사용이 권장되는, 자동으로 메모리를 해제해주는 포인터는?',
+                    options: ['Smart Pointer (shared_ptr, unique_ptr)', 'Raw Pointer', 'Null Pointer', 'Void Pointer'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 4: 리눅스 시스템 (Linux & OS)',
+                title: 'Linux Environment',
+                description: '로봇 개발의 주 무대인 리눅스 환경과 쉘 스크립팅, 파일 시스템을 익힙니다.',
+                topics: ['Ubuntu/Debian Basics', 'Shell Scripting (Bash)', 'Process Management', 'Networking Basics (SSH, IP)'],
+                resources: [
+                    { name: 'Linux Command Line Basics', url: 'https://ubuntu.com/tutorials/command-line-for-beginners' }
+                ],
+                quiz: {
+                    question: '리눅스 터미널에서 현재 실행 중인 프로세스들의 상태를 실시간으로 확인하는 명령어는?',
+                    options: ['top (or htop)', 'ls', 'cd', 'grep'],
+                    correctAnswer: 0
+                }
+            },
+            // 3. Robotics Core
+            {
+                step: 'Phase 5: 로봇 미들웨어 (ROS 2 Basic)',
+                title: 'ROS 2 Fundamentals',
+                description: '로봇 소프트웨어 개발의 표준 운영체제인 ROS 2의 기본 개념과 통신 방식을 배웁니다.',
+                topics: ['Nodes & Lifecycle', 'Topics (Pub/Sub)', 'Services (Req/Res)', 'Actions (Long-running tasks)'],
+                resources: [
+                    { name: 'ROS 2 Humble Documentation', url: 'https://docs.ros.org/en/humble/' }
+                ],
+                quiz: {
+                    question: 'ROS 2에서 노드 간에 데이터를 지속적으로 스트리밍(방송)할 때 사용하는 통신 방식은?',
+                    options: ['Topic (토픽)', 'Service (서비스)', 'Action (액션)', 'Parameter'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 6: ROS 2 심화 (Advanced ROS 2)',
+                title: 'Advanced ROS 2 Features',
+                description: '복잡한 로봇 시스템을 효율적으로 관리하기 위한 ROS 2의 고급 기능을 다룹니다.',
+                topics: ['Custom Interfaces (.msg/.srv)', 'DDS (Data Distribution Service)', 'Launch Files', 'ROS 2 Parameters'],
+                resources: [
+                    { name: 'The Construct ROS Courses', url: 'https://www.theconstructsim.com/' }
+                ],
+                quiz: {
+                    question: 'ROS 2가 실시간성과 신뢰성을 확보하기 위해 채택한 통신 미들웨어 표준은?',
+                    options: ['DDS (Data Distribution Service)', 'TCP/IP', 'HTTP', 'WebSocket'],
+                    correctAnswer: 0
+                }
+            },
+            // 4. Perception
+            {
+                step: 'Phase 7: 컴퓨터 비전 기초 (Computer Vision)',
+                title: 'Computer Vision Basics',
+                description: '로봇의 눈이 되는 카메라 데이터를 처리하고 분석하는 기술을 배웁니다.',
+                topics: ['Image Processing (OpenCV)', 'Feature Extraction (SIFT, ORB)', 'Camera Calibration', 'Hough Transform'],
                 resources: [
                     { name: 'OpenCV Tutorials', url: 'https://docs.opencv.org/4.x/d9/df8/tutorial_root.html' }
-                ]
+                ],
+                quiz: {
+                    question: '카메라 렌즈의 왜곡을 보정하고, 3차원 공간의 점을 2차원 이미지로 매핑하기 위해 구해야 하는 파라미터 행렬은?',
+                    options: ['Intrinsic Matrix (내부 파라미터)', 'Rotation Matrix', 'Translation Vector', 'Identity Matrix'],
+                    correctAnswer: 0
+                }
             },
             {
-                step: 'Phase 3: 임베디드 AI',
-                title: 'Edge AI Deployment',
-                description: '작은 컴퓨터(Edge Device)에서 AI가 빠르게 돌아가도록 최적화합니다.',
-                topics: ['Model Quantization', 'TensorRT', 'Embedded Linux', 'Real-time Systems'],
+                step: 'Phase 8: 3D 비전과 포인트 클라우드',
+                title: '3D Perception & LiDAR',
+                description: 'LiDAR나 RGB-D 카메라로 얻은 3차원 점군(Point Cloud) 데이터를 처리합니다.',
+                topics: ['Point Cloud Library (PCL)', 'Depth Estimation', '3D Object Detection', 'PointNet Architecture'],
                 resources: [
-                    { name: 'NVIDIA Jetson Community', url: 'https://developer.nvidia.com/embedded-computing' }
-                ]
+                    { name: 'PCL Documentation', url: 'https://pointclouds.org/documentation/' }
+                ],
+                quiz: {
+                    question: '3D 공간상의 점들의 집합(Point Cloud)을 처리할 때, 노이즈를 제거하거나 다운샘플링하기 위해 사용하는 대표적인 필터는?',
+                    options: ['Voxel Grid Filter', 'Low Pass Filter', 'Sobel Filter', 'Canny Edge Detector'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 9: 위치 추정과 지도 작성 (SLAM)',
+                title: 'SLAM (Simultaneous Localization and Mapping)',
+                description: '로봇이 낯선 환경에서 자신의 위치를 파악하고 지도를 그리는 핵심 기술입니다.',
+                topics: ['Kalman Filter / Particle Filter', 'Visual SLAM (ORB-SLAM)', 'LiDAR SLAM (Cartographer)', 'Loop Closure Detection'],
+                resources: [
+                    { name: 'SLAM for Dummies', url: 'https://ocw.mit.edu/courses/16-412j-cognitive-robotics-spring-2016/resources/session-14-slam/' }
+                ],
+                quiz: {
+                    question: '로봇이 이전에 방문했던 장소를 다시 방문했음을 인식하여, 누적된 위치 오차를 획기적으로 줄이는 기술은?',
+                    options: ['Loop Closure (루프 결합)', 'Dead Reckoning', 'Odometry', 'Path Planning'],
+                    correctAnswer: 0
+                }
+            },
+            // 5. Control & Planning
+            {
+                step: 'Phase 10: 제어 이론 (Control Theory)',
+                title: 'Classic Control',
+                description: '로봇이 목표 상태로 정확하고 안정적으로 도달하도록 하는 제어 기법을 익힙니다.',
+                topics: ['PID Control', 'LQR (Linear Quadratic Regulator)', 'State Space Model', 'Stability Analysis'],
+                resources: [
+                    { name: 'Control Bootcamp (Steve Brunton)', url: 'https://www.youtube.com/playlist?list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m' }
+                ],
+                quiz: {
+                    question: 'PID 제어기에서 "현재 오차"에 비례하여 제어 입력을 조절하는 항은?',
+                    options: ['P (Proportional)', 'I (Integral)', 'D (Derivative)', 'Gain'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 11: 경로 계획 (Path Planning)',
+                title: 'Path & Motion Planning',
+                description: '장애물을 피해서 목적지까지 가는 최적의 경로를 생성하는 알고리즘을 배웁니다.',
+                topics: ['A* Algorithm', 'RRT / RRT* (Rapidly-exploring Random Tree)', 'Navigation Stack (Nav2)', 'Trajectory Optimization'],
+                resources: [
+                    { name: 'Introduction to A*', url: 'https://www.redblobgames.com/pathfinding/a-star/introduction.html' }
+                ],
+                quiz: {
+                    question: '고차원 공간이나 복잡한 환경에서 무작위 샘플링을 통해 빠르게 경로를 찾아내는 확률적 경로 계획 알고리즘은?',
+                    options: ['RRT (Rapidly-exploring Random Tree)', 'A*', 'Dijkstra', 'BFS'],
+                    correctAnswer: 0
+                }
+            },
+            // 6. AI & Reinforcement Learning
+            {
+                step: 'Phase 12: 딥러닝 기초 (Deep Learning)',
+                title: 'Deep Learning for Robotics',
+                description: '로봇의 인지 및 제어에 사용되는 기본적인 딥러닝 모델을 학습합니다.',
+                topics: ['Neural Networks Basics', 'CNN (for Vision)', 'PyTorch Framework', 'Inference Optimization'],
+                resources: [
+                    { name: 'Deep Learning Specialization', url: 'https://www.coursera.org/specializations/deep-learning' }
+                ],
+                quiz: {
+                    question: '이미지 데이터를 처리하여 객체를 인식하는 데 가장 효과적인 신경망 구조는?',
+                    options: ['CNN (Convolutional Neural Network)', 'RNN', 'MLP', 'Transformer'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 13: 강화학습 기초 (RL Basics)',
+                title: 'Reinforcement Learning Foundations',
+                description: '보상을 통해 시행착오를 겪으며 스스로 학습하는 강화학습의 원리를 배웁니다.',
+                topics: ['Markov Decision Process (MDP)', 'Q-Learning', 'Policy Gradients', 'Exploration vs Exploitation'],
+                resources: [
+                    { name: 'Spinning Up in Deep RL (OpenAI)', url: 'https://spinningup.openai.com/' }
+                ],
+                quiz: {
+                    question: '강화학습에서 에이전트가 어떤 상태(State)에서 취할 행동(Action)을 결정하는 규칙이나 전략을 무엇이라 하는가?',
+                    options: ['Policy (정책)', 'Reward (보상)', 'Environment (환경)', 'Episode (에피소드)'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 14: 심화 강화학습 (Deep RL)',
+                title: 'Deep Reinforcement Learning',
+                description: '딥러닝과 강화학습을 결합하여 복잡한 로봇 제어 문제를 해결합니다.',
+                topics: ['DQN (Deep Q-Network)', 'PPO (Proximal Policy Optimization)', 'SAC (Soft Actor-Critic)', 'Reward Shaping'],
+                resources: [
+                    { name: 'Hugging Face Deep RL Course', url: 'https://huggingface.co/learn/deep-rl-course/unit1/introduction' }
+                ],
+                quiz: {
+                    question: '연속적인 행동 공간(Continuous Action Space)을 가지는 로봇 제어 문제에 적합한 최신 강화학습 알고리즘은?',
+                    options: ['PPO / SAC', 'DQN', 'Tabular Q-Learning', 'Genetic Algorithm'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 15: 모방 학습 (Imitation Learning)',
+                title: 'Imitation Learning',
+                description: '전문가의 시범 데이터를 통해 로봇이 빠르게 동작을 배우는 기법입니다.',
+                topics: ['Behavior Cloning', 'Inverse Reinforcement Learning', 'DAgger', 'Demonstration Data Collection'],
+                resources: [
+                    { name: 'Imitation Learning Tutorial', url: 'https://sites.google.com/view/icml2018-imitation-learning/' }
+                ],
+                quiz: {
+                    question: '전문가(사람)가 시연한 행동을 지도 학습(Supervised Learning) 방식으로 그대로 따라 하도록 학습하는 기법은?',
+                    options: ['Behavior Cloning', 'Q-Learning', 'Policy Gradient', 'Monte Carlo'],
+                    correctAnswer: 0
+                }
+            },
+            // 7. Simulation & Sim2Real
+            {
+                step: 'Phase 16: 물리 시뮬레이션 (Physics Engines)',
+                title: 'Robotics Simulation',
+                description: '현실과 유사한 가상 환경을 구축하여 AI를 안전하게 학습시킵니다.',
+                topics: ['Gazebo (Classic/Ignition)', 'NVIDIA Isaac Sim', 'MuJoCo', 'URDF/SDF Modeling'],
+                resources: [
+                    { name: 'NVIDIA Isaac Sim', url: 'https://developer.nvidia.com/isaac-sim' }
+                ],
+                quiz: {
+                    question: 'NVIDIA Omniverse 기반으로 만들어진, 고품질 렌더링과 물리 엔진을 지원하는 최신 로봇 시뮬레이터는?',
+                    options: ['Isaac Sim', 'Gazebo 9', 'V-Rep', 'Webots'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 17: Sim-to-Real Transfer',
+                title: 'Sim-to-Real Transfer',
+                description: '시뮬레이션에서 학습한 모델을 현실 세계에서도 잘 작동하도록 만드는 기술입니다.',
+                topics: ['Domain Randomization', 'System Identification', 'Reality Gap Analysis', 'Robust Control'],
+                resources: [
+                    { name: 'OpenAI Solving Rubiks Cube', url: 'https://openai.com/research/solving-rubiks-cube' }
+                ],
+                quiz: {
+                    question: '시뮬레이션 환경의 물리 파라미터(마찰력, 질량 등)나 시각적 요소(조명, 텍스처)를 무작위로 변화시켜, 모델의 적응력을 높이는 기법은?',
+                    options: ['Domain Randomization', 'Data Augmentation', 'Dropout', 'Fine-tuning'],
+                    correctAnswer: 0
+                }
+            },
+            // 8. Deployment & Hardware
+            {
+                step: 'Phase 18: 임베디드 AI (Edge AI)',
+                title: 'Edge AI Deployment',
+                description: '학습된 무거운 AI 모델을 소형 컴퓨터(Edge Device)에서 실시간으로 돌아가게 경량화합니다.',
+                topics: ['Model Quantization', 'TensorRT Optimization', 'TFLite / ONNX Runtime', 'Pruning'],
+                resources: [
+                    { name: 'NVIDIA TensorRT', url: 'https://developer.nvidia.com/tensorrt' }
+                ],
+                quiz: {
+                    question: 'AI 모델의 파라미터 정밀도를 32비트(FP32)에서 8비트(INT8) 등으로 낮추어, 정확도 손실을 최소화하면서 속도를 높이는 기술은?',
+                    options: ['Quantization (양자화)', 'Distillation', 'Compilation', 'Overclocking'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 19: 하드웨어 인터페이스',
+                title: 'Hardware Interfacing',
+                description: '센서와 액추에이터를 코드로 직접 제어하는 하드웨어 통신을 다룹니다.',
+                topics: ['GPIO / PWM Control', 'Serial (UART), I2C, SPI', 'Motor Drivers', 'Microcontroller (Arduino/STM32)'],
+                resources: [
+                    { name: 'Arduino Reference', url: 'https://www.arduino.cc/reference/en/' }
+                ],
+                quiz: {
+                    question: '마이크로컨트롤러와 센서 간에 데이터를 주고받을 때 사용하는 2선식(SDA, SCL) 직렬 통신 프로토콜은?',
+                    options: ['I2C', 'SPI', 'UART', 'Ethernet'],
+                    correctAnswer: 0
+                }
+            },
+            // 9. Career
+            {
+                step: 'Phase 20: 프로젝트 & 포트폴리오',
+                title: 'Capstone Project',
+                description: '실제 로봇(또는 고정밀 시뮬레이션)을 사용하여 나만의 Physical AI 프로젝트를 완성합니다.',
+                topics: ['System Integration', 'Real-world Testing', 'Demo Video Production', 'Open Source Contribution'],
+                resources: [
+                    { name: 'ROS 2 Projects', url: 'https://roboticsbackend.com/' }
+                ],
+                quiz: {
+                    question: '로봇 프로젝트를 진행할 때, 전체 시스템의 데이터 흐름과 노드 간의 관계를 시각화하여 디버깅을 돕는 ROS 도구는?',
+                    options: ['rqt_graph', 'rviz', 'gazebo', 'ros2 topic echo'],
+                    correctAnswer: 0
+                }
+            },
+            {
+                step: 'Phase 21: 커리어 & 트렌드',
+                title: 'Future of Physical AI',
+                description: '휴머노이드, 자율주행 등 최신 트렌드를 파악하고 커리어 방향을 설정합니다.',
+                topics: ['Humanoid Robots', 'End-to-End Autonomous Driving', 'Foundation Models for Robotics (VLA)', 'Research Papers (ICRA/IROS)'],
+                resources: [
+                    { name: 'IEEE Spectrum Robotics', url: 'https://spectrum.ieee.org/topic/robotics/' }
+                ],
+                quiz: {
+                    question: '최근 로봇 분야에서 주목받는, "비전(Vision)", "언어(Language)", "행동(Action)"을 통합하여 학습한 거대 모델을 무엇이라 하는가?',
+                    options: ['VLA (Vision-Language-Action) Model', 'LLM (Large Language Model)', 'GAN', 'Expert System'],
+                    correctAnswer: 0
+                }
             }
         ],
         faq: [

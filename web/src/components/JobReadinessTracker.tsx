@@ -33,24 +33,38 @@ export function JobReadinessTracker({ jobId, roadmap }: JobReadinessTrackerProps
 
     const progress = Math.round((completedSteps.length / roadmap.length) * 100);
 
-    const handleStepClick = (index: number) => {
-        if (completedSteps.includes(index)) return; // Already done
+    // Sort roadmap: Incomplete steps first, Completed steps last.
+    // Within each group, maintain original order (index).
+    const sortedRoadmapWithIndex = roadmap
+        .map((step, index) => ({ step, index }))
+        .sort((a, b) => {
+            const aCompleted = completedSteps.includes(a.index);
+            const bCompleted = completedSteps.includes(b.index);
+
+            if (aCompleted === bCompleted) {
+                return a.index - b.index; // Maintain original order
+            }
+            return aCompleted ? 1 : -1; // Move completed to bottom
+        });
+
+    const handleStepClick = (originalIndex: number) => {
+        if (completedSteps.includes(originalIndex)) return; // Already done
 
         // Check if previous step is completed (optional enforcement)
         // if (index > 0 && !completedSteps.includes(index - 1)) return; 
 
-        if (roadmap[index].quiz) {
-            setQuizStepIndex(index);
+        if (roadmap[originalIndex].quiz) {
+            setQuizStepIndex(originalIndex);
         } else {
             // No quiz, mark as done immediately (or keep as just content view)
             // For now, let's just mark it done to be friendly if no quiz exists
-            markStepComplete(index);
+            markStepComplete(originalIndex);
         }
     };
 
-    const markStepComplete = (index: number) => {
-        if (!completedSteps.includes(index)) {
-            setCompletedSteps([...completedSteps, index]);
+    const markStepComplete = (originalIndex: number) => {
+        if (!completedSteps.includes(originalIndex)) {
+            setCompletedSteps([...completedSteps, originalIndex]);
         }
         setQuizStepIndex(null);
     };
@@ -60,7 +74,7 @@ export function JobReadinessTracker({ jobId, roadmap }: JobReadinessTrackerProps
             <ProgressHero progress={progress} />
 
             <div className="relative border-l-2 border-slate-200 dark:border-slate-800 ml-4 md:ml-6 space-y-12">
-                {roadmap.map((step, index) => {
+                {sortedRoadmapWithIndex.map(({ step, index }) => {
                     const isCompleted = completedSteps.includes(index);
                     const isLocked = index > 0 && !completedSteps.includes(index - 1) && !isCompleted;
                     const hasQuiz = !!step.quiz;

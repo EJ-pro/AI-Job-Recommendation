@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 import AdBanner from "@/components/AdBanner";
 import RouteListener from "@/components/RouteListener";
 import Script from "next/script";
+import SurveyButton from "@/components/SurveyButton";
 
 // ... (imports)
 
@@ -67,6 +68,8 @@ export default function RootLayout({
           </aside>
 
         </main>
+
+        <SurveyButton />
 
         {/* Mobile footer Ad (Visible only on small screens) */}
         <div className="xl:hidden w-full p-4">
