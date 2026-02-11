@@ -1,4 +1,4 @@
-   'use client';
+'use client';
 
 import { Suspense, useEffect, useState, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -125,7 +125,7 @@ function ResultContent() {
                             <div key={idx} className="relative pl-6 border-l-2 border-primary/20 pb-1 last:pb-0">
                                 <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-background" />
                                 <div className="mb-1 text-sm font-bold text-primary">{item.step}</div>
-                                <p className="text-sm text-muted-foreground">{item.action}</p>
+                                <p className="text-sm text-muted-foreground">{item.title}</p>
                             </div>
                         ))}
                     </div>
