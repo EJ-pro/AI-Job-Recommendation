@@ -44,7 +44,7 @@ export default function JobCard({ job, rank, className }: JobCardProps) {
                 <div className="space-y-3">
                     <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Key Tasks</h4>
                     <ul className="grid gap-2">
-                        {job.tasks.map((task, i) => (
+                        {job.responsibilities.slice(0, 3).map((task, i) => (
                             <li key={i} className="flex items-start gap-2 text-foreground/90">
                                 <span className={isTop ? 'text-primary' : 'text-secondary'}>•</span>
                                 {task}
