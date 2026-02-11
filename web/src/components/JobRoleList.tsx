@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { JobRole } from '@/lib/data';
 import {
     BrainCircuit,
@@ -107,7 +108,7 @@ export default function JobRoleList({ jobs }: JobRoleListProps) {
                                                 <Code size={16} /> 주요 업무
                                             </h4>
                                             <div className="flex flex-wrap gap-2">
-                                                {job.tasks.map((task, idx) => (
+                                                {job.responsibilities.map((task, idx) => (
                                                     <span key={idx} className="text-xs px-2 py-1 rounded-md border border-border bg-background">
                                                         {task}
                                                     </span>
@@ -125,11 +126,17 @@ export default function JobRoleList({ jobs }: JobRoleListProps) {
                                                     <div key={idx} className="relative">
                                                         <span className="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-muted-foreground/30 ring-4 ring-background" />
                                                         <p className="text-xs font-medium text-muted-foreground mb-0.5">{step.step}</p>
-                                                        <p className="text-sm line-clamp-1 text-foreground/90">{step.action}</p>
+                                                        <p className="text-sm line-clamp-1 text-foreground/90">{step.title}</p>
                                                     </div>
                                                 ))}
                                             </div>
                                         </div>
+                                    </div>
+                                    <div className="pt-6 flex justify-end">
+                                        <Link href={`/job/${job.id}`} className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full sm:w-auto">
+                                            상세보기
+                                            <Search className="ml-2 h-4 w-4" />
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

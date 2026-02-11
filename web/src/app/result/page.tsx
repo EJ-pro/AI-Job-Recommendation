@@ -1,4 +1,4 @@
-'use client';
+   'use client';
 
 import { Suspense, useEffect, useState, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -37,6 +37,8 @@ function ResultContent() {
             // I recall implementing Difficulty Selection Screen. Let's see if I stored it.
             // Taking a quick peek at test/page.tsx would be good but I'll implement valid-effort logic.
             const difficulty = localStorage.getItem('difficulty_preference') || 'beginner';
+            const scoresStr = localStorage.getItem('test_result_scores');
+            const scores = scoresStr ? JSON.parse(scoresStr) : {};
 
             fetch('/api/test-result', {
                 method: 'POST',
@@ -44,7 +46,8 @@ function ResultContent() {
                 body: JSON.stringify({
                     userId: user?.email || 'anonymous',
                     jobRole: bestId,
-                    difficulty: difficulty
+                    difficulty: difficulty,
+                    scores
                 })
             }).catch(err => console.error('Failed to save result:', err));
         }

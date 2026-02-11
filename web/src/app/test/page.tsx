@@ -49,6 +49,16 @@ export default function TestPage() {
         const bestJobId = recommendations[0]?.id;
         const secondJobId = recommendations[1]?.id;
 
+        // Save to localStorage for ResultPage to pick up
+        const scores = recommendations.reduce((acc, job) => {
+            acc[job.id] = (job as any).score || 0;
+            return acc;
+        }, {} as Record<string, number>);
+
+        localStorage.setItem('test_result_scores', JSON.stringify(scores));
+        localStorage.setItem('test_result_best', bestJobId);
+        localStorage.setItem('test_result_second', secondJobId);
+
         // Redirect to results
         router.push(`/result?best=${bestJobId}&second=${secondJobId}`);
     };

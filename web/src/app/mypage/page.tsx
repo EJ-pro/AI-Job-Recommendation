@@ -8,6 +8,7 @@ import Button from '@/components/Button';
 import { User, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import StatsDashboard from '@/components/StatsDashboard';
+import PersonalResultSummary from '@/components/PersonalResultSummary';
 
 export default function MyPage() {
     const { user, isLoading, logout } = useAuth();
@@ -62,6 +63,12 @@ export default function MyPage() {
                 <div className="space-y-4 pt-4">
                     <h2 className="text-xl font-bold px-2 border-l-4 border-primary pl-4">전체 참여자 데이터 분석</h2>
                     <StatsDashboard />
+                </div>
+
+                {/* Personal Result Summary */}
+                <div className="space-y-4 pt-4">
+                    <h2 className="text-xl font-bold px-2 border-l-4 border-primary pl-4">테스트 결과 종합</h2>
+                    <PersonalResultSummary userEmail={user.email} />
                 </div>
             </div>
         </div>

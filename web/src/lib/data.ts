@@ -1,11 +1,35 @@
+export interface RoadmapStep {
+    step: string;
+    title: string;
+    description: string;
+    topics: string[];
+    resources: { name: string; url: string }[];
+    quiz?: {
+        question: string;
+        options: string[];
+        correctAnswer: number;
+    };
+}
+
+export interface TechStack {
+    category: string;
+    skills: string[];
+}
+
 export interface JobRole {
     id: string;
     title: string;
     description: string;
-    tasks: string[];
+    long_description: string; // 상세 설명 (A-Z)
+    salary_range: string; // 연봉 정보 (예: "초봉 4,000 ~ 5,000")
+    difficulty: 'Easy' | 'Medium' | 'Hard' | 'Extreme';
+    demand: 'Low' | 'Medium' | 'High' | 'Very High';
+    responsibilities: string[]; // 주요 업무 리스트
+    tech_stack: TechStack[]; // 기술 스택
     tags: string[];
-    focus_areas: string[]; // 3개월 집중 공략 분야 (Top 3)
-    roadmap: { step: string; action: string }[]; // 3단계 학습 로드맵
+    focus_areas: string[];
+    roadmap: RoadmapStep[]; // 상세 로드맵
+    faq: { question: string; answer: string }[]; // 자주 묻는 질문
 }
 
 export interface Question {
@@ -22,7 +46,22 @@ export const JOBS: JobRole[] = [
         id: 'ai-app',
         title: 'AI Application Engineer',
         description: 'LLM API와 프레임워크를 활용해 실제 사용자가 쓰는 AI 서비스를 빠르게 개발합니다.',
-        tasks: ['LangChain/LLM 연동', 'AI 서비스 백엔드 개발', 'RAG(검색 증강) 시스템 구축'],
+        long_description: 'AI Application Engineer는 최신 AI 모델(LLM)을 활용하여 실제 사용자가 사용할 수 있는 웹/앱 서비스를 만드는 역할입니다. 모델 자체를 학습시키는 것보다, 잘 만들어진 모델(OpenAI, Claude 등)을 API로 호출하고, 이를 기존 시스템과 연결하여 가치를 창출하는 데 집중합니다. "AI를 활용한 풀스택 개발자"에 가깝습니다.',
+        salary_range: '초봉 4,000 ~ 5,500만원',
+        difficulty: 'Medium',
+        demand: 'Very High',
+        responsibilities: [
+            'LangChain/LlamaIndex를 활용한 LLM 애플리케이션 개발',
+            'RAG(검색 증강 생성) 파이프라인 구축 및 최적화',
+            'FastAPI/Streamlit을 이용한 백엔드 및 데모 페이지 구현',
+            'Prompt Engineering을 통한 답변 품질 개선'
+        ],
+        tech_stack: [
+            { category: 'Language', skills: ['Python', 'TypeScript', 'JavaScript'] },
+            { category: 'Framework', skills: ['FastAPI', 'Next.js', 'Streamlit', 'LangChain'] },
+            { category: 'Database', skills: ['PostgreSQL', 'Pinecone (Vector DB)', 'Redis'] },
+            { category: 'AI Tools', skills: ['OpenAI API', 'Hugging Face', 'Ollama'] }
+        ],
         tags: ['Service', 'API', 'Fast-Paced'],
         focus_areas: [
             'LangChain/LlamaIndex 프레임워크 마스터',
@@ -30,16 +69,65 @@ export const JOBS: JobRole[] = [
             'Prompt Engineering 기초'
         ],
         roadmap: [
-            { step: '1개월차', action: 'OpenAI API와 LangChain 튜토리얼을 따라하며 챗봇 3개 만들기 (문서요약, Q&A 등)' },
-            { step: '2개월차', action: 'Streamlit이나 FastAPI를 사용하여 웹 서비스 형태로 배포하고, Vector DB(Pinecone 등) 연동해보기' },
-            { step: '3개월차', action: '나만의 AI 서비스(기획+개발+배포) 포트폴리오 1개 완성하기 (RAG 포함)' }
+            {
+                step: 'Phase 1: AI 서비스 기초',
+                title: 'LLM API 활용 및 챗봇 만들기',
+                description: 'API를 통해 AI 모델과 대화하는 방법을 익히고, 간단한 챗봇 인터페이스를 구현합니다.',
+                topics: ['REST API 호출', 'OpenAI Playground 사용법', 'Streamlit 기초', 'Python Asyncio'],
+                resources: [
+                    { name: 'OpenAI Quickstart', url: 'https://platform.openai.com/docs/quickstart' },
+                    { name: 'Streamlit Documentation', url: 'https://docs.streamlit.io/' }
+                ],
+                quiz: {
+                    question: 'OpenAI API를 사용할 때, 대화의 맥락(Context)을 유지하기 위해 보내야 하는 메시지 리스트의 역할(Role)이 아닌 것은?',
+                    options: ['System', 'User', 'Assistant', 'Manager'],
+                    correctAnswer: 3
+                }
+            },
+            {
+                step: 'Phase 2: 프레임워크 심화',
+                title: 'LangChain & RAG 구현',
+                description: '단순 대화를 넘어, 내 데이터를 참조하여 답변하는 RAG 시스템을 구축합니다.',
+                topics: ['LangChain Components', 'Vector Database 원리', 'Embedding 개념', 'Chain & Agent'],
+                resources: [
+                    { name: 'LangChain Academy', url: 'https://python.langchain.com/docs/get_started/introduction' },
+                    { name: 'Pinecone Learning Center', url: 'https://www.pinecone.io/learn/' }
+                ]
+            },
+            {
+                step: 'Phase 3: 실전 프로젝트',
+                title: '나만의 AI 서비스 배포',
+                description: '기획부터 배포까지 전체 과정을 경험하며 포트폴리오를 완성합니다.',
+                topics: ['FastAPI 백엔드 구조화', 'Docker 배포', 'Vercel/Fly.io 호스팅', '서비스 모니터링'],
+                resources: [
+                    { name: 'Full Stack Deep Learning', url: 'https://fullstackdeeplearning.com/' }
+                ]
+            }
+        ],
+        faq: [
+            { question: '수학을 잘해야 하나요?', answer: '아니요, 이 직무는 수학보다는 "구현력"과 "센스"가 중요합니다. API를 잘 다루고 사용자 경험(UX)을 고민하는 능력이 더 필요합니다.' },
+            { question: '풀스택 개발자와 다른가요?', answer: '기본은 비슷하지만, LLM의 특성(Tokens, Context Window, Hallucination)을 이해하고 다루는 기술이 추가로 요구됩니다.' }
         ]
     },
     {
         id: 'prompt-eng',
         title: 'Prompt Engineer',
         description: 'LLM이 최적의 답변을 내놓도록 프롬프트를 설계/최적화하고, 모델의 한계를 극복합니다.',
-        tasks: ['프롬프트 최적화 및 평가', 'Few-shot Learning 설계', '모델 환각(Hallucination) 제어'],
+        long_description: 'Prompt Engineer는 AI 모델과 소통하는 "통역사"입니다. 모델이 의도한 대로 정확하고 일관된 답변을 하도록 지시어(Prompt)를 설계하고, 다양한 케이스에 대해 실험하며 최적의 효율을 찾아냅니다. 최근에는 단순한 문장 작성을 넘어, 데이터를 평가하고 자동화하는 엔지니어링 영역으로 확장되고 있습니다.',
+        salary_range: '초봉 3,500 ~ 5,000만원',
+        difficulty: 'Medium',
+        demand: 'Medium',
+        responsibilities: [
+            'System Prompt 설계 및 최적화',
+            'Few-shot 예제 데이터셋 구축',
+            'LLM 답변 품질 평가(Evaluation) 및 개선',
+            '비용 및 응답 속도 최적화'
+        ],
+        tech_stack: [
+            { category: 'Concepts', skills: ['CoT (Chain of Thought)', 'ReAct', 'Zero-shot/Few-shot'] },
+            { category: 'Tools', skills: ['OpenAI Playground', 'Anthropic Console', 'LangSmith'] },
+            { category: 'Scripting', skills: ['Python (Basic)', 'Jupyter Notebook'] }
+        ],
         tags: ['Logical', 'Language', 'Creative'],
         focus_areas: [
             'Advanced Prompting (CoT, ReAct)',
@@ -47,16 +135,59 @@ export const JOBS: JobRole[] = [
             '기초 Python 스크립팅'
         ],
         roadmap: [
-            { step: '1개월차', action: '기본적인 프롬프트 기법(Zero/Few-shot, CoT)을 다양한 모델(GPT, Claude)에서 실험하고 기록하기' },
-            { step: '2개월차', action: '복잡한 태스크를 해결하는 프롬프트 체인을 설계하고, 자동화 스크립트 작성해보기' },
-            { step: '3개월차', action: '특정 도메인(법률, 의료 등)에 특화된 프롬프트 셋과 평가 리포트를 포트폴리오로 정리하기' }
+            {
+                step: 'Phase 1: 프롬프트 기초',
+                title: 'LLM의 작동 원리 이해',
+                description: '모델이 텍스트를 생성하는 원리를 이해하고 기본적인 지시 기법을 익힙니다.',
+                topics: ['Transformer 개요', 'Temperature & Top P', 'Role Play', 'Zero/One/Few-shot'],
+                resources: [
+                    { name: 'Prompt Engineering Guide', url: 'https://www.promptingguide.ai/' }
+                ]
+            },
+            {
+                step: 'Phase 2: 고급 기법',
+                title: '복잡한 문제 해결하기',
+                description: 'Chain of Thought 등 논리적 추론을 유도하는 고급 기법을 적용합니다.',
+                topics: ['CoT', 'Tree of Thoughts', 'Self-Consistency', 'Prompt Chaining'],
+                resources: [
+                    { name: 'Anthropic Prompt Library', url: 'https://docs.anthropic.com/claude/prompt-library' }
+                ]
+            },
+            {
+                step: 'Phase 3: 엔지니어링 & 자동화',
+                title: '프롬프트 최적화 자동화',
+                description: 'Python 스크립트를 통해 프롬프트 테스트를 자동화하고 성능을 정량적으로 평가합니다.',
+                topics: ['LLM Evaluation', 'OpenAI Evals', 'DSPy (Declarative Programming)', 'A/B Testing'],
+                resources: [
+                    { name: 'HPC AI Tech Blog', url: 'https://medium.com/@hpcai' }
+                ]
+            }
+        ],
+        faq: [
+            { question: '개발 지식이 없어도 되나요?', answer: '초기에는 괜찮지만, 전문적인 커리어를 위해서는 파이썬을 활용한 데이터 처리나 자동화 스크립트 작성 능력은 필수입니다.' },
+            { question: '미래에도 유망한가요?', answer: '모델이 똑똑해지면서 단순 프롬프팅은 줄겠지만, 복잡한 시스템을 지휘하고 평가하는 "AI 오케스트레이션" 능력은 더 중요해질 것입니다.' }
         ]
     },
     {
         id: 'mlops',
         title: 'MLOps Engineer',
         description: '머신러닝 모델의 학습부터 배포, 모니터링까지의 전체 라이프사이클을 자동화하고 관리합니다.',
-        tasks: ['모델 배포 및 서빙', '클라우드 인프라(AWS/GCP) 관리', '자동화 파이프라인 구축'],
+        long_description: 'MLOps Engineer는 "Machine Learning"과 "Operations(운영)"의 합성어로, AI 모델을 연구실에서 꺼내 실제 서비스 환경에서 안정적으로 돌아가게 만드는 핵심 인프라 전문가입니다. DevOps 문화를 ML에 적용하여, 모델 학습-배포-모니터링의 과정을 자동화(CI/CD/CT)합니다.',
+        salary_range: '초봉 4,500 ~ 6,000만원',
+        difficulty: 'Hard',
+        demand: 'High',
+        responsibilities: [
+            'ML 파이프라인(학습/전처리/배포) 자동화 구축',
+            'Kubernetes 기반의 모델 서빙 인프라 관리',
+            '모델 성능 및 리소스 모니터링 시스템 구축',
+            '클라우드(AWS/GCP) 비용 최적화'
+        ],
+        tech_stack: [
+            { category: 'Cloud', skills: ['AWS', 'GCP', 'Azure'] },
+            { category: 'Container', skills: ['Docker', 'Kubernetes', 'Helm'] },
+            { category: 'CI/CD', skills: ['GitHub Actions', 'Jenkins', 'ArgoCD'] },
+            { category: 'MLOps Tools', skills: ['MLflow', 'Kubeflow', 'Airflow', 'Prometheus'] }
+        ],
         tags: ['Infrastructure', 'DevOps', 'Stability'],
         focus_areas: [
             'Docker & Kubernetes',
@@ -64,16 +195,59 @@ export const JOBS: JobRole[] = [
             'CI/CD for ML (GitHub Actions)'
         ],
         roadmap: [
-            { step: '1개월차', action: 'Python으로 만든 간단한 모델을 Docker Container로 패키징하고 AWS EC2에 띄워보기' },
-            { step: '2개월차', action: 'GitHub Actions를 이용해 모델 학습부터 배포까지 자동화되는 CI/CD 파이프라인 구축하기' },
-            { step: '3개월차', action: 'Kubernetes 혹은 Serverless(Lambda) 환경에서 모델 서빙 아키텍처 구현 및 트래픽 테스트' }
+            {
+                step: 'Phase 1: 컨테이너 & 클라우드',
+                title: 'Docker와 AWS 기초',
+                description: '애플리케이션을 격리된 환경(컨테이너)으로 만들고 클라우드 서버에 배포합니다.',
+                topics: ['DockerFile 작성', 'EC2/Lambda 배포', 'Linux 터미널 명령어', 'Networking 기초'],
+                resources: [
+                    { name: 'Docker for Beginners', url: 'https://docker-curriculum.com/' }
+                ]
+            },
+            {
+                step: 'Phase 2: CI/CD 파이프라인',
+                title: '자동화 시스템 구축',
+                description: '코드가 변경되면 자동으로 테스트하고 배포하는 파이프라인을 만듭니다.',
+                topics: ['GitHub Actions', 'Unit Testing', 'Automated Deployment', 'Model Registry (MLflow)'],
+                resources: [
+                    { name: 'MLOps Zoomcamp', url: 'https://github.com/DataTalksClub/mlops-zoomcamp' }
+                ]
+            },
+            {
+                step: 'Phase 3: 오케스트레이션 & 모니터링',
+                title: 'Kubernetes & Serving',
+                description: '대규모 트래픽을 처리하는 클러스터를 운영하고 모델 상태를 감시합니다.',
+                topics: ['K8s Pods/Services', 'Model Serving (Triton/TorchServe)', 'Grafana/Prometheus', 'GPU Resource Management'],
+                resources: [
+                    { name: 'Kubernetes Tutorials', url: 'https://kubernetes.io/docs/tutorials/' }
+                ]
+            }
+        ],
+        faq: [
+            { question: '신입도 가능한가요?', answer: '진입 장벽이 높은 편입니다. 백엔드나 시스템 엔지니어로 시작해서 ML 관련 경험을 쌓고 넘어오는 경우가 많습니다.' },
+            { question: '수학적 지식이 필요한가요?', answer: '모델의 내부 원리보다는, 모델이 실행되는 "환경"과 "시스템"에 대한 이해가 훨씬 중요합니다.' }
         ]
     },
     {
         id: 'data-eng',
         title: 'Data Engineer',
         description: '데이터의 수집, 저장, 처리를 위한 견고한 파이프라인을 구축하여 모델 학습을 지원합니다.',
-        tasks: ['ETL 파이프라인 구축', '데이터 웨어하우스/레이크 관리', '대용량 데이터 분산 처리'],
+        long_description: 'Data Engineer는 데이터의 "배관공"입니다. 다양한 곳에 흩어진 데이터를 수집(Extract)하고, 사용하기 좋게 가공(Transform)하여, 저장소(Load)에 적재하는 ETL 파이프라인을 책임집니다. 데이터 과학자나 분석가가 데이터를 분석할 수 있도록 깨끗한 데이터를 안정적으로 공급하는 것이 목표입니다.',
+        salary_range: '초봉 4,000 ~ 5,500만원',
+        difficulty: 'Medium',
+        demand: 'High',
+        responsibilities: [
+            'ETL/ELT 파이프라인 설계 및 운영',
+            'Data Warehouse / Data Lake 구축 및 관리',
+            '대용량 데이터 분산 처리 (Spark 등)',
+            '데이터 품질(Quality) 및 정합성 관리'
+        ],
+        tech_stack: [
+            { category: 'Language', skills: ['Python', 'SQL', 'Scala', 'Java'] },
+            { category: 'Big Data', skills: ['Apache Spark', 'Kafka', 'Hadoop'] },
+            { category: 'Workflow', skills: ['Apache Airflow', 'Prefect', 'dbt'] },
+            { category: 'Storage', skills: ['Snowflake', 'BigQuery', 'Redshift', 'S3'] }
+        ],
         tags: ['BigData', 'Pipeline', 'Spark/Kafka'],
         focus_areas: [
             'SQL & Database Design',
@@ -81,16 +255,59 @@ export const JOBS: JobRole[] = [
             'Cloud Data Warehouse (BigQuery 등)'
         ],
         roadmap: [
-            { step: '1개월차', action: 'SQL 심화 문법 완성 및 Python Pandas로 데이터 정제 스크립트 능숙하게 다루기' },
-            { step: '2개월차', action: 'Airflow를 설치하여 주기적으로 데이터를 수집/가공하는 ETL 파이프라인 만들어보기' },
-            { step: '3개월차', action: '클라우드(AWS S3, BigQuery)를 연동하여 대시보드까지 이어지는 전체 데이터 흐름 완성하기' }
+            {
+                step: 'Phase 1: 데이터 베이스 기초',
+                title: 'SQL Master & Python Data',
+                description: '데이터를 저장하고 조회하는 가장 기본적인 언어를 완벽하게 익힙니다.',
+                topics: ['Advanced SQL (Window Functions)', 'Data Modeling (Star/Snowflake Schema)', 'Pandas Data Cleaning'],
+                resources: [
+                    { name: 'Mode SQL Tutorial', url: 'https://mode.com/sql-tutorial/' }
+                ]
+            },
+            {
+                step: 'Phase 2: 파이프라인 구축',
+                title: 'Airflow & ETL',
+                description: '데이터 이동을 스케줄링하고 자동화하는 워크플로우를 만듭니다.',
+                topics: ['DAG 작성', 'Cron Expression', 'Web Scraping -> DB 적재', 'API Data Fetching'],
+                resources: [
+                    { name: 'Apache Airflow Docs', url: 'https://airflow.apache.org/' }
+                ]
+            },
+            {
+                step: 'Phase 3: 빅데이터 & 클라우드',
+                title: 'Distributed Processing',
+                description: '메모리에 다 들어가지 않는 거대한 데이터를 다루는 기술을 배웁니다.',
+                topics: ['Spark Architecture', 'AWS EMR / Glue', 'Streaming Data (Kafka)', 'Data Governance'],
+                resources: [
+                    { name: 'Data Engineering Cookbook', url: 'https://github.com/andkret/Cookbook' }
+                ]
+            }
+        ],
+        faq: [
+            { question: '비전공자도 할 수 있나요?', answer: 'DB와 SQL에 대한 이해가 깊다면 충분히 도전할 수 있습니다. 꼼꼼함과 안정성을 추구하는 성향이 잘 맞습니다.' },
+            { question: 'AI랑 관련이 있나요?', answer: '모든 AI 모델은 데이터 위에서 만들어집니다. 양질의 데이터를 공급하는 데이터 엔지니어가 없으면 AI 개발도 불가능합니다.' }
         ]
     },
     {
         id: 'data-sci',
         title: 'Data Scientist',
         description: '복잡한 데이터에서 비즈니스 인사이트를 도출하고, 통계 및 머신러닝 알고리즘을 적용합니다.',
-        tasks: ['데이터 탐색적 분석(EDA)', '시각화 및 대시보드 제작', '통계적 가설 검정'],
+        long_description: 'Data Scientist는 데이터를 통해 "가치"를 발견하는 탐험가입니다. 수집된 데이터에서 패턴을 찾고(EDA), 통계적 기법으로 가설을 검증하며, 예측 모델을 만들어 비즈니스 의사결정을 돕습니다. 기술적인 능력(코딩)뿐만 아니라 비즈니스 도메인에 대한 깊은 이해와 스토리텔링 능력이 필수적입니다.',
+        salary_range: '초봉 4,000 ~ 5,500만원',
+        difficulty: 'Hard',
+        demand: 'Medium',
+        responsibilities: [
+            '데이터 탐색적 분석(EDA) 및 시각화',
+            '예측 모델링 및 머신러닝 알고리즘 적용',
+            'A/B 테스트 설계 및 결과 분석',
+            '비즈니스 인사이트 도출 및 리포팅'
+        ],
+        tech_stack: [
+            { category: 'Language', skills: ['Python', 'R', 'SQL'] },
+            { category: 'Analysis', skills: ['Pandas', 'NumPy', 'Scipy'] },
+            { category: 'ML', skills: ['Scikit-learn', 'XGBoost', 'LightGBM'] },
+            { category: 'Visualization', skills: ['Matplotlib', 'Seaborn', 'Tableau', 'PowerBI'] }
+        ],
         tags: ['Analysis', 'Statistics', 'Math'],
         focus_areas: [
             'Python 데이터 분석 (Pandas/Scikit-learn)',
@@ -98,16 +315,59 @@ export const JOBS: JobRole[] = [
             '데이터 시각화/스토리텔링'
         ],
         roadmap: [
-            { step: '1개월차', action: 'Kaggle의 유명한 데이터셋 3개를 골라 EDA(탐색적 데이터 분석) 리포트 작성해보기' },
-            { step: '2개월차', action: 'Scikit-learn을 활용해 분류/회귀 모델을 만들고, 성능 지표(Accuracy, F1 등) 해석 능력 기르기' },
-            { step: '3개월차', action: '자신만의 가설을 세우고 데이터를 통해 검증하여 비즈니스 제안까지 포함된 분석 프로젝트 완성' }
+            {
+                step: 'Phase 1: 데이터 분석 기초',
+                title: 'Data Analysis & Visualization',
+                description: '데이터를 요리조리 뜯어보고 시각적으로 표현하는 능력을 기릅니다.',
+                topics: ['Python Basics', 'Pandas DataFrame', 'Charts & Graphs', 'Descriptive Statistics'],
+                resources: [
+                    { name: 'Kaggle Learn', url: 'https://www.kaggle.com/learn' }
+                ]
+            },
+            {
+                step: 'Phase 2: 머신러닝 & 통계',
+                title: 'Modeling & Inference',
+                description: '데이터로 미래를 예측하거나 숨겨진 관계를 증명합니다.',
+                topics: ['Regression/Classification', 'Hypothesis Testing', 'Feature Engineering', 'Model Evaluation Metrics'],
+                resources: [
+                    { name: 'StatQuest with Josh Starmer', url: 'https://www.youtube.com/c/joshstarmer' }
+                ]
+            },
+            {
+                step: 'Phase 3: 실전 문제 해결',
+                title: 'Business Project',
+                description: '실제 비즈니스 시나리오에서 문제를 정의하고 해결책을 제안합니다.',
+                topics: ['Problem Definition', 'Dashboard Building', 'Presentation Skills', 'Domain Knowledge'],
+                resources: [
+                    { name: 'Towards Data Science', url: 'https://towardsdatascience.com/' }
+                ]
+            }
+        ],
+        faq: [
+            { question: '석/박사 학위가 필수인가요?', answer: '필수는 아니지만, 통계적 지식의 깊이가 요구되므로 우대하는 경향이 있습니다. 포트폴리오로 실력을 증명하면 학력은 극복 가능합니다.' },
+            { question: '취업이 어렵나요?', answer: '단순 분석가는 포화 상태지만, 비즈니스 감각과 엔지니어링 능력을 겸비한 "Full-stack Data Scientist"는 여전히 수요가 많습니다.' }
         ]
     },
     {
         id: 'research',
         title: 'AI Research Scientist',
         description: '새로운 알고리즘을 연구하거나 최신 논문을 구현하여 기술의 한계를 넓힙니다.',
-        tasks: ['논문 리서치 및 구현', '모델 아키텍처 설계', '모델 경량화 및 최적화'],
+        long_description: 'AI Research Scientist는 "미래의 기술"을 만드는 과학자입니다. 기존 모델의 성능을 뛰어넘는 새로운 아키텍처를 고안하거나, 아직 해결되지 않은 난제들을 딥러닝 기술로 풀어냅니다. 최신 논문을 끊임없이 읽고 구현하며, 학회에 논문을 발표하거나 기업의 핵심 원천 기술(Core Tech)을 개발합니다.',
+        salary_range: '초봉 5,000 ~ 8,000만원 (학위별 상이)',
+        difficulty: 'Extreme',
+        demand: 'Medium',
+        responsibilities: [
+            '최신 AI 논문 리서치 및 구현 (SoTA 추구)',
+            '신규 모델 아키텍처 설계 및 실험',
+            '모델 경량화, 최적화 연구',
+            '특허 출원 및 논문 작성'
+        ],
+        tech_stack: [
+            { category: 'Framework', skills: ['PyTorch', 'TensorFlow', 'JAX'] },
+            { category: 'Theory', skills: ['Linear Algebra', 'Probability', 'Calculus', 'Optimization'] },
+            { category: 'Domain', skills: ['CV (Computer Vision)', 'NLP (Natural Language Processing)', 'RL (Reinforcement Learning)'] },
+            { category: 'Tools', skills: ['LaTeX', 'Weights & Biases', 'Linux'] }
+        ],
         tags: ['Research', 'DeepLearning', 'Academic'],
         focus_areas: [
             'Deep Learning Theory (PyTorch)',
@@ -115,16 +375,59 @@ export const JOBS: JobRole[] = [
             '수학적 기초 (선형대수/확률)'
         ],
         roadmap: [
-            { step: '1개월차', action: 'PyTorch 공식 튜토리얼 완독 및 CNN/RNN/Transformer 기본 구조 바닥부터 코딩해보기' },
-            { step: '2개월차', action: '관심 분야(CV/NLP)의 Top-tier 학회 최신 논문 1편을 선정하여 코드로 구현(Reproduction)하기' },
-            { step: '3개월차', action: '구현한 모델을 학습시켜 벤치마크 성능을 측정하고, 개선 아이디어 실험해보기' }
+            {
+                step: 'Phase 1: 딥러닝 이론',
+                title: 'Deep Learning Foundations',
+                description: '신경망의 수학적 원리를 바닥부터 이해합니다.',
+                topics: ['Backpropagation', 'Gradient Descent', 'CNN/RNN Architecture', 'Pytorch Basics'],
+                resources: [
+                    { name: 'CS231n (Stanford)', url: 'http://cs231n.stanford.edu/' },
+                    { name: 'Deep Learning Book', url: 'https://www.deeplearningbook.org/' }
+                ]
+            },
+            {
+                step: 'Phase 2: 논문 구현',
+                title: 'Paper Reproduction',
+                description: '유명한 논문을 읽고 코드로 똑같이 구현하며 디테일을 익힙니다.',
+                topics: ['Reading Papers', 'Model Debugging', 'Training Tricks', 'Transformer Deep Dive'],
+                resources: [
+                    { name: 'Papers With Code', url: 'https://paperswithcode.com/' }
+                ]
+            },
+            {
+                step: 'Phase 3: 연구 수행',
+                title: 'Novel Research',
+                description: '자신만의 아이디어를 제안하고 실험을 통해 증명합니다.',
+                topics: ['Experiment Design', 'Ablation Study', 'Writing Papers', 'Conference Submission'],
+                resources: [
+                    { name: 'ArXiv', url: 'https://arxiv.org/' }
+                ]
+            }
+        ],
+        faq: [
+            { question: '박사 학위가 꼭 필요한가요?', answer: '대부분의 리서치 직군은 석사/박사 학위를 강력히 선호합니다. 학사라면 뛰어난 구현 능력이나 논문 실적을 보여줘야 합니다.' },
+            { question: '수학을 얼마나 잘해야 하나요?', answer: '논문의 수식을 이해하고 코드로 옮길 수 있을 정도의 선형대수와 확률통계 지식은 필수입니다.' }
         ]
     },
     {
         id: 'pm',
         title: 'AI Product Manager',
         description: 'AI 기술을 활용한 제품을 기획하고, 개발팀과 비즈니스팀 사이의 가교 역할을 합니다.',
-        tasks: ['사용자 요구사항 정의', '제품 로드맵 설계', 'AI 서비스 기획'],
+        long_description: 'AI Product Manager는 기술과 시장을 연결하는 "지휘자"입니다. 소비자가 원하는 것이 무엇인지 파악하고, 이를 AI 기술로 어떻게 해결할 수 있을지 기획합니다. 개발자, 디자이너, 비즈니스 팀과 끊임없이 소통하며 제품이 성공적으로 출시되고 운영되도록 관리합니다. 기술에 대한 이해도가 높을수록 좋은 PM이 될 수 있습니다.',
+        salary_range: '초봉 3,500 ~ 5,500만원',
+        difficulty: 'Medium',
+        demand: 'High',
+        responsibilities: [
+            'AI 기반 서비스 기획 및 요구사항 명세(PRD) 작성',
+            '제품 로드맵 수립 및 일정 관리',
+            '데이터 기반 의사결정 및 성과 분석',
+            '유관부서 커뮤니케이션 및 조율'
+        ],
+        tech_stack: [
+            { category: 'Planning', skills: ['Figma', 'Jira', 'Confluence', 'Notion'] },
+            { category: 'Data', skills: ['SQL', 'Google Analytics', 'Excel/Spreadsheet'] },
+            { category: 'Tech Literacy', skills: ['API 이해', 'ML 개발 프로세스 이해', 'Prompting'] }
+        ],
         tags: ['Communication', 'Planning', 'Business'],
         focus_areas: [
             'AI 기술 이해 (한계와 가능성)',
@@ -132,16 +435,59 @@ export const JOBS: JobRole[] = [
             '기획서/요구사항 명세서 작성'
         ],
         roadmap: [
-            { step: '1개월차', action: '성공한 AI 서비스 5개를 분석(Reverse Engineering)하여 기능 명세서와 UX 흐름도 역기획해보기' },
-            { step: '2개월차', action: '간단한 노코드 툴이나 API를 활용해 MVP(최소기능제품)를 직접 만들어보고 사용자 반응 보기' },
-            { step: '3개월차', action: '해결하려는 문제 정의부터 솔루션, 지표 설정까지 포함된 완벽한 서비스 기획 포트폴리오 작성' }
+            {
+                step: 'Phase 1: 기획 역량',
+                title: 'Service Planning Basics',
+                description: '문제를 정의하고 해결책을 문서화하는 능력을 기릅니다.',
+                topics: ['User Persona', 'User Journey Map', 'Wireframing', 'PRD 작성법'],
+                resources: [
+                    { name: 'Brunch (Planner Tips)', url: 'https://brunch.co.kr/' }
+                ]
+            },
+            {
+                step: 'Phase 2: AI 리터러시',
+                title: 'Understanding AI',
+                description: 'AI로 무엇이 가능하고 불가능한지 기술적 한계를 이해합니다.',
+                topics: ['AI Terminology', 'Development Cycle', 'Cost & Latency', 'API Capabilities'],
+                resources: [
+                    { name: 'Google AI for Everyone', url: 'https://www.coursera.org/learn/ai-for-everyone' }
+                ]
+            },
+            {
+                step: 'Phase 3: 실전 매니지먼트',
+                title: 'Product Launching',
+                description: '실제 제품을 만들어보고 데이터를 보며 개선합니다.',
+                topics: ['Agile/Scrum', 'Data Driven Decision', 'A/B Testing', 'Growth Hacking'],
+                resources: [
+                    { name: 'Lenny\'s Newsletter', url: 'https://www.lennysnewsletter.com/' }
+                ]
+            }
+        ],
+        faq: [
+            { question: '개발을 할 줄 알아야 하나요?', answer: '직접 코딩은 안 해도 되지만, 개발자와 대화가 통할 정도의 기술 이해도(API, DB, 서버 등)는 반드시 필요합니다.' },
+            { question: '어떤 전공이 유리한가요?', answer: '전공 무관합니다. 인문계열이라도 논리적 사고력과 커뮤니케이션 능력이 뛰어나면 충분합니다.' }
         ]
     },
     {
         id: 'ml-eng',
         title: 'Machine Learning Engineer',
         description: '머신러닝 알고리즘을 활용해 데이터를 학습시키고, 실제 서비스에 적용하여 가치를 창출하는 모델을 개발합니다.',
-        tasks: ['머신러닝 모델 설계 및 개발', '데이터 전처리 및 피처 엔지니어링', '모델 성능 평가 및 최적화'],
+        long_description: 'Machine Learning Engineer는 데이터를 먹고 자라는 "모델"을 키우는 육성가입니다. 데이터 사이언티스트가 실험적으로 증명한 모델을 실제 서비스에서 쓸 수 있도록 최적화하거나, 적절한 알고리즘을 선택해 비즈니스 문제를 해결하는 모델을 직접 개발합니다. 모델링 능력과 엔지니어링 능력이 모두 필요합니다.',
+        salary_range: '초봉 4,000 ~ 6,000만원',
+        difficulty: 'Hard',
+        demand: 'Very High',
+        responsibilities: [
+            '머신러닝/딥러닝 모델 설계 및 학습',
+            '데이터 전처리 및 피처 엔지니어링 파이프라인 구축',
+            '모델 성능 평가 및 하이퍼파라미터 튜닝',
+            '모델 경량화 및 추론 최적화'
+        ],
+        tech_stack: [
+            { category: 'Language', skills: ['Python', 'C++'] },
+            { category: 'Deep Learning', skills: ['PyTorch', 'TensorFlow', 'Keras'] },
+            { category: 'ML Libs', skills: ['Scikit-learn', 'XGBoost', 'LightGBM'] },
+            { category: 'Ops', skills: ['Docker', 'FastAPI', 'ONNX'] }
+        ],
         tags: ['Modeling', 'Engineering', 'AI'],
         focus_areas: [
             'Deep Learning (PyTorch/TensorFlow)',
@@ -149,16 +495,59 @@ export const JOBS: JobRole[] = [
             'Model Serving & MLOps Basics'
         ],
         roadmap: [
-            { step: '1개월차', action: '기초 ML/DL 이론(회귀, 분류, 신경망)을 학습하고 Scikit-learn으로 간단한 모델 구현하기' },
-            { step: '2개월차', action: 'Kaggle 등의 데이터셋을 활용해 탐색적 분석(EDA)부터 모델 학습, 성능 개선까지 수행하기' },
-            { step: '3개월차', action: '학습된 모델을 웹 서비스(Streamlit/FastAPI)에 연동하고 실제 사용자에게 배포하는 경험 쌓기' }
+            {
+                step: 'Phase 1: 머신러닝 기초',
+                title: 'Classical ML & Math',
+                description: '통계적 학습 이론과 기본 머신러닝 알고리즘을 마스터합니다.',
+                topics: ['Linear Regression', 'Decision Trees', 'Ensemble Methods', 'Math for ML'],
+                resources: [
+                    { name: 'Andrew Ng ML Course', url: 'https://www.coursera.org/specializations/machine-learning-introduction' }
+                ]
+            },
+            {
+                step: 'Phase 2: 딥러닝 & 프레임워크',
+                title: 'Deep Learning with PyTorch',
+                description: '현대 AI의 핵심인 신경망과 딥러닝 프레임워크를 다룹니다.',
+                topics: ['Neural Networks', 'CNN/RNN/LSTM', 'PyTorch Framework', 'TensorBoard'],
+                resources: [
+                    { name: 'PyTorch Tutorials', url: 'https://pytorch.org/tutorials/' }
+                ]
+            },
+            {
+                step: 'Phase 3: 엔지니어링 & 배포',
+                title: 'Production ML',
+                description: '학습된 모델을 실제 애플리케이션에 통합하는 기술을 익힙니다.',
+                topics: ['Model Persistence', 'API Serving', 'Optimization (Quantization)', 'Containerization'],
+                resources: [
+                    { name: 'Made With ML', url: 'https://madewithml.com/' }
+                ]
+            }
+        ],
+        faq: [
+            { question: '데이터 사이언티스트와 차이가 뭔가요?', answer: 'DS가 "원인 분석과 인사이트"에 집중한다면, ML 엔지니어는 "성능 좋은 예측 시스템 구축"에 더 집중합니다.' },
+            { question: '어떤 수학이 필요한가요?', answer: '선형대수학(행렬 연산), 미적분(최적화), 확률통계(모델 평가)가 기본입니다.' }
         ]
     },
     {
         id: 'physical-ai',
         title: 'Physical AI Engineer',
         description: '현실 세계의 로봇이나 장치를 제어하는 AI 모델을 개발하고, 센서 데이터를 처리하여 물리적인 상호작용을 구현합니다.',
-        tasks: ['로봇/드론 자율주행 알고리즘 개발', '센서 데이터(LiDAR, Camera) 퓨전 및 처리', '임베디드 AI 모델 최적화 (Edge AI)'],
+        long_description: 'Physical AI Engineer는 코드를 "현실 세계"로 가져오는 마법사입니다. 로봇, 드론, 자율주행차, 스마트 팩토리 등 물리적인 하드웨어에 AI를 탑재하여, 주변 환경을 인식하고 판단하고 움직이게 만듭니다. 소프트웨어뿐만 아니라 하드웨어에 대한 이해와 센서 데이터 처리가 매우 중요합니다.',
+        salary_range: '초봉 4,000 ~ 5,500만원',
+        difficulty: 'Hard',
+        demand: 'Medium',
+        responsibilities: [
+            '로봇/드론 자율주행 및 경로 계획 알고리즘 개발',
+            'Computer Vision 기반의 객체 인식 및 상황 판단',
+            'Sensor Fusion (LiDAR, Camera, IMU) 및 데이터 처리',
+            '임베디드 보드(Edge Device) 기반 AI 모델 최적화 및 포팅'
+        ],
+        tech_stack: [
+            { category: 'Language', skills: ['C++', 'Python'] },
+            { category: 'Robotics', skills: ['ROS (Robot Operating System)', 'Gazebo', 'SLAM'] },
+            { category: 'Vision', skills: ['OpenCV', 'PCL (Point Cloud Library)', 'YOLO'] },
+            { category: 'Hardware', skills: ['NVIDIA Jetson', 'Raspberry Pi', 'Arduino', 'Sensors'] }
+        ],
         tags: ['Robotics', 'Embedded', 'Hardware'],
         focus_areas: [
             'ROS (Robot Operating System) & Gazebo Sim',
@@ -166,9 +555,37 @@ export const JOBS: JobRole[] = [
             'Embedded System (NVIDIA Jetson, Raspberry Pi)'
         ],
         roadmap: [
-            { step: '1개월차', action: 'Python/C++로 기본 로봇 제어(모터/센서) 및 ROS 2 기초 학습하기' },
-            { step: '2개월차', action: '카메라/LiDAR 센서 데이터를 받아 장애물을 피하는 자율주행 봇 시뮬레이션 구현하기' },
-            { step: '3개월차', action: '실제 임베디드 보드(Jetson 등)에 경량화된 AI 모델을 탑재하여 미션을 수행하는 프로젝트 완성하기' }
+            {
+                step: 'Phase 1: 로보틱스 기초',
+                title: 'Robotics Software (ROS)',
+                description: '로봇 소프트웨어의 표준인 ROS와 기본 제어 이론을 배웁니다.',
+                topics: ['ROS 2 Basics', 'Nodes & Topics', 'Linux Environment', 'C++ Programming'],
+                resources: [
+                    { name: 'ROS 2 Documentation', url: 'https://docs.ros.org/en/humble/index.html' }
+                ]
+            },
+            {
+                step: 'Phase 2: 인지 & 판단',
+                title: 'Perception & Navigation',
+                description: '로봇이 세상을 보고(Vision) 길을 찾는(Navigation) 기술을 구현합니다.',
+                topics: ['Computer Vision', 'SLAM (Simultaneous Localization and Mapping)', 'Path Planning (A*)', 'Sensor Fusion'],
+                resources: [
+                    { name: 'OpenCV Tutorials', url: 'https://docs.opencv.org/4.x/d9/df8/tutorial_root.html' }
+                ]
+            },
+            {
+                step: 'Phase 3: 임베디드 AI',
+                title: 'Edge AI Deployment',
+                description: '작은 컴퓨터(Edge Device)에서 AI가 빠르게 돌아가도록 최적화합니다.',
+                topics: ['Model Quantization', 'TensorRT', 'Embedded Linux', 'Real-time Systems'],
+                resources: [
+                    { name: 'NVIDIA Jetson Community', url: 'https://developer.nvidia.com/embedded-computing' }
+                ]
+            }
+        ],
+        faq: [
+            { question: '하드웨어를 직접 만들어야 하나요?', answer: '아니요, 주로 기구 설계는 기계공학 엔지니어가 하고, 여러분은 그 "머리(지능)"를 만드는 소프트웨어에 집중합니다. 다만 회로도는 볼 줄 알면 좋습니다.' },
+            { question: 'C++이 필수인가요?', answer: '실시간 제어와 성능이 중요한 로봇 분야에서는 C++이 필수입니다. AI 모델링은 Python으로 하더라도 배포는 C++로 하는 경우가 많습니다.' }
         ]
     },
 ];

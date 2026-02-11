@@ -5,5 +5,74 @@
     "jobRole": "prompt-eng",
     "difficulty": "beginner",
     "timestamp": "2026-02-06T11:35:00.024Z"
+  },
+  {
+    "id": "81713b23-4adb-4e1b-a0bc-658d706b0ff2",
+    "userId": "1@1",
+    "jobRole": "data-sci",
+    "difficulty": "beginner",
+    "timestamp": "2026-02-10T09:24:46.024Z"
+  },
+  {
+    "id": "82a63ac0-84dd-4dc5-b8c0-97114b97ff1c",
+    "userId": "1@1",
+    "jobRole": "research",
+    "scores": {
+      "research": 24,
+      "ml-eng": 24,
+      "data-eng": 21,
+      "data-sci": 21,
+      "mlops": 18,
+      "pm": 15,
+      "ai-app": 14,
+      "prompt-eng": 9,
+      "physical-ai": 5
+    },
+    "difficulty": "beginner",
+    "timestamp": "2026-02-10T09:29:51.867Z"
+  },
+  {
+    "id": "63d96f90-15dd-4885-a826-b2124aa7666b",
+    "userId": "1@1",
+    "jobRole": "ai-app",
+    "scores": {
+      "ai-app": 29,
+      "research": 24,
+      "data-sci": 23,
+      "data-eng": 22,
+      "ml-eng": 21,
+      "pm": 19,
+      "prompt-eng": 16,
+      "mlops": 13,
+      "physical-ai": 11
+    },
+    "difficulty": "beginner",
+    "timestamp": "2026-02-10T09:32:09.292Z"
+  },
+  {
+    "id": "5dbca047-5955-4abb-884d-73b15f85bd0a",
+    "userId": "anonymous",
+    "jobRole": "ai-app",
+    "scores": {},
+    "difficulty": "beginner",
+    "timestamp": "2026-02-10T09:33:10.118Z"
+  },
+  {
+    "id": "8998d650-057c-44de-96da-3a33765ade9f",
+    "userId": "1@1",
+    "jobRole": "data-sci",
+    "scores": {
+      "ai-app": 29,
+      "research": 24,
+      "data-sci": 23,
+      "data-eng": 22,
+      "ml-eng": 21,
+      "pm": 19,
+      "prompt-eng": 16,
+      "mlops": 13,
+      "physical-ai": 11
+    },
+    "difficulty": "beginner",
+    "timestamp": "2026-02-10T09:45:37.298Z"
   }
 ]

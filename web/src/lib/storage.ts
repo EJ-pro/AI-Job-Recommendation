@@ -8,6 +8,7 @@ export interface TestResult {
     id: string; // uuid
     userId?: string; // email or name if logged in
     jobRole: string;
+    scores: Record<string, number>;
     difficulty: 'beginner' | 'advanced';
     timestamp: string;
 }

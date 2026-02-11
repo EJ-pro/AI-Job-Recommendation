@@ -31,6 +31,5 @@ export function calculateRecommendation(answers: Record<number, number>, questio
         score: scores[job.id] || 0,
     })).sort((a, b) => b.score - a.score);
 
-    // Return top 2 matching jobs
-    return sortedJobs.slice(0, 2);
+    return sortedJobs;
 }
