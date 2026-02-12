@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { RoadmapStep } from '@/lib/data';
 import { ProgressHero } from './ProgressHero';
 import { QuizModal } from './QuizModal';
+import { RoadmapOverview } from './RoadmapOverview';
 import { CheckCircle2, Lock, ChevronRight, BookOpen, ExternalLink, PlayCircle } from 'lucide-react';
 import clsx from 'clsx';
 import Button from '@/components/Button';
@@ -73,6 +74,18 @@ export function JobReadinessTracker({ jobId, roadmap }: JobReadinessTrackerProps
         <div className="w-full max-w-4xl mx-auto">
             <ProgressHero progress={progress} />
 
+            <RoadmapOverview
+                roadmap={roadmap}
+                completedSteps={completedSteps}
+                onStepClick={(index) => {
+                    // Optional: Scroll to the step or just view details
+                    const element = document.getElementById(`step-${index}`);
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }}
+            />
+
             <div className="relative border-l-2 border-slate-200 dark:border-slate-800 ml-4 md:ml-6 space-y-12">
                 {sortedRoadmapWithIndex.map(({ step, index }) => {
                     const isCompleted = completedSteps.includes(index);
@@ -80,7 +93,7 @@ export function JobReadinessTracker({ jobId, roadmap }: JobReadinessTrackerProps
                     const hasQuiz = !!step.quiz;
 
                     return (
-                        <div key={index} className="relative pl-8 md:pl-12">
+                        <div key={index} id={`step-${index}`} className="relative pl-8 md:pl-12">
                             {/* Timeline Node */}
                             <div
                                 className={clsx(
