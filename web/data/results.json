@@ -74,5 +74,23 @@
     },
     "difficulty": "beginner",
     "timestamp": "2026-02-10T09:45:37.298Z"
+  },
+  {
+    "id": "996f93bd-9dc4-4fb0-a7a3-24acb22f54b4",
+    "userId": "1@1",
+    "jobRole": "data-sci",
+    "scores": {
+      "data-sci": 8,
+      "mlops": 5,
+      "data-eng": 5,
+      "research": 5,
+      "prompt-eng": 3,
+      "ml-eng": 2,
+      "ai-app": 0,
+      "pm": 0,
+      "physical-ai": 0
+    },
+    "difficulty": "beginner",
+    "timestamp": "2026-02-12T02:23:30.021Z"
   }
 ]

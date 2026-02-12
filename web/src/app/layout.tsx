@@ -22,6 +22,7 @@ import AdBanner from "@/components/AdBanner";
 import RouteListener from "@/components/RouteListener";
 import Script from "next/script";
 import SurveyButton from "@/components/SurveyButton";
+import ChatBot from "@/components/ChatBot";
 
 // ... (imports)
 
@@ -70,6 +71,7 @@ export default function RootLayout({
         </main>
 
         <SurveyButton />
+        <ChatBot />
 
         {/* Mobile footer Ad (Visible only on small screens) */}
         <div className="xl:hidden w-full p-4">
